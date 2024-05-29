@@ -7,6 +7,6 @@ const Ocupacion= db.define('ocupacion',{
         allowNull:false
     }
 })
-
+// asdaskldhaslk
 export default Ocupacion
 
