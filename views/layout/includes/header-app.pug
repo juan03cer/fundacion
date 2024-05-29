@@ -1,0 +1,29 @@
+header.bg-indigo-600.p-4
+  .container.mx-auto.flex.justify-between.items-center
+    a(href="/") 
+      h1.text-2xl.text-white.font-extrabold.text-center FSFLMX
+        span.font-normal Sin Sordera
+
+    nav(class="my-5 text-sm flex items-center justify-end gap-3 font-bold text-white")
+      a(href="/auth/registro" class="hover:text-gray-300 hidden md:inline") Crear Cuenta
+      a(href="/auth/login" class="hover:text-gray-300 hidden md:inline") Iniciar Sesión
+      //- para moviles
+      a(href="/auth/registro" class="hover:text-gray-300 md:hidden") Crear Cuenta
+      a(href="/auth/login" class="hover:text-gray-300 md:hidden") Iniciar Sesión
+
+
+div(class="bg-indigo-700 py-5 hidden lg:block")
+  div(class="container mx-auto flex justify-between")
+    nav(class="flex gap-4 items-center")
+        a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Pacientes
+        a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Pacientes 
+        a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Pacientes 
+
+    form(action="/buscador" method="POST" class="flex gap-3 items-center")
+      input(type="hidden" name="_csrf" value=csrfToken)
+      label(for="termino" class="text-sm uppercase font-bold text-white") Busqueda 
+      input(type="text" id="termino" name="termino" placeholder="Buscar Paciente" class="p-2 rounded-lg shadow text-sm")
+
+      input(type="submit" class="bg-indigo-800 hover:bg-indigo-400 cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm" value="Buscar")
+
+
