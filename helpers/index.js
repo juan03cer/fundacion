@@ -2,6 +2,8 @@
     return usuarioid=== pacienteUsuarioid
  }
 
+
  export {
-    esUsuario
+    esUsuario,
+    
  }

@@ -48,5 +48,7 @@ export{
     Beneficiario,
     Donadores,
     Escolaridad,
-    Serviciorequerido
+    Serviciorequerido,
+    Ocupacion
+    
 }

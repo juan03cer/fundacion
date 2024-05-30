@@ -3,7 +3,7 @@ import csrf from 'csurf'
 import cookieParser from 'cookie-parser';
 import usuarioRoutes from './routes/usuarioRoutes.js';
 import pacientesRoutes from './routes/pacientesRoutes.js';
-
+import datosRoutes from './routes/datosRoutes.js'
 import superRoutes from './routes/superRoutes.js';
 
 import appRoutes from './routes/appRoutes.js';
@@ -46,6 +46,7 @@ app.use('/',appRoutes)
 app.use('/auth', usuarioRoutes)
 app.use('/',pacientesRoutes)
 app.use('/',superRoutes)
+app.use('/', datosRoutes)
 
 app.use('/api', apiRoutes)
 
