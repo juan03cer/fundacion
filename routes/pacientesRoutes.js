@@ -1,6 +1,6 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {admin,crear,guardar,agregarImagen,almacenarImagen,mostrarPaciente ,editar,guardarCambios,eliminar,cambiarEstado} from '../controllers/pacientesController.js'
+import {admin,crear,guardar,agregarImagen,almacenarImagen,mostrarPaciente ,editar,guardarCambios,eliminar,cambiarEstado,mostrarcampaings} from '../controllers/pacientesController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 import identificarUsuario from '../middleware/identificarUsuario.js'
@@ -30,7 +30,6 @@ router.post('/pacientes/agregar-imagen/:id',
 router.get('/pacientes/editar/:id',protegerRuta,editar)
 router.post('/pacientes/editar/:id',protegerRuta,
     body('nombre').notEmpty().withMessage('El Nombre es obligatorio'),
-    body('datomedico').notEmpty().withMessage('El datos medico es obligatorio'),
     body('correo').notEmpty().withMessage('El Correo es obligatorio'),
     body('lat').notEmpty().withMessage('Ubica la direccion del paciente en el mapa'),
 guardarCambios
@@ -48,4 +47,6 @@ router.get('/pacientes/:id',
 identificarUsuario,
 mostrarPaciente)
 
+
+router.get('/sitio/campaings',mostrarcampaings)
 export default router

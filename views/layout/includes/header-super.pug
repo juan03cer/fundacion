@@ -1,6 +1,7 @@
-header.bg-indigo-600.p-4
-  .container.mx-auto.flex.justify-between.items-center
-    a(href="/") 
+
+header.bg-gradient-to-r.from-green-800.to-purple-700.p-2
+  .container.mx-auto.px-8.flex.justify-between.items-center
+    a(href="/mi-sitio") 
       h1.text-2xl.text-white.font-extrabold.text-center FSFLMX
         span.font-normal Sin Sordera
 
@@ -11,11 +12,10 @@ header.bg-indigo-600.p-4
         input(type="hidden" name="_csrf" value=csrfToken)
         input(type="submit" class="bg-indigo-800 py-2 px-10 rounded-lg" value="Cerrar Sesion") 
 
-div(class="bg-indigo-700 py-5 hidden lg:block")
+div(class="bg-gradient-to-r from-green-700 to-purple-700 py-5 md:block")
   div(class="container mx-auto flex justify-between")
     a(href="/admin/campaing" class="text-sm font-bold uppercase text-white") Crear Campaña
     a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Fundacion
     a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Crear Servicio requerido
-
 
 

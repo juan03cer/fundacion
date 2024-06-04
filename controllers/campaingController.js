@@ -4,6 +4,8 @@ import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario
 import { promises } from 'node:dns'
 
 
+
+
 const superUsuario = async (req, res) => {
 
     // Leer QueryString
@@ -116,11 +118,24 @@ const guardar = async (req,res)=>{
         console.log(error)
     }
 }
-
+const campaings = async (req,res)=>{
+    try {
+        const campaings = await Campaign.findAll();
+        
+        res.render('admin/mostrarcampaings', {
+            campaings,
+            csrfToken: req.csrfToken(),
+            pagina:'campañas'
+        });
+    } catch (error) {
+        console.render('/404')
+    }
+}
 export{
     superUsuario,
     crearCampaing,
-    guardar
+    guardar,
+    campaings
    
     
 }

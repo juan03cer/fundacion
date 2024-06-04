@@ -67,9 +67,33 @@ const buscador= async (req,res)=>{
 
 }
 
+
+const buscadorcampaing= async (req,res)=>{
+    const{campaingbusqueda} =req.body
+
+    try {
+        const campaigns = await Campaign.findAll({
+            where: {
+                nombre: {
+                    [Sequelize.Op.like]: '%' + campaingbusqueda + '%'
+                }
+            }
+        });
+
+        res.render('busquedacampaing', {
+            pagina: 'Resultados de la búsqueda',
+            campaigns,
+            csrfToken: req.csrfToken()
+        });
+    } catch (error) {
+        console.render('404')
+    }
+};
+
 export{
     inicio,
     campaign,
     noEncontrado,
-    buscador
+    buscador,
+    buscadorcampaing
 }

@@ -409,64 +409,20 @@ const mostrarPaciente = async (req,res)=>{
 
 //se termina de llenar la informacion del usuario
 
-const crearCompletado = async(req,res) =>{
-    //Consultar Modelo de Precio y Categorias
-    const [campaingid] = await Promise.all([
-        Campaign.findAll(), 
-    ])
 
-   
-    res.render('admin/campaing',{
-        pagina:'Registrar Campaña',
-        csrfToken: req.csrfToken(),
-        campaingid,
-        datos:{}
-    })
-
-}
-
-const guardarcompletado = async (req,res)=>{
-    //validacion
-    let resultado = validationResult(req)
-
-    if(!resultado.isEmpty()){
-
-        const [campaingid] = await Promise.all([
-            Campaign.findAll(), 
-        ])
-    
-    
-       
-      return  res.render('admin/campaing',{
-            pagina:'Registrar Paciente',
-            csrfToken: req.csrfToken(),
+const mostrarcampaings = async (req, res) => {
+    try {
+        const campaings = await Campaign.findAll();
         
-            campaingid,
-            errores:resultado.array(),
-            datos:req.body
-
-        })
+        res.render('sitio/campaings', {
+            campaings,
+            csrfToken: req.csrfToken(),
+            pagina:'campañas'
+        });
+    } catch (error) {
+        console.render('/404')
     }
-
-    //Crear un registro
-    const{nombre} =req.body
-
-    try{
-       await Campaign.create({
-            nombre,
-            
-        })
- // Redirigue a paguina principal del super
- res.render('admin/super', {
-   
-});
-    } catch(error){
-        console.log(error)
-    }
-}
-
-
-
+};
 
 
 
@@ -480,7 +436,8 @@ export{
     guardarCambios,
     eliminar,
     cambiarEstado,
-  mostrarPaciente
+  mostrarPaciente,
+  mostrarcampaings
 
     
 }

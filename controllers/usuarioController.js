@@ -23,7 +23,8 @@ export {
 const formularioLogin = (req, res) =>{
     res.render('auth/login', {
         pagina:'Iniciar sesion',
-        csrfToken: req.csrfToken()
+        csrfToken: req.csrfToken(),
+       
 
     })
 }
@@ -43,6 +44,7 @@ const autenticar = async (req,res)=>{
         pagina:'Iniciar Sesion',
         csrfToken: req.csrfToken(),
         errores: resultado.array(),
+       
        })
     }
 
@@ -56,7 +58,7 @@ const autenticar = async (req,res)=>{
             pagina:'Iniciar sesion',
             csrfToken: req.csrfToken(),
             errores: [{msg:'el usuario no existe'}]
-           })
+      })
     }else{
         
     }
@@ -89,6 +91,7 @@ const autenticar = async (req,res)=>{
         //almacenar en un cookie
         return res.cookie('_token', token,{
             httpOnly:true,
+           
             // secure:true
         }).redirect('/mi-sitio')
     
@@ -226,7 +229,7 @@ const confirmar = async (req,res)=>{
 
 const formularioOlvidePassword = (req, res) =>{
     res.render('auth/olvide-password', {
-        pagina:'Recupera tu acceso  FSFLMX sinfronteras',
+        pagina:'Recupera tu acceso a Fundacion Mexico Sin Sordera A.C',
         csrfToken: req.csrfToken()
 
     })
@@ -243,7 +246,7 @@ const resetPassword = async (req , res )=>{
     if(!resultado.isEmpty()){
         //errores
        return res.render('auth/olvide-password',{
-        pagina:'Recupera tu acceso  FSFLMX sinfronteras',
+        pagina:'Recupera tu acceso a Fundacion Mexico Sin Sordera A.C',
         csrfToken: req.csrfToken(),
         errores: resultado.array()
 
@@ -255,7 +258,7 @@ const resetPassword = async (req , res )=>{
     const usuario = await Usuario.findOne({where: {email}})
     if(!usuario){
         return res.render('auth/olvide-password',{
-            pagina:'Recupera tu acceso  FSFLMX sinfronteras',
+            pagina:'Recupera tu acceso a Fundacion Mexico Sin Sordera A.C',
             csrfToken: req.csrfToken(),
             errores: [{msg: 'El email no pertenece a ningun usuario'}]
     
@@ -338,6 +341,8 @@ const nuevoPassword = async (req,res) =>{
 
     })
 
+}
 
-
+const envioMasivoMails = async (req,res)=>{
+    
 }

@@ -1,28 +1,31 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario} from '../models/index.js'
+import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,Seguridadsocial,Titularseguridadsocial,Usuario} from '../models/index.js'
 
 
 const completado = async (req,res)=>{
     const {id} = req.params
     
     //Comprobar que el paciente estista 
-        const paciente =await Paciente.findByPk(id)
+      
+        const paciente =await Paciente.findByPk(id,{
+            include:[
+                { model: Companyseguros , as:'companyseguro'},
+                {model: Seguridadsocial, as:'seguridadsocial' },
+                {model:Titularseguridadsocial,as:'titularseguridadsocial'},
+                {model:Usuario,as:'usuario'},
+                
+                
+            ],
+        })
         if(!paciente){
             return res.redirect('/mis-pacientes')
         }
-        //Consultar Modelo de Precio y Categorias
-        const [escolaridadid,ocupacionid] = await Promise.all([
-            Escolaridad.findAll(), 
-            Ocupacion.findAll(),
-           
-        ])
-    
        
         res.render('pacientes/completado',{
             pagina:`Completar datos de :  ${paciente.nombre}`,
             csrfToken: req.csrfToken(),
-            
+            usuario:req.usuario,
             paciente,
             datos:{}
         })
