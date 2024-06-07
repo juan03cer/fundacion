@@ -131,11 +131,28 @@ const campaings = async (req,res)=>{
         console.render('/404')
     }
 }
+
+const asociados = async(req,res)=>{
+ //Consultar Modelo de Precio y Categorias
+ const [usuario] = await Promise.all([
+    Usuario.findAll(), 
+])
+
+
+res.render('admin/asociados',{
+    pagina:'Registros de Pesonas asociadas ala Fundacion',
+    csrfToken: req.csrfToken(),
+    usuario,
+    datos:{}
+})
+
+}
+
 export{
     superUsuario,
     crearCampaing,
     guardar,
-    campaings
-   
+    campaings,
+   asociados
     
 }

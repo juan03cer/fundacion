@@ -1,6 +1,6 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {superUsuario,crearCampaing,guardar,campaings} from '../controllers/campaingController.js'
+import {superUsuario,crearCampaing,guardar,campaings, asociados} from '../controllers/campaingController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 
@@ -17,6 +17,8 @@ router.post('/admin/campaing',protegerRuta,
 
     guardar
 )
+
+router.get('/admin/asociados', asociados)
 
 
 export default router

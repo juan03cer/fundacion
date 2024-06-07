@@ -6,7 +6,6 @@ const router =express.Router()
 //Pagina de inicio
 router.get('/',inicio)
 
-//
 router.get('/campaign/:id',campaign)
 
 router.get('/404', noEncontrado)
