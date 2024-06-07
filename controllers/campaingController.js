@@ -103,11 +103,15 @@ const guardar = async (req,res)=>{
     }
 
     //Crear un registro
-    const{nombre} =req.body
+    const{nombre,descripcion,calle,lat,lng} =req.body
 
     try{
        await Campaign.create({
             nombre,
+            descripcion,
+            calle,
+            lat,
+            lng
             
         })
  // Redirigue a paguina principal del super
