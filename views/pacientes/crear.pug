@@ -2,14 +2,41 @@ extends ../layout/admin
 
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
-    
+    style.
+        /* Estilos personalizados para aumentar el espacio entre los elementos del menú */
+        .nav-item {
+            margin-left: 2rem; /* Ajusta el valor según sea necesario */
+            margin-right: 2rem; /* Ajusta el valor según sea necesario */
+        }
+        
+        /* Fondo de la página */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/img/logo/fondo-munecos.jpg') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.3; /* Ajusta la opacidad de la imagen de fondo */
+            z-index: -1; /* Asegúrate de que el fondo esté detrás del contenido */
+        }
+
+        /* Header y footer transparentes */
+        header {
+            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+        }
+        footer {
+            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+        }
     
 
 block contenido
+    
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
-            span.font-normal  Sin Sordera
-         h2.text-center.text-2xl.font-extrabold= pagina
+         h1.text-4xl.my-10.font-extrabold.text-center REGISTRO DE PACIENTE
+            
 
          if errores 
             div(class="max-w-md mx-auto my-10")
