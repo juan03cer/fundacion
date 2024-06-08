@@ -20,11 +20,18 @@ block contenido
          div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
               form.space-y-8(method="POST" action="/admin/emails")
                 input(type="hidden" name="_csrf" value = csrfToken)
+                
                 div.space-y-5
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Modifique el correo 
-                    p.text-gray-600 Añade Informacion sobre el correo 
                    
-                     div
+                    div.flex
+                        a(href="/pacientes/crear" class="rounded px-10 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto mr-4") Ver lista de Correos 
+                        a(href="/pacientes/ver" class="rounded px-10 py-2 bg-green-600 hover:bg-green-900 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto") Agregar a la lista de Correos
+
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Modifique el correo 
+                        
+                    p.text-gray-600 Añade Informacion sobre el correo 
+                    
+                    div
                         label.block.text-sm.uppercase.text-gray-400.mb-2.font-bold(for="alias") Alias del remitente
                         input#alias.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Alias del remitente" type="text" name="alias" value=datos ? datos.alias : '')
 
@@ -34,8 +41,6 @@ block contenido
 
                     div
                         label.block.text-sm.uppercase.text-gray-400.mb-2.font-bold(for="message") Mensaje del correo
-                        textarea#message.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Mensaje del correo" name="message")= datos ? datos.message : ''
-
+                        textarea#message.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(rows="5" placeholder="Mensaje del correo" name="message")= datos ? datos.message : ''
 
                     input(class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Enviar Correos")
-                                                          

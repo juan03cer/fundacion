@@ -14,6 +14,8 @@ router.get('/admin/emails',protegerRuta, crearCorreo)
 router.post('/admin/emails',protegerRuta, sendEmails)
 
 
+
+
 router.get('/admin/mostrarcampaings',protegerRuta, campaings)
 
 
