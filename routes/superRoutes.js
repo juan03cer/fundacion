@@ -13,7 +13,7 @@ router.get('/mi-sitio',protegerRuta, superUsuario)
 router.get('/admin/emails',protegerRuta, crearCorreo)
 router.post('/admin/emails',protegerRuta, sendEmails)
 
-
+router.get('/admin/email/crear',protegerRuta, )
 
 
 router.get('/admin/mostrarcampaings',protegerRuta, campaings)
