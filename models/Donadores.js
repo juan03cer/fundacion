@@ -14,6 +14,18 @@ const Donadores = db.define('donadores',{
         type:DataTypes.STRING(50),
         allowNull:false
     },
+    telcontacto:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    empresa:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    montodonado:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
     
 })
 

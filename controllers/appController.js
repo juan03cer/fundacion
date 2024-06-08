@@ -47,7 +47,7 @@ const buscador= async (req,res)=>{
 
     //validar que el termino no este vacio
     if(!termino.trim()){
-       return req.redirect('back')
+       return req.redirect('404')
     }
     const paciente = await Paciente.findAll({
         where:{
@@ -79,6 +79,7 @@ const buscadorcampaing= async (req,res)=>{
                 }
             }
         });
+        
 
         res.render('busquedacampaing', {
             pagina: 'Resultados de la búsqueda',
@@ -86,7 +87,7 @@ const buscadorcampaing= async (req,res)=>{
             csrfToken: req.csrfToken()
         });
     } catch (error) {
-        console.render('404')
+        res.render('404')
     }
 };
 

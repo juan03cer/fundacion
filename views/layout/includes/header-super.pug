@@ -6,16 +6,18 @@ header.bg-gradient-to-r.from-green-800.to-purple-700.p-2
         span.font-normal Sin Sordera
 
     nav(class="my-5 text-sm md:flex md:items-center md:justify-end gap-3 font-bold text-white hidden")
-      a(href="mis-pacientes") Mis Asociados
+      a(href="/admin/donadores") Donadores
+      a(href="/admin/asociados") Mis Asociados
       a(href="") Mi perfil 
       form(action="/auth/cerrar-sesion" method="POST") 
         input(type="hidden" name="_csrf" value=csrfToken)
         input(type="submit" class="bg-indigo-800 py-2 px-10 rounded-lg" value="Cerrar Sesion") 
 
-div(class="bg-gradient-to-r from-green-700 to-purple-700 py-5 md:block")
+div(class="px-10 bg-gradient-to-r from-green-700 to-purple-700 py-5 md:block ")
   div(class="container mx-auto flex justify-between")
     a(href="/admin/campaing" class="text-sm font-bold uppercase text-white") Crear Campaña
-    a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Fundacion
+    a(href="/admin/donador" class="text-sm font-bold uppercase text-white") Registrar Donador
+    
     a(href="/admin/emails" class="text-sm font-bold uppercase text-white") Enviar Correos
     a(href="/seguridadsocial" class="text-sm font-bold uppercase text-white") Crear Servicio requerido
 

@@ -103,11 +103,15 @@ const guardar = async (req,res)=>{
     }
 
     //Crear un registro
-    const{nombre} =req.body
+    const{nombre,descripcion,calle,lat,lng} =req.body
 
     try{
        await Campaign.create({
             nombre,
+            descripcion,
+            calle,
+            lat,
+            lng
             
         })
  // Redirigue a paguina principal del super
@@ -131,11 +135,28 @@ const campaings = async (req,res)=>{
         console.render('/404')
     }
 }
+
+const asociados = async(req,res)=>{
+ //Consultar Modelo de Precio y Categorias
+ const [usuario] = await Promise.all([
+    Usuario.findAll(), 
+])
+
+
+res.render('admin/asociados',{
+    pagina:'Registros de Pesonas asociadas ala Fundacion',
+    csrfToken: req.csrfToken(),
+    usuario,
+    datos:{}
+})
+
+}
+
 export{
     superUsuario,
     crearCampaing,
     guardar,
-    campaings
-   
+    campaings,
+   asociados
     
 }
