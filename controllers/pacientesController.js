@@ -182,6 +182,7 @@ const almacenarImagen = async (req,res,next) =>{
     const{id} =req.params
 
     //Validar que el paciente exista
+    
     const paciente =await Paciente.findByPk(id)
     if(!paciente){
         return res.redirect('/mis-pacientes')
@@ -208,7 +209,7 @@ const almacenarImagen = async (req,res,next) =>{
 
     try{
         // console.log(req.file)
-        //Almacenar Imagen y Publicar propiedad
+        //Almacenar Imagen y Publicar paciente
         paciente.imagen = req.file.filename
 
         paciente.publicado = 1
@@ -233,16 +234,16 @@ const editar =async(req,res)=>{
         return res.redirect('/mis-pacientes')
     }
 
-    //Revisra que quien visita la url ,es quien creo al paciente
-    if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-pacientes')
-    }
+    // //Revisra que quien visita la url ,es quien creo al paciente
+    // if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
+    //     return res.redirect('/mis-pacientes')
+    // }
     //Consultar Modelo de Precio y Categorias
-    const [companysegurosid,titularseguridadsocialid,seguridadsocialid] = await Promise.all([
+    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid] = await Promise.all([
         Companyseguros.findAll(),
         Titularseguridadsocial.findAll(),
         Seguridadsocial.findAll(),
-        
+        Campaign.findAll()
         
     ])
 
@@ -252,6 +253,7 @@ const editar =async(req,res)=>{
         companysegurosid,
         titularseguridadsocialid,
         seguridadsocialid,
+        campaignid,
         datos:paciente
     })
 }
@@ -263,10 +265,11 @@ const guardarCambios= async(req,res)=>{
 
     if(!resultado.isEmpty()){
 
-        const [companysegurosid,titularseguridadsocialid,seguridadsocialid] = await Promise.all([
+        const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid] = await Promise.all([
             Companyseguros.findAll(),
             Titularseguridadsocial.findAll(),
-            Seguridadsocial.findAll()
+            Seguridadsocial.findAll(),
+            Campaign.findAll()
             
         ])
     
@@ -277,6 +280,7 @@ const guardarCambios= async(req,res)=>{
             companysegurosid,
             titularseguridadsocialid,
             seguridadsocialid,
+            campaignid,
             errores:resultado.array(),
             datos:req.body
         })
@@ -297,7 +301,7 @@ const guardarCambios= async(req,res)=>{
 
     //Reescribir el objeto y actualizarlo
     try{
-        const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,correo,numpaciente,telrecados,calle,lat,lng} =req.body
+        const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng} =req.body
 
         paciente.set({
             nombre,
@@ -307,6 +311,7 @@ const guardarCambios= async(req,res)=>{
             segdgasmdcs,
             companysegurosid,
             titularseguridadsocialid,
+            campaignid,
             correo,
             numpaciente,
             telrecados,
@@ -331,10 +336,10 @@ const eliminar = async (req,res) =>{
         return res.redirect('/mis-pacientes')
     }
 
-    //Revisra que quien visita la url ,es quien creo al paciente
-    if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-pacientes')
-    }
+    // //Revisra que quien visita la url ,es quien creo al paciente
+    // if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
+    //     return res.redirect('/mis-pacientes')
+    // }
 
     // Eliminar la imagen
     await unlink(`public/uploads/${paciente.imagen}`)
@@ -409,6 +414,34 @@ const mostrarPaciente = async (req,res)=>{
 
 //se termina de llenar la informacion del usuario
 
+const mostrarPacienteApp = async (req,res)=>{
+
+    const {id} = req.params
+    
+//Comprobar que el paciente estista 
+    const paciente =await Paciente.findByPk(id,{
+        include:[
+            { model: Companyseguros , as:'companyseguro'},
+            {model: Seguridadsocial, as:'seguridadsocial' },
+            {model:Titularseguridadsocial,as:'titularseguridadsocial'},
+            {model:Usuario,as:'usuario'},
+            
+            
+        ],
+    })
+     if(!paciente || !paciente.publicado){
+        return res.redirect('/404')
+     }
+
+
+    res.render('pacientes/mostrarapp',{
+        paciente,
+        pagina:paciente.nombre,
+        csrfToken: req.csrfToken(),
+        usuario:req.usuario,
+        esUsuario: esUsuario(req.usuario?.id, paciente.usuarioid)
+    })
+}
 
 const mostrarcampaings = async (req, res) => {
     try {
@@ -437,7 +470,8 @@ export{
     eliminar,
     cambiarEstado,
   mostrarPaciente,
-  mostrarcampaings
+  mostrarcampaings,
+  mostrarPacienteApp
 
     
 }

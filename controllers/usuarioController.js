@@ -50,7 +50,6 @@ const autenticar = async (req,res)=>{
 
     const {email,password}= req.body
 
-   
     //comprobar si el usuario existe
     const usuario= await Usuario.findOne({where:{email}})
     if(!usuario){
