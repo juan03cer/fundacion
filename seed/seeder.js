@@ -4,7 +4,7 @@ import socialSegurity from './socialsegurity.js';
 import titusegusocial from './titusegusocial.js';
 import Parentesco from '../models/Parentesco.js';
 import relationship from './relationship.js';
-import Serviciorequerido from '../models/serviciorequerido.js';
+import Serviciorequerido from '../models/Serviciorequerido.js';
 import requiredservice from './requiredservice.js';
 import Medios from '../models/Medios.js';
 import media from './media.js';

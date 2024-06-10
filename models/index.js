@@ -1,6 +1,6 @@
 import Seguridadsocial from "./Seguridadsocial.js";
 import Companyseguros from "./Companyseguros.js";
-import Titularseguridadsocial from "./titularseguridadsocial.js";
+import Titularseguridadsocial from "./Titularseguridadsocial.js";
 import Usuario from './Usuario.js'
 import Paciente from "./Paciente.js";
 import Campaign from "./Campaign.js";
@@ -50,5 +50,4 @@ export{
     Escolaridad,
     Serviciorequerido,
     Ocupacion
-    
 }
