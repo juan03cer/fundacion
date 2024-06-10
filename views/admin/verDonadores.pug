@@ -44,6 +44,10 @@ block contenido
                     p.bg-green-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= mensaje.msg
 
         div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4x1 my-10 md:px-10")
+
+            div.flex
+                a(href="/admin/donadores/crear" class="rounded px-10 py-2 bg-green-600 hover:bg-green-900 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto") Agregar a la lista de Correos
+
             if donadores.length
                 table
                     thead
@@ -69,6 +73,10 @@ block contenido
                                      button(type="button" class="rounded px-8 py-2 bg-red-500 hover:bg-red-900 text-sm font-bold text-center text-white uppercase my-2 inline-block w-full md:w-auto" onclick=`confirmDelete(${donador.id})`) Eliminar
             else
                 p.text-center No hay donadores registrados.
+            
+            div.flex
+               a(href="/admin/emails" class="rounded px-10 py-2 bg-indigo-600 hover:bg-teal-900 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto") Regresar
+
 
 
 block scripts
