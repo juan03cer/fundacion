@@ -2,14 +2,51 @@ extends ../layout/admin
 
 block styles 
    meta(name="csrf-token" content=csrfToken)
+   style.
+         .nav-item {
+            margin-left: 2rem; /* Ajusta el valor según sea necesario */
+            margin-right: 2rem; /* Ajusta el valor según sea necesario */
+        }
+        /* Estilo para el fondo con opacidad */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/img/logo/background-mexico-sin-sordera-2024.jpg') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.3; /* Ajusta la opacidad según sea necesario */
+            z-index: -1; /* Asegúrate de que esté detrás del contenido */
+        }
+
+        /* Header y footer transparentes */
+        header {
+            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+        }
+        footer {
+            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+        }
 
 block contenido
-     div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
-            span.font-normal  Sin Sordera
+         header(class="w-full p-4 flex justify-between items-center m-4")
+            img(src="/img/logo/logo-noyolo.png" alt="Inicio Logo" style="height: 5rem; width: auto; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); border-radius: 50%;")
+            nav(class="flex-1 flex justify-center")
+                  ul(class="flex text-white")
+                     li(class="nav-item") 
+                        a(href="/" class="hover:underline font-extrabold text-black") INICIO
+                     li(class="nav-item") 
+                        a(href="#" class="hover:underline font-extrabold text-black") DONACIONES
+                     li(class="nav-item") 
+                        a(href="#" class="hover:underline font-extrabold text-black") ACERCA DE NOSOTROS
+                     li(class="nav-item") 
+                        a(href="#" class="hover:underline font-extrabold text-black") CONTACTO
+            img(src="/img/logo/logo-sello.png" alt="Final Logo" style="height: 5rem; width: auto;box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1); border-radius: 40%;")
+         div.py-10 
          h2.text-center.text-2xl.font-extrabold=pagina
          
-         a(href="/pacientes/crear" class="rounded px-10 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto" ) Registrar Paciente 
+         a(href="/pacientes/crear" class="rounded px-10 py-2 bg-white hover:bg-white text-sm font-extrabold text-center text-black uppercase my-5 inline-block w-full md:w-auto" ) Registrar Paciente 
         
         
          //- pre= JSON.stringify(paciente,undefine,2)
@@ -71,7 +108,9 @@ block contenido
                                        a(href=`/mis-pacientes?pagina=${n}` class=`${paginaActual == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-200'} relative inline-flex items-flex items-center px-4 border text-sm font-medium`) #{n++}
          else
              p.text-center No hay Pacientes
-        
+         footer(class="w-full p-4 flex justify-between items-center text-black mt-10 m-4")
+               p &copy; 2024 Fundacion Mexico Sin Sordera A.C
+               img(src="/img/logo/logo-R.jpg" alt="Logo" style="height: 8rem; width: auto; box-shadow: 0 12px 5px rgba(0, 0, 0, 0.1); border-radius: 8%;" class="footer-img")
 
 block scripts
    script(src="/js/cambiarEstado.js")
