@@ -1,10 +1,10 @@
-
 header.bg-gradient-to-r.from-green-800.to-purple-700.p-2
   .container.mx-auto.px-8.flex.justify-between.items-center
-    a(href="/" class="bg-cover bg-center") 
-      h1.text-2xl.text-white.font-extrabold.text-center Fundacion Mexico 
-        span.font-normal Sin Sordera A.C
-
+    // Contenedor para imagen y título
+    .flex.items-center
+      a(href="/" class="bg-cover bg-center") 
+        img(src="/img/logo/logo-mexico-sin-sordera-2023.png" alt="Logo" style="height: 10rem; width: auto;" class="mr-2")
+      
     nav(class="my-5 text-sm flex items-center justify-end gap-3 font-bold text-white")
       a(href="/auth/registro" class="hover:text-gray-300 hidden md:inline") Crear Cuenta
       a(href="/auth/login" class="hover:text-gray-300 hidden md:inline") Iniciar Sesión
