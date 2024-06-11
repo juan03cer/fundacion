@@ -1,0 +1,52 @@
+extends ../layout/super
+
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+    
+    
+
+block contenido
+     div.py-10 
+         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
+            span.font-normal  Sin Sordera
+         h2.text-center.text-2xl.font-extrabold= pagina
+
+         if errores || mensajes
+            div(class="max-w-md mx-auto my-10")
+                if errores
+                    each error in errores 
+                        p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
+                if mensajes
+                    each mensaje in mensajes
+                        p.bg-green-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= mensaje.msg
+
+
+         div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
+              form.space-y-8(method="POST" action="/admin/emails")
+                input(type="hidden" name="_csrf" value = csrfToken)
+                
+                div.space-y-5
+                   
+                    div.flex
+                        a(href="/admin/donadores/ver" class="rounded px-10 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto mr-5") Ver lista de Correos 
+                        a(href="/admin/donadores/crear" class="rounded px-10 py-2 bg-green-600 hover:bg-green-900 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto") Agregar a la lista de Correos
+                        a(href="/admin/mensajes" class="rounded px-10 py-2 bg-red-600 hover:bg-red-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto") Mensajes Predefinidos
+
+
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Modifique el correo 
+                        
+                    p.text-gray-600 Añade Informacion sobre el correo 
+                    
+                    div
+                        label.block.text-sm.uppercase.text-gray-400.mb-2.font-bold(for="alias") Alias del remitente
+                        input#alias.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Alias del remitente" type="text" name="alias" value=datos ? datos.alias : '')
+
+                    div
+                        label.block.text-sm.uppercase.text-gray-400.mb-2.font-bold(for="subject") Asunto del correo
+                        input#subject.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Asunto del correo" type="text" name="subject" value=datos ? datos.subject : '')
+
+                    div
+                        label.block.text-sm.uppercase.text-gray-400.mb-2.font-bold(for="message") Mensaje del correo
+                        textarea#message.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(rows="5" placeholder="Mensaje del correo" name="message")= datos ? datos.message : ''
+
+                    input(class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Enviar Correos")
