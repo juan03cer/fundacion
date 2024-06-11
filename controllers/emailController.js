@@ -4,6 +4,7 @@ const User = require('../models/Donadores'); */
 import nodemailer from 'nodemailer';
 import Donadores from '../models/Donadores.js';
 import { validationResult } from 'express-validator';
+import MensajesPredefinidos from '../models/MensajePredefinidos.js';
 
 const sendEmails = async (req, res) => {
   const { subject, message, alias } = req.body;
@@ -215,6 +216,80 @@ const actualizarDonador = async (req, res) => {
   }
 };
 
+const verMensajesPredefinidos = async (req, res) => {
+  try {
+    const mensajes = await MensajesPredefinidos.findAll();
+    const hayMensajes = mensajes.length > 0;
+
+     // Truncar mensajes a 15 caracteres
+     const mensajesTruncados = mensajes.map(mensaje => ({
+      ...mensaje.toJSON(),
+      mensaje: mensaje.mensaje.length > 15 ? mensaje.mensaje.substring(0, 15) + '...' : mensaje.mensaje
+    }));
+
+    res.render('admin/verMensajes', {
+      pagina: 'Mensajes Predefinidos',
+      csrfToken: req.csrfToken(),
+      mensajes: mensajesTruncados,
+      hayMensajes
+    });
+  } catch (error) {
+    console.error('Error al obtener los mensajes predefinidos:', error);
+    res.status(500).render('admin/verMensajes', {
+      pagina: 'Mensajes Predefinidos',
+      csrfToken: req.csrfToken(),
+      mensajes: [],
+      hayMensajes: false,
+      errores: [{ msg: 'Error interno del servidor' }]
+    });
+  }
+};
+
+const crearMensajePredefinido = async (req, res) => {
+  res.render('admin/crearMensaje', {
+    pagina: 'Crear Mensaje Predefinido',
+    csrfToken: req.csrfToken(),
+    errores: []
+  });
+};
+
+const guardarMensajePredefinido = async (req, res) => {
+  const { alias, asunto, mensaje } = req.body;
+  const errores = [];
+
+  if (!alias) {
+    errores.push({ msg: 'El alias del mensaje es obligatorio' });
+  }
+
+  if (!asunto) {
+    errores.push({ msg: 'El asunto del mensaje es obligatorio' });
+  }
+
+  if (!mensaje) {
+    errores.push({ msg: 'El contenido del mensaje es obligatorio' });
+  }
+
+  if (errores.length > 0) {
+    return res.render('admin/crearMensaje', {
+      pagina: 'Crear Mensaje Predefinido',
+      csrfToken: req.csrfToken(),
+      errores
+    });
+  }
+
+  try {
+    await MensajesPredefinidos.create({ alias, asunto, mensaje });
+    res.redirect('/admin/mensajes');
+  } catch (error) {
+    console.error('Error al guardar el mensaje predefinido:', error);
+    res.status(500).render('admin/crearMensaje', {
+      pagina: 'Crear Mensaje Predefinido',
+      csrfToken: req.csrfToken(),
+      errores: [{ msg: 'Error interno del servidor' }]
+    });
+  }
+};
+
 export{
     crearCorreo,
     sendEmails,
@@ -223,5 +298,8 @@ export{
     mostrarDonadores,
     eliminarDonador,
     editarDonador,
-    actualizarDonador
+    actualizarDonador,
+    verMensajesPredefinidos,
+    crearMensajePredefinido,
+    guardarMensajePredefinido
 }
