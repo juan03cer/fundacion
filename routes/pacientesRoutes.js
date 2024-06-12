@@ -1,6 +1,6 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {admin,crear,guardar,agregarImagen,almacenarImagen,mostrarPaciente ,editar,guardarCambios,eliminar,cambiarEstado,mostrarcampaings} from '../controllers/pacientesController.js'
+import {admin,crear,guardar,agregarImagen,almacenarImagen,mostrarPaciente ,editar,guardarCambios,eliminar,cambiarEstado,mostrarcampaings, mostrarPacienteApp} from '../controllers/pacientesController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 import identificarUsuario from '../middleware/identificarUsuario.js'
@@ -46,7 +46,9 @@ router.put('/pacientes/:id',protegerRuta,cambiarEstado)
 router.get('/pacientes/:id',
 identificarUsuario,
 mostrarPaciente)
-
+router.get('/pacientes/:id',
+    identificarUsuario,
+    mostrarPacienteApp)
 
 router.get('/sitio/campaings',mostrarcampaings)
 export default router

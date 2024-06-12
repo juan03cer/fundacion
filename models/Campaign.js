@@ -10,19 +10,6 @@ const Campaign = db.define('campaign',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    calle:{
-        type: DataTypes.STRING(80),
-        allowNull:false,
-
-    },
-    lat:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    lng:{
-        type:DataTypes.STRING,
-        allowNull:false
-    }
 
 })
 

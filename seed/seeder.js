@@ -4,7 +4,7 @@ import socialSegurity from './socialsegurity.js';
 import titusegusocial from './titusegusocial.js';
 import Parentesco from '../models/Parentesco.js';
 import relationship from './relationship.js';
-import Serviciorequerido from '../models/serviciorequerido.js';
+import Serviciorequerido from '../models/Serviciorequerido.js';
 import requiredservice from './requiredservice.js';
 import Medios from '../models/Medios.js';
 import media from './media.js';
@@ -15,9 +15,7 @@ import occupation from './occupation.js';
 import usuarios from './usuarios.js';
 import { Companyseguros,Titularseguridadsocial,Seguridadsocial, Donadores} from '../models/index.js'
 
-
 import db from "../config/db.js";
-
 
 const importarDatos = async()=>{
     try{
@@ -28,7 +26,6 @@ const importarDatos = async()=>{
         await db.sync()
 
         //Insertar los Datos
-       
         await Promise.all([
             Companyseguros.bulkCreate(company),
           Seguridadsocial.bulkCreate(socialSegurity),
@@ -39,13 +36,7 @@ const importarDatos = async()=>{
           Escolaridad.bulkCreate(leveleducation),
           Ocupacion.bulkCreate(occupation),
         //   Donadores.bulkCreate(),
-          
-          
-
-
         ])
-
-
         console.log('Datos Importados Correctamente')
         exit()
 
