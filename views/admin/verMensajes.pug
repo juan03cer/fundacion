@@ -34,9 +34,10 @@ block contenido
                                 td.py-2.px-4= mensaje.alias
                                 td.py-2.px-4= mensaje.asunto
                                 td.py-2.px-4= mensaje.mensaje
-                                td.py-2.px-4
+                                td.py-2.px-4.flex.space-x-2
                                     a(href=`/admin/mensajes/editar/${mensaje.id}` class="rounded px-8 py-2 bg-green-500 hover:bg-green-700 text-sm font-bold text-center text-white uppercase my-2 inline-block") Editar
                                     button(type="button" class="bg-red-500 text-white px-8 py-2 rounded" onclick=`confirmDelete(${mensaje.id})`) Eliminar
+                                    a(href=`/admin/mensajes/utilizar/${mensaje.id}` class="rounded px-8 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-2 inline-block") Utilizar
             else
                 p.text-center.text-gray-500 No existen mensajes guardados.
 

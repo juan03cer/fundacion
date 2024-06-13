@@ -290,6 +290,175 @@ const guardarMensajePredefinido = async (req, res) => {
   }
 };
 
+const editarMensajePredefinido = async (req, res) => {
+  try {
+    const mensaje = await MensajesPredefinidos.findByPk(req.params.id);
+
+    if (!mensaje) {
+      req.flash('error', 'Mensaje no encontrado');
+      return res.redirect('/admin/mensajes');
+    }
+
+    res.render('admin/editarMensaje', {
+      pagina: 'Editar Mensaje Predefinido',
+      csrfToken: req.csrfToken(),
+      mensaje
+    });
+  } catch (error) {
+    console.error('Error al obtener el mensaje predefinido:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};
+
+const guardarCambiosMensajePredefinido = async (req, res) => {
+  const { alias, asunto, mensaje: nuevoMensaje } = req.body;
+
+  try {
+    const mensaje = await MensajesPredefinidos.findByPk(req.params.id);
+
+    if (!mensaje) {
+      return res.status(404).render('admin/verMensajes', {
+        pagina: 'Lista de Mensajes Predefinidos',
+        errores: [{ msg: 'Mensaje no encontrado' }],
+        mensajes: []
+      });
+    }
+
+    mensaje.alias = alias;
+    mensaje.asunto = asunto;
+    mensaje.mensaje = nuevoMensaje;
+    await mensaje.save();
+
+    res.redirect('/admin/mensajes');
+  } catch (error) {
+    console.error('Error al guardar los cambios del mensaje predefinido:', error);
+
+    res.status(500).render('admin/editarMensaje', {
+      pagina: 'Editar Mensaje Predefinido',
+      csrfToken: req.csrfToken(),
+      mensaje: req.body,
+      errores: [{ msg: 'Error interno del servidor' }]
+    });
+  }
+};
+
+
+const eliminarMensajePredefinido = async (req, res) => {
+  try {
+    const mensaje = await MensajesPredefinidos.findByPk(req.params.id);
+
+    if (!mensaje) {
+      return res.status(404).render('admin/verMensajes', {
+        pagina: 'Lista de Mensajes Predefinidos',
+        errores: [{ msg: 'Mensaje no encontrado' }],
+        mensajes: []
+      });
+    }
+
+    await mensaje.destroy();
+    res.redirect('/admin/mensajes');
+  } catch (error) {
+    console.error('Error al eliminar el mensaje predefinido:', error);
+    res.status(500).render('admin/verMensajes', {
+      pagina: 'Lista de Mensajes Predefinidos',
+      errores: [{ msg: 'Error al eliminar el mensaje predefinido' }],
+      mensajes: []
+    });
+  }
+};
+
+const utilizarMensajePredefinido = async (req, res) => {
+  try {
+    const mensaje = await MensajesPredefinidos.findByPk(req.params.id);
+
+    if (!mensaje) {
+      req.flash('error', 'Mensaje no encontrado');
+      return res.redirect('/admin/mensajes');
+    }
+
+    res.render('admin/utilizarMensaje', {
+      pagina: 'Utilizar Mensaje Predefinido',
+      csrfToken: req.csrfToken(),
+      mensaje
+    });
+  } catch (error) {
+    console.error('Error al obtener el mensaje predefinido:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};
+
+const enviarEmail = async (req, res) => {
+  try {
+    const { mensajeId, alias } = req.body;
+    const mensaje = await MensajesPredefinidos.findByPk(mensajeId);
+
+    if (!mensaje) {
+      return res.render('admin/verMensajes', {
+        pagina: 'Mensajes Predefinidos',
+        csrfToken: req.csrfToken(),
+        mensajes: [],
+        errores: [{ msg: 'Mensaje no encontrado' }]
+      });
+    }
+
+    const donadores = await Donadores.findAll();
+
+    if (!donadores.length) {
+      return res.render('admin/verMensajes', {
+        pagina: 'Mensajes Predefinidos',
+        csrfToken: req.csrfToken(),
+        mensajes: [],
+        errores: [{ msg: 'No hay donadores en la base de datos' }]
+      });
+    }
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail', // o el servicio que estés usando
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    donadores.forEach(donador => {
+      let mailOptions = {
+        from: `"${alias}" <${process.env.EMAIL_USER}>`, // Use the alias from req.body
+        to: donador.gmaildonador,
+        subject: mensaje.asunto,
+        text: mensaje.mensaje,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(`Error sending to ${donador.gmaildonador}: ${error}`);
+        } else {
+          console.log(`Email sent to ${donador.gmaildonador}: ${info.response}`);
+        }
+      });
+    });
+
+    res.render('admin/emailForm', {
+      pagina: 'Enviar Correos Masivos',
+      csrfToken: req.csrfToken(),
+      datos: {},
+      errores: [],
+      mensajes: [{ msg: 'Emails enviados Correctamente' }]
+    });
+    } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).render('admin/emailForm', {
+      pagina: 'Enviar Correos Masivos',
+      csrfToken: req.csrfToken(),
+      datos: req.body,
+      errores: [{ msg: 'Internal server error' }],
+      mensajes: []        
+    });
+    }
+};
+
+
+
+
 export{
     crearCorreo,
     sendEmails,
@@ -301,5 +470,10 @@ export{
     actualizarDonador,
     verMensajesPredefinidos,
     crearMensajePredefinido,
-    guardarMensajePredefinido
+    guardarMensajePredefinido,
+    editarMensajePredefinido,
+    eliminarMensajePredefinido,
+    utilizarMensajePredefinido,
+    guardarCambiosMensajePredefinido,
+    enviarEmail
 }

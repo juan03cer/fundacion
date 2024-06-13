@@ -3,7 +3,7 @@ import {body} from 'express-validator'
 import {superUsuario,crearCampaing,guardar,campaings, asociados} from '../controllers/campaingController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
-import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador, actualizarDonador, eliminarDonador, verMensajesPredefinidos, crearMensajePredefinido, guardarMensajePredefinido } from '../controllers/emailController.js';
+import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador, actualizarDonador, eliminarDonador, verMensajesPredefinidos, crearMensajePredefinido, guardarMensajePredefinido, editarMensajePredefinido, eliminarMensajePredefinido, utilizarMensajePredefinido, guardarCambiosMensajePredefinido, enviarEmail } from '../controllers/emailController.js';
 
 const router = express.Router();
 
@@ -37,6 +37,12 @@ router.post('/admin/mensajes/crear', protegerRuta,
   body('mensaje').notEmpty().withMessage('El contenido del mensaje es obligatorio'),
   guardarMensajePredefinido
 );
+
+router.get('/admin/mensajes/editar/:id', protegerRuta, editarMensajePredefinido);
+router.post('/admin/mensajes/editar/:id',protegerRuta, guardarCambiosMensajePredefinido);
+router.get('/admin/mensajes/eliminar/:id',protegerRuta, eliminarMensajePredefinido);
+router.get('/admin/mensajes/utilizar/:id',protegerRuta, utilizarMensajePredefinido);
+router.post('/admin/emails/enviar',protegerRuta, enviarEmail);
 
 router.get('/admin/mostrarcampaings',protegerRuta, campaings)
 
