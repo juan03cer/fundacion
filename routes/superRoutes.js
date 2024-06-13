@@ -1,9 +1,10 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {superUsuario,crearCampaing,guardar,campaings, asociados} from '../controllers/campaingController.js'
+import {superUsuario,crearCampaing,guardar,campaings, asociados,eliminarUsuario,editarAsociado} from '../controllers/campaingController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
-import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador, actualizarDonador, eliminarDonador, verMensajesPredefinidos, crearMensajePredefinido, guardarMensajePredefinido } from '../controllers/emailController.js';
+import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador,
+   actualizarDonador, eliminarDonador, verMensajesPredefinidos, crearMensajePredefinido, guardarMensajePredefinido } from '../controllers/emailController.js';
 
 const router = express.Router();
 
@@ -27,7 +28,6 @@ router.post('/admin/donadores/crear', protegerRuta,
 
 router.get('/admin/donadores/editar/:id', protegerRuta, editarDonador);
 router.post('/admin/donadores/editar/:id', protegerRuta, actualizarDonador);
-router.get('/admin/donadores/eliminar/:id', protegerRuta, eliminarDonador);
 
 router.get('/admin/mensajes', protegerRuta, verMensajesPredefinidos);
 router.get('/admin/mensajes/crear', protegerRuta, crearMensajePredefinido);
@@ -47,8 +47,14 @@ router.post('/admin/campaing',protegerRuta,
 
     guardar
 )
+////////Asociados///////////
+router.get('/admin/asociados',protegerRuta, asociados)
 
-router.get('/admin/asociados', asociados)
+router.post('/usuarios/eliminar/:id', protegerRuta, eliminarUsuario);
+
+router.get('/admin/editarAsociado/:id',protegerRuta, editarAsociado);
+
+
 
 
 export default router
