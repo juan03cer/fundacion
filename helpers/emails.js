@@ -12,16 +12,18 @@ const emailRegistro = async(datos)=>{
       });
     //   console.log(datos)
     const{email, nombre, token } = datos
+    const adminEmail = 'juan03esteban@hotmail.com'; // Cambia esto por el email del administrador
+
     //enviar el email
     await transport.sendMail({
         from: 'ju1an34xd@gmail.com',
-        to:email,
+        to:adminEmail,
         subject:'Confirma tu cuenta en FSFLMXsinfronteras.com',
         text:'Confirma tu cuenta en  FSFLMXsinfronteras.com',
         html:`
         <p>hola el usuario ${nombre},quiere que compruebes su cuenta en FSFLMXsinfronteras.com</p>
         <p>La cuenta ya esta lista,solo debes de confirmarla en el siguiente enlace </p>
-        <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/confirmar/${token}">Confirmar cuenta</a>
+        <a href="${process.env.BACKEND_URL}/auth/confirmar/${token}">Confirmar cuenta</a>
 
         <p>si no reconoce los datos ignorelos  </p>
 
