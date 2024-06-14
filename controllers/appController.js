@@ -31,6 +31,16 @@ const inicio = async (req, res )=>{
     })
     }
 
+
+ const inicioprincipal = async (req,res)=>{
+    res.render('inicioprincipal',{
+        pagina:'Inicio',
+        csrfToken: req.csrfToken()
+
+    })
+     
+ }
+
 const campaign =(req,res) =>{
     const{id}= req.params
 }
@@ -96,5 +106,6 @@ export{
     campaign,
     noEncontrado,
     buscador,
-    buscadorcampaing
+    buscadorcampaing,
+    inicioprincipal
 }
