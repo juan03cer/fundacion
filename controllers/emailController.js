@@ -25,8 +25,8 @@ const sendEmails = async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: 'gmail', // o el servicio que estés usando
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER2,
+        pass: process.env.EMAIL_PASS2,
       },
     });
 
@@ -415,8 +415,8 @@ const enviarEmail = async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: 'gmail', // o el servicio que estés usando
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER2,
+        pass: process.env.EMAIL_PASS2,
       },
     });
 
