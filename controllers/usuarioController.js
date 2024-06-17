@@ -85,7 +85,6 @@ const autenticar = async (req,res)=>{
         // Redirigir al super usuario a otra vista
         const token = generarJWT({id: usuario.id, nombre : usuario.nombre})
 
-        console.log(token)
     
         //almacenar en un cookie
         return res.cookie('_token', token,{

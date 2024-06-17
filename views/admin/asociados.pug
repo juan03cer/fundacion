@@ -1,4 +1,4 @@
-extends ../layout/admin
+extends ../layout/super
 
 block styles 
    meta(name="csrf-token" content=csrfToken)
@@ -27,18 +27,21 @@ block contenido
         
          //- pre= JSON.stringify(usuario,undefine,2)
          if usuario.length
-            div(class="bg-white shadow rounded-lg")
-                ul(class="divide-y divide-gray-200")
-                    each usuarios in usuario
-                         li 
-                           div(class="bg-white shadow rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 md:space-y-0 gap-4") 
-                              div(class="sm:w-2/4 md:w-2/6 lg:w-4/6 space-x-3") 
-                                
-                                 a(class="block text-2xl font-extrabold text-indigo-600" href=`/usuarios/${usuarios.id}`)= 'Trabajador: ' + usuarios.nombre
+            div.bg-gray-100.py-8
+                div.max-w-7xl.mx-auto.bg-white.shadow-lg.rounded-lg.overflow-hidden
+                    ul.divide-y.divide-gray-300
+                        each usuarios in usuario
+                            li
+                                div(class="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 gap-4 bg-white shadow rounded-lg mb-4")
+                                    div(class="flex-grow space-y-2")
+                                        a(class="block text-2xl font-extrabold text-indigo-600 hover:underline" href=`/usuarios/${usuarios.id}`)= 'Trabajador: ' + usuarios.nombre
+                                        div
+                                          h2='Email de la Persona asociada: '+usuarios.email
+                                                         
 
-                           div(class="sm:w-1/4 md:w-2/6 lg:w-4/6 flex flex-col lg:flex-row gap-2" ) 
-                                 a(href=`/usuarios/editar/${usuarios.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800") Editar        
-                                    form(method="POST" action=`/usuarios/eliminar/${usuarios.id}`)
-                                     input(type="hidden" name="_csrf" value = csrfToken)
-                                     input(type="submit" class='w-full px-5 py-5 md:py-2 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800' value="Eliminiar")
-           
+                                    div(class="flex space-x-2")
+                                        
+                                        form(method="POST" action=`/usuarios/eliminar/${usuarios.id}`)
+                                            input(type="hidden" name="_csrf" value=csrfToken)
+                                            input(type="submit" class='text-center px-4 py-2 text-xs font-semibold rounded bg-red-100 text-red-800 hover:bg-red-200 cursor-pointer' value="Eliminar")
+//- a(href=`/admin/editarAsociado/${usuarios.id}` class="text-center px-4 py-2 text-xs font-semibold rounded bg-indigo-100 text-indigo-800 hover:bg-indigo-200") Editar

@@ -150,11 +150,46 @@ res.render('admin/asociados',{
 
 }
 
+const eliminarUsuario = async(req,res)=>{
+    const{id}=req.params
+    //Validar que el usuario exista
+    const usuarios = await Usuario.findByPk(id)
+
+    if(!usuarios){
+        return res.redirect('/mi-sitio')
+    }
+
+    //Eliminar paciente
+    await usuarios.destroy()
+    res.redirect('/mi-sitio')
+}
+
+const editarAsociado = async (req,res)=>{
+        const{id}=req.params
+        //Validar que el paciente exista
+        const usuario = await Usuario.findByPk(id)
+    
+        if(!usuario){
+            return res.redirect('/mi-sitio')
+        }
+
+
+        res.render('admin/editarAsociado',{
+            pagina:`Editar Usuario: ${usuario.nombre}`,
+            csrfToken: req.csrfToken(),
+            datos:usuario
+        })
+}
+
+
 export{
     superUsuario,
     crearCampaing,
     guardar,
     campaings,
-   asociados
+   asociados,
+   eliminarUsuario,
+   editarAsociado
+
     
 }
