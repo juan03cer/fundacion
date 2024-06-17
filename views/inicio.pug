@@ -3,13 +3,10 @@ extends ./layout/app
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
     style.
-        /* Estilos personalizados para aumentar el espacio entre los elementos del menú */
         .nav-item {
-            margin-left: 2rem; /* Ajusta el valor según sea necesario */
-            margin-right: 2rem; /* Ajusta el valor según sea necesario */
+            margin-left: 2rem; 
+            margin-right: 2rem; 
         }
-        
-        /* Fondo de la página */
         body::before {
             content: '';
             position: fixed;
@@ -19,21 +16,19 @@ block styles
             height: 100%;
             background: url('/img/logo/background-mexico-sin-sordera-2024.jpg') no-repeat center center fixed;
             background-size: cover;
-            opacity: 0.3; /* Ajusta la opacidad de la imagen de fondo */
-            z-index: -1; /* Asegúrate de que el fondo esté detrás del contenido */
+            opacity: 0.3; 
+            z-index: -1; 
         }
-
-        /* Header y footer transparentes */
         header {
-            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+            background: rgba(148, 220, 34, 0.8); 
         }
         footer {
-            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
+            background: rgba(148, 220, 34, 0.8); 
         }
 
-        /* Sombra para la imagen del footer */
+        
         .footer-img {
-            box-shadow: 0 4px 8px rgba(112, 111, 111, 0.3); /* Ajusta la sombra según tus necesidades */
+            box-shadow: 0 4px 8px rgba(112, 111, 111, 0.3);
         }
 
 block contenido 

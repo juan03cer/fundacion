@@ -2,14 +2,27 @@ extends ../layout/admin
 
 block styles 
    meta(name="csrf-token" content=csrfToken)
+   style.
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/img/logo/fondo-cuarto.jpg') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
 
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
-            span.font-normal  Sin Sordera
-         h2.text-center.text-2xl.font-extrabold=pagina
+         h1.text-4xl.my-10.font-extrabold.text-center Fundación México
+            span.font-normal  Sin Sordera A.C 
+         h2.text-center.text-2xl.font-extrabold Registro de Usuarios Pertenecientes a la Fundación
          
-         a(href="/usuarios/crear" class="rounded px-10 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto" ) Registrar Paciente 
+         a(href="/usuarios/crear" class="rounded px-10 py-2 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-center text-white uppercase my-5 inline-block w-full md:w-auto" ) Registrar Nuevo Usuario 
         
         
          //- pre= JSON.stringify(usuario,undefine,2)

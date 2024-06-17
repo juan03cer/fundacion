@@ -3,12 +3,6 @@ extends ../layout/campaings
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
     style.
-        /* Estilos personalizados para aumentar el espacio entre los elementos del menú */
-        .nav-item {
-            margin-left: 2rem; /* Ajusta el valor según sea necesario */
-            margin-right: 2rem; /* Ajusta el valor según sea necesario */
-        }
-        
         /* Fondo de la página */
         body::before {
             content: '';
@@ -19,20 +13,52 @@ block styles
             height: 100%;
             background: url('/img/logo/background-mexico-sin-sordera-2024.jpg') no-repeat center center fixed;
             background-size: cover;
-            opacity: 0.3; /* Ajusta la opacidad de la imagen de fondo */
-            z-index: -1; /* Asegúrate de que el fondo esté detrás del contenido */
+            opacity: 0.3;
+            z-index: -1;
         }
 
+        /* Estilo para la sección de campañas */
+        .campaign-section {
+            background-color: #46b8a9; /* Color de fondo */
+            padding: 20px;
+            border-radius: 20px; /* Esquinas redondeadas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin-bottom: 20px; /* Espacio entre campañas */
+            max-width: 90%; /* Ancho máximo del 90% */
+        }
 
+        .campaign-title {
+            color: #333; /* Color del título */
+        }
+
+        .campaign-name {
+            color: #fff; /* Color del nombre */
+        }
+
+        /* Estilo para el contenedor de grilla */
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar columnas */
+            gap: 20px;
+            justify-items: center; /* Centrar elementos horizontalmente */
+        }
 
 block contenido
     div.py-10
         h1.text-4xl.my-10.font-extrabold.text-center 
-            | CAMPAÑAS
-        div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4")
+            | Fundación México 
+            span.font-normal Sin Sordera A.C 
+        h2.text-center.text-2xl.font-extrabold CAMPAÑAS REGISTRADAS
+        br
+        div.campaigns-grid
             each campaing in campaings
-                div(class="border-2 border-black p-4 flex flex-col items-center justify-center text-center") 
-                    p(class="text-green-600 font-bold text-xl") Campaña:
-                        span(class="text-gray-800 block text-lg")= campaing.nombre
-                        span(class="text-gray-800 block text-lg")= campaing.createdAt
+                div.campaign-section
+                    p(class="campaign-title text-gray-600 font-bold text-1xl") 
+                        | Nombre de la Campaña:
+                        span(class="campaign-name text-gray-800 block text-lg")
+                            u= campaing.nombre
+                    p(class="campaign-title text-gray-600 font-bold text-1xl") 
+                        | Fue creado el:
+                        span(class="text-white block text-lg")= campaing.createdAt
+
 
