@@ -1,12 +1,12 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,Seguridadsocial,Titularseguridadsocial,Usuario} from '../models/index.js'
-
+import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,Seguridadsocial,Titularseguridadsocial,Usuario,Parentesco, Datomedico} from '../models/index.js'
+import {esUsuario} from '../helpers/index.js'
 
 const completado = async (req,res)=>{
     const {id} = req.params
     
-    //Comprobar que el paciente estista 
+    //Comprobar que el paciente extista 
       
         const paciente =await Paciente.findByPk(id,{
             include:[
@@ -83,6 +83,7 @@ const guardarBeneficiario = async (req, res) => {
   //Crear un registro
   const{nombre,firma,fechanacimiento,edad,meses,escolaridadid,ocupacionid} =req.body
 
+  const{id: usuariobeneficiarioid} =req.usuario
   try{
      const actualizarBeneficiario = await Beneficiario.create({
           nombre,
@@ -90,6 +91,7 @@ const guardarBeneficiario = async (req, res) => {
           fechanacimiento,
           edad,
           meses,
+          usuariobeneficiarioid,
           escolaridadid,
           ocupacionid,
           pacienteid: req.params.id
@@ -158,10 +160,11 @@ const guardarDatosMedicos= async (req,res)=>{
 
 
   //Crear un registro
-  const{enfermedad,ruidosonido,familiarusausado,ladoescucha,exposicion,tiporuido,diagnostico} =req.body
+  const{enfermedad,ruidosonido,familiarusausado,ladoescucha,exposicion,tiporuido,diagnostico,serviciorequeridoid} =req.body
 
+  const{id: usuariodatomedicoid} =req.usuario
   try{
-     const actualizarDatoMedico = await Beneficiario.create({
+     const actualizarDatoMedico = await Datomedico.create({
         enfermedad,
         ruidosonido,
         familiarusausado,
@@ -169,6 +172,8 @@ const guardarDatosMedicos= async (req,res)=>{
         exposicion,
         tiporuido,
         diagnostico,
+        usuariodatomedicoid,
+        serviciorequeridoid,
         pacienteid: req.params.id
          
       });
@@ -190,9 +195,39 @@ const guardarDatosMedicos= async (req,res)=>{
 }
 
 
-
-const donadores = async (req,res)=>{
-  
+const mostrarDatosMedicos = async (req,res) =>{
+      
+    const {id} = req.params
+    
+    //Comprobar que el paciente exista 
+        const paciente =await Paciente.findByPk(id,{
+            include:[
+                { model: Companyseguros , as:'companyseguro'},
+                {model: Seguridadsocial, as:'seguridadsocial' },
+                {model:Titularseguridadsocial,as:'titularseguridadsocial'},
+                
+                {model:Parentesco,as:'parentesco'},
+                {
+                    model: Datomedico,
+                    as: 'datomedico',
+                    include: [{ model: Serviciorequerido, as: 'serviciorequerido' },
+                        { model:Usuario, as: 'usuario' }
+                    ]
+                }
+                
+            ],
+        })
+         if(!paciente || !paciente.publicado){
+            return res.redirect('/404')
+         }
+    
+    
+        res.render('pacientes/mostrardatosmedicos',{
+            paciente,
+            pagina:'Datos Medicos del Paciente: '+paciente.nombre,
+            csrfToken: req.csrfToken(),
+            usuario:req.usuario,
+        })
 }
 
 export{
@@ -201,6 +236,6 @@ export{
     guardarBeneficiario,
    datosMedicos,
    guardarDatosMedicos,
-   donadores
+   mostrarDatosMedicos
  
 }

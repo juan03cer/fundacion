@@ -9,9 +9,10 @@ import Donadores  from './Donadores.js'
 import Serviciorequerido from "./Serviciorequerido.js";
 import Beneficiario from "./Beneficiario.js";
 import Medios from "./Medios.js";
-
 import Escolaridad from "./Escolaridad.js";
 import Ocupacion from "./Ocupacion.js";
+import Parentesco from "./Parentesco.js"
+
 
 Paciente.belongsTo(Seguridadsocial,{foreignKey: 'seguridadsocialid'})
 Paciente.belongsTo(Companyseguros,{foreignKey: 'companysegurosid'})
@@ -25,14 +26,13 @@ Datomedico.belongsTo(Serviciorequerido,{foreignKey:'serviciorequeridoid'})
 Paciente.belongsTo(Datomedico,{foreignKey:'datomedicoid'})
 Paciente.belongsTo(Beneficiario,{foreignKey:'beneficiarioid'})
 Paciente.belongsTo(Medios,{foreignKey:'mediosid'})
+Paciente.belongsTo(Parentesco,{foreignKey:'parentescoid'})
+Datomedico.belongsTo(Usuario,{foreignKey:'usuariodatomedicoid'})
 
-
-
-
-
+Beneficiario.belongsTo(Usuario,{foreignKey:'usuariobeneficiarioid'})
+//Beneficiario
 Beneficiario.belongsTo(Escolaridad,{foreignKey:'escolaridadid'})
 Beneficiario.belongsTo(Ocupacion,{foreignKey:'ocupacionid'})
-
 
 // Donadores.belongsTo()
 
@@ -49,5 +49,6 @@ export{
     Donadores,
     Escolaridad,
     Serviciorequerido,
-    Ocupacion
+    Ocupacion,
+    Parentesco
 }

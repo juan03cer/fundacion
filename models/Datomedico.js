@@ -30,6 +30,11 @@ const Datomedico = db.define('datomedico',{
         type:DataTypes.STRING,
         allowNull:false
     },  
+    publicado:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
+    },
     
 })
 

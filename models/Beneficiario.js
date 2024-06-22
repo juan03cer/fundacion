@@ -25,6 +25,11 @@ const Beneficiario = db.define('beneficiario',{
     }, 
    //escolaridad llave
    //ocupacion llave
+   publicado:{
+    type:DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false
+},
 
 
 })

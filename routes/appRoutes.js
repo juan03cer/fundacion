@@ -4,16 +4,15 @@ import protegerRuta from '../middleware/protegerRuta.js';
 const router =express.Router()
 
 //Pagina de inicio
-router.get('/inicio',protegerRuta,inicio)
-router.get('/',inicioprincipal)
+router.get('/',protegerRuta,inicio)
 
 
-router.get('/campaign/:id',campaign)
+router.get('/campaign/:id',protegerRuta,campaign)
 
-router.get('/404', noEncontrado)
+router.get('/404',protegerRuta, noEncontrado)
 
-router.post('/buscador',buscador)
-router.post('/buscadorcampaing', buscadorcampaing)
+router.post('/buscador',protegerRuta,buscador)
+router.post('/buscadorcampaing',protegerRuta, buscadorcampaing)
 
 
 export default router

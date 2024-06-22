@@ -14,7 +14,6 @@ router.get('/pacientes/crear',protegerRuta,crear)
 
 router.post('/pacientes/crear',protegerRuta,
     body('nombre').notEmpty().withMessage('El Nombre es obligatorio'),
-
     body('correo').notEmpty().withMessage('El Correo es obligatorio'),
     body('lat').notEmpty().withMessage('Ubica la direccion del paciente en el mapa'),
 guardar

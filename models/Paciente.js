@@ -36,7 +36,7 @@ const Paciente = db.define('pacientes',{
         type:DataTypes.STRING
     },
     calle:{
-        type: DataTypes.STRING(80),
+        type: DataTypes.STRING,
         allowNull:false,
 
     },
@@ -48,19 +48,23 @@ const Paciente = db.define('pacientes',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    imagen:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    activo:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false,
-        defaultValue:false
-    },
     publicado:{
         type:DataTypes.BOOLEAN,
         allowNull:false,
         defaultValue:false
+    },
+    companion:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    telcompanion:{
+        type:DataTypes.STRING,
+        allowNull:false
+
+    },
+    canaldereferencia:{
+        type:DataTypes.STRING,
+        allowNull:false
     }
     
 

@@ -2,35 +2,7 @@ extends ../layout/admin
 
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
-    style.
-        /* Estilos personalizados para aumentar el espacio entre los elementos del menú */
-        .nav-item {
-            margin-left: 2rem; /* Ajusta el valor según sea necesario */
-            margin-right: 2rem; /* Ajusta el valor según sea necesario */
-        }
-        
-        /* Fondo de la página */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/img/logo/fondo-munecos.jpg') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.3; /* Ajusta la opacidad de la imagen de fondo */
-            z-index: -1; /* Asegúrate de que el fondo esté detrás del contenido */
-        }
 
-        /* Header y footer transparentes */
-        header {
-            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
-        }
-        footer {
-            background: rgba(148, 220, 34, 0.8); /* Fondo verde semitransparente */
-        }
-    
 
 block contenido
     
@@ -48,7 +20,7 @@ block contenido
               form.space-y-8(method="POST" action="/pacientes/crear")
                 input(type="hidden" name="_csrf" value = csrfToken)
                 div.space-y-5
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion General
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion Del Paciente
                     p.text-gray-600 Añade Informacion sobre el paciente
                    
                     div
@@ -70,7 +42,8 @@ block contenido
                             select#seguridadsocialid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="seguridadsocialid")
                                 option(value="") -Selecione con que seguridad social cuenta-     
                                 each seguridadsociales in seguridadsocialid
-                                    option(value=seguridadsociales.id selected= datos ? datos.seguridadsocialid == seguridadsociales.id ? true:false:null)=seguridadsociales.nombre 
+                                    option(value=seguridadsociales.id selected= datos ? datos.seguridadsocialid == seguridadsociales.id ? true:false:null)=seguridadsociales.nombre
+                                     
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/3")
@@ -108,12 +81,46 @@ block contenido
                             label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="telrecados") Telefono para recados 
                             input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
                     div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="campaignid") Seleccione la campaña ala que corresponde 
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="campaignid") Seleccione la campaña en que se conoce al Paciente 
                             select#campaignid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="campaignid")
                                 option(value="") -Selecione- 
                                 each campaign in campaignid
                                     option(value=campaign.id  selected= datos ? datos.campaignid == campaign.id ? true:false:null)= campaign.nombre   
-                                     
+                                    
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion del acompañante
+                    p.text-gray-600 Añade Informacion sobre el acompañante, si no es el caso poner N/A
+
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="companion") Nombre completo de la persona que llama, responsable o familiar
+                            input#companion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Acompañante" type="text" name="companion" value= datos ? datos.numpaciente : '')
+                               
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="parentescoid") Parentesco
+                            select#parentescoid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="parentescoid")
+                                option(value="") -Selecione- 
+                                each parentesco in parentescoid
+                                    option(value=parentesco.id  selected= datos ? datos.parentescoid == parentesco.id ? true:false:null)= parentesco.nombre  
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="telcompanion") Telefono
+                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion requerida para la fundacion
+                    p.text-gray-600 
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        div(class="md:w-1/1")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="mediosid") ¿A traves de que medio se entero de la compañia?
+                            select#mediosid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="mediosid")
+                                option(value="") -Selecione- 
+                                each medio in mediosid
+                                    option(value=medio.id  selected= datos ? datos.mediosid == medio.id ? true:false:null)= medio.nombre  
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="canaldereferencia") Canal de Referencia (En caso de ser Referido)
+                            input#canaldereferencia.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Canal de referencia" type="text" name="canaldereferencia" value= datos ? datos.canaldereferencia : '')
+                 
+
 
                     div.border-gray-200.border-t.py-5.space-y-5                   
                         h3.text-lg.leading-6.font-medium.text-gray-900 Ubicacion
@@ -128,7 +135,7 @@ block contenido
                         input(type="hidden" name="lng" id="lng" value= datos ? datos.lng: '') 
                             
 
-                    input(class="w-full py-3 bg-indigo-600 hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Añadir Imagen")
+                    input(class="w-full py-3 bg-indigo-600 hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar")
 
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")

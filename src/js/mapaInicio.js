@@ -51,7 +51,6 @@
                     .addTo(mapa)
                     .bindPopup(`
                         <h1 class="text-xl font-extrabold uppercase my-5 m-5">${paciente?.nombre}</h1>
-                        <img src="/uploads/${paciente?.imagen}" alt="Imagen del paciente ${paciente.nombre}">
                         <p class="text-gray-600 font-bold"> </p> 
                         <a href="/pacientes/${paciente.id}" style="color: white; " class="bg-indigo-600 block p-2 text-center font-bold uppercase">Ver Paciente</a>
                     `)

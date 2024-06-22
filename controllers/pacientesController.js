@@ -1,8 +1,9 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
+import Medios from '../models/Medios.js'
 
 const admin = async (req, res) => {
 
@@ -34,6 +35,7 @@ const admin = async (req, res) => {
                     { model: Companyseguros , as:'companyseguro'},
                     {model: Seguridadsocial, as:'seguridadsocial' },
                     {model:Titularseguridadsocial,as:'titularseguridadsocial'},
+                    
                    
                  ],
             }),
@@ -64,11 +66,13 @@ const admin = async (req, res) => {
 //formulario para crear 
 const crear = async(req,res) =>{
     //Consultar Modelo de Precio y Categorias
-    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid] = await Promise.all([
+    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid,parentescoid,mediosid] = await Promise.all([
         Companyseguros.findAll(),
         Titularseguridadsocial.findAll(),
         Seguridadsocial.findAll(),
         Campaign.findAll(), 
+        Parentesco.findAll(),
+        Medios.findAll()
     ])
 
    
@@ -79,6 +83,8 @@ const crear = async(req,res) =>{
         titularseguridadsocialid,
         seguridadsocialid,
         campaignid,
+        parentescoid,
+        mediosid,
         datos:{}
     })
 
@@ -90,11 +96,13 @@ const guardar = async (req,res)=>{
 
     if(!resultado.isEmpty()){
 
-        const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid] = await Promise.all([
+        const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid,parentescoid,mediosid] = await Promise.all([
             Companyseguros.findAll(),
             Titularseguridadsocial.findAll(),
             Seguridadsocial.findAll(),
             Campaign.findAll(),
+            Parentesco.findAll(),
+            Medios.findAll()
             
         ])
     
@@ -106,6 +114,8 @@ const guardar = async (req,res)=>{
             titularseguridadsocialid,
             seguridadsocialid,
             campaignid,
+            parentescoid,
+            mediosid,
             errores:resultado.array(),
             datos:req.body
 
@@ -113,7 +123,7 @@ const guardar = async (req,res)=>{
     }
 
     //Crear un registro
-    const{nombre,datomedico,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng} =req.body
+    const{nombre,datomedico,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,companion,parentescoid,mediosid,telcompanion,canaldereferencia} =req.body
 
 
     const{id: usuarioid} =req.usuario
@@ -135,12 +145,17 @@ const guardar = async (req,res)=>{
             lat,
             lng,
             usuarioid,
-            imagen:''
+            companion,
+            parentescoid,
+            mediosid,
+            telcompanion,
+            canaldereferencia
+
             
         })
 
         const {id} = pacienteGuardado
-        res.redirect(`/pacientes/agregar-imagen/${id}`)
+        res.redirect('/mis-pacientes')
 
     } catch(error){
         console.log(error)
@@ -239,11 +254,12 @@ const editar =async(req,res)=>{
     //     return res.redirect('/mis-pacientes')
     // }
     //Consultar Modelo de Precio y Categorias
-    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid] = await Promise.all([
+    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid,parentescoid] = await Promise.all([
         Companyseguros.findAll(),
         Titularseguridadsocial.findAll(),
         Seguridadsocial.findAll(),
-        Campaign.findAll()
+        Campaign.findAll(),
+        Parentesco.findAll()
         
     ])
 
@@ -254,6 +270,7 @@ const editar =async(req,res)=>{
         titularseguridadsocialid,
         seguridadsocialid,
         campaignid,
+        parentescoid,
         datos:paciente
     })
 }
@@ -341,9 +358,7 @@ const eliminar = async (req,res) =>{
     //     return res.redirect('/mis-pacientes')
     // }
 
-    // Eliminar la imagen
-    await unlink(`public/uploads/${paciente.imagen}`)
-
+ 
     //Eliminar paciente
     await paciente.destroy()
     res.redirect('/mis-pacientes')
@@ -394,6 +409,8 @@ const mostrarPaciente = async (req,res)=>{
             {model: Seguridadsocial, as:'seguridadsocial' },
             {model:Titularseguridadsocial,as:'titularseguridadsocial'},
             {model:Usuario,as:'usuario'},
+            {model:Parentesco,as:'parentesco'},
+            
             
             
         ],
@@ -405,7 +422,7 @@ const mostrarPaciente = async (req,res)=>{
 
     res.render('pacientes/mostrar',{
         paciente,
-        pagina:paciente.nombre,
+        pagina:'Datos del Paciente: '+paciente.nombre,
         csrfToken: req.csrfToken(),
         usuario:req.usuario,
         esUsuario: esUsuario(req.usuario?.id, paciente.usuarioid)

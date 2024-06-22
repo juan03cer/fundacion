@@ -85,6 +85,28 @@ block contenido
                                 option(value="") -Selecione- 
                                 each campaign in campaignid
                                     option(value=campaign.id  selected= datos ? datos.campaignid == campaign.id ? true:false:null)= campaign.nombre   
+                   
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion del acompañante
+                    p.text-gray-600 Añade Informacion sobre el acompañante, si no es el caso poner N/A
+
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="companion") Nombre completo de la persona que llama, responsable o familiar
+                            input#companion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Numero telefonico" type="text" name="companion" value= datos ? datos.numpaciente : '')
+                               
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="parentescoid") Parentesco
+                            select#parentescoid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="parentescoid")
+                                option(value="") -Selecione- 
+                                each parentesco in parentescoid
+                                    option(value=parentesco.id  selected= datos ? datos.parentescoid == parentesco.id ? true:false:null)= parentesco.nombre  
+
+                        div(class="md:w-1/3")
+                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="telcompanion") Telefono
+                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
+                  
                     div.border-gray-200.border-t.py-5.space-y-5                   
                         h3.text-lg.leading-6.font-medium.text-gray-900 Ubicacion
                         p.text-gray-600 Ubica el domicilio del paciente en el mapa           
