@@ -18,7 +18,7 @@ block contenido
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div.space-y-5
-                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Informacion sobre el beneficiario
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Edita Informacion sobre el beneficiario
     
                         div
                             label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="enfermedad") ¿Padece alguna enfermedad?
@@ -52,10 +52,8 @@ block contenido
                                     option(value=serviciorequerido.id selected= datos ? datos.serviciorequeridoid == serviciorequerido.id ? true:false:null)= serviciorequerido.nombre  
                         div
                             label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="diagnostico") Diagnostico medico:
-                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Beneficiario" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
+                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Beneficiario" type="" name="diagnostico" )= datos ? datos.diagnostico : ''        
                         
 
                         input(class="w-full py-3 bg-indigo-600 hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
-
-block scripts
-     script(src="/js/calcularedad.js")                                                             
+                                                     

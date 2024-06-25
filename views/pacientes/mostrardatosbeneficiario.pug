@@ -1,0 +1,53 @@
+extends ../layout/admin
+
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+    
+block contenido
+    div.py-10.flex.justify-center.bg-gray-100.min-h-screen
+        div.max-w-4xl.w-full.bg-white.shadow-md.rounded-lg.p-8
+            h1.text-4xl.my-10.font-extrabold.text-center.text-gray-900
+                span.text-black-600  Fundacion Mexico
+                span.font-normal.text-gray-700  Sin Sordera
+
+            if errores
+                div(class="max-w-md mx-auto my-5")
+                    each error in errores 
+                        p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg   
+
+            div.mt-5
+                div.bg-white.shadow-md.rounded-lg.p-6
+                    h2.text-2xl.leading-6.font-bold.text-gray-900.text-center.mb-6 Información del Beneficiario
+                    div.flex.justify-center.gap-4.mb-5
+                        a(href=`/pacientes/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-3 text-xs leading-5 font-semibold rounded bg-green-200 text-black hover:bg-green-300") Ver Información General    
+                        a(href=`/pacientes/mostrardatosmedicos/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-3 text-xs leading-5 font-semibold rounded bg-yellow-200 text-black hover:bg-yellow-300") Ver Datos Medicos  
+                    
+                    h2.text-center.text-2xl.font-extrabold.mb-6= pagina
+                    if beneficiarioId
+                        a(href=`/pacientes/${pacienteId.id}/editardatobeneficiario/${beneficiarioId}` class="text-center w-full md:px-5 md:py-2  py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black") Editar Datos del beneficiario
+                    
+                    div(class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5") 
+                        div
+                            p.text-gray-600.font-bold NOMBRE DEL BENEFICIARIO
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.nombre
+                        div
+                            p.text-gray-600.font-bold ¿FIRMÓ TODOS LOS FORMULARIOS?
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.firma
+                        div
+                            p.text-gray-600.font-bold OCUPACIÓN
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.ocupacion.nombre
+                        div
+                            p.text-gray-600.font-bold ESCOLARIDAD
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.escolaridad.nombre
+                        div
+                            p.text-gray-600.font-bold FECHA DE NACIMIENTO
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.fechanacimiento
+                        div
+                            p.text-gray-600.font-bold EDAD DEL PACIENTE
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.edad
+                        div
+                            p.text-gray-600.font-bold MESES DEL PACIENTE
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.meses
+                        div
+                            p.text-gray-600.font-bold ULTIMA PERSONA QUE MODIFICO EL BENEFICIARIO
+                            span.text-gray-800.block.text-lg= pacienteId.beneficiario.usuario.nombre

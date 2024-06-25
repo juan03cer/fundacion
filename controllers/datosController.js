@@ -115,6 +115,128 @@ const guardarBeneficiario = async (req, res) => {
   }
 }
 
+const mostrarDatosBeneficiario = async(req,res)=>{
+    const { id } = req.params;
+
+    // Comprobar que el paciente exista 
+    const pacienteId = await Paciente.findByPk(id, {
+        include: [
+            { model: Companyseguros, as: 'companyseguro' },
+            { model: Seguridadsocial, as: 'seguridadsocial' },
+            { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
+            { model: Parentesco, as: 'parentesco' },
+            {
+                model: Beneficiario, as: 'beneficiario',
+                include: [
+                    { model: Escolaridad, as: 'escolaridad' },
+                    { model: Ocupacion, as: 'ocupacion' },
+                    { model: Usuario, as: 'usuario' }
+                ]
+            }
+        ],
+    });
+
+    if (!pacienteId || !pacienteId.publicado) {
+        return res.redirect('/404');
+    }
+
+    // Asegúrate de que exista algún dato médico asociado al pacienteId
+    const beneficiarioId = pacienteId.beneficiario ? pacienteId.beneficiario.id : null;
+
+
+    res.render('pacientes/mostrardatosbeneficiario', {
+        pacienteId,
+        pagina: 'Datos Medicos del Paciente: ' + pacienteId.nombre,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        beneficiarioId
+    });
+}
+
+
+
+const editarDatoBeneficiario = async(req,res) =>{
+    const { pacienteId, beneficiarioid } = req.params;
+
+    // Buscar el paciente y los datos médicos asociados
+    const paciente = await Paciente.findByPk(pacienteId);
+    if (!paciente) {
+        return res.redirect('/mis-pacientes');
+    }
+
+    const beneficiario = await Beneficiario.findByPk(beneficiarioid);
+    if (!beneficiario) {
+        return res.redirect('/mis-pacientes');
+    }
+
+       //Consultar Modelo de Precio y Categorias
+       const [escolaridadid,ocupacionid] = await Promise.all([
+        Escolaridad.findAll(), 
+        Ocupacion.findAll(),
+       
+    ])
+    res.render('pacientes/editardatobeneficiario', {
+        pagina: `Editar Datos Médicos del paciente: ${paciente.nombre}`,
+        csrfToken: req.csrfToken(),
+        escolaridadid,
+        ocupacionid,
+        paciente,
+        datos: beneficiario
+    });
+}
+
+const editarDatoBeneficiarioGuardado = async(req,res) =>{
+    const { pacienteId, beneficiarioid } = req.params;
+    // Validación
+    let resultado = validationResult(req);
+
+    if (!resultado.isEmpty()) {
+
+        const [escolaridadid,ocupacionid] = await Promise.all([
+            Escolaridad.findAll(), 
+            Ocupacion.findAll(),
+           
+        ])
+        return res.render('pacientes/editardatobeneficiario', {
+            pagina: `Editar Datos Del Beneficiario`,
+            csrfToken: req.csrfToken(),
+            escolaridadid,
+            ocupacionid,
+            errores: resultado.array(),
+            datos: req.body,
+            paciente: await Paciente.findByPk(pacienteId) 
+        });
+    }
+    
+  //Crear un registro
+  const{nombre,firma,fechanacimiento,edad,meses,escolaridadid,ocupacionid} =req.body
+
+  const{id: usuariobeneficiarioid} =req.usuario
+
+  try{
+     // Buscar el dato beneficiario para actualizar
+     const beneficiario = await Beneficiario.findByPk(beneficiarioid);
+     if (!beneficiario) {
+         return res.redirect('/mis-pacientes');
+     }
+      await beneficiario.update({
+        nombre,
+        firma,
+        fechanacimiento,
+        edad,meses,
+        escolaridadid,
+        ocupacionid,
+        usuariobeneficiarioid
+         
+      });
+
+    // Redirigue a paguina principal del super
+    res.redirect(`/pacientes/mostrardatosbeneficiario/${pacienteId}`);
+  } catch(error){
+      res.render('/404')
+  }
+}
+
 
 //formulario para crear 
 const datosMedicos = async(req,res) =>{
@@ -190,52 +312,139 @@ const guardarDatosMedicos= async (req,res)=>{
         serviciorequeridoid
     });
   } catch(error){
-      console.log(error)
+      res.render('/404')
   }
 }
 
 
-const mostrarDatosMedicos = async (req,res) =>{
-      
-    const {id} = req.params
-    
-    //Comprobar que el paciente exista 
-        const paciente =await Paciente.findByPk(id,{
-            include:[
-                { model: Companyseguros , as:'companyseguro'},
-                {model: Seguridadsocial, as:'seguridadsocial' },
-                {model:Titularseguridadsocial,as:'titularseguridadsocial'},
-                
-                {model:Parentesco,as:'parentesco'},
-                {
-                    model: Datomedico,
-                    as: 'datomedico',
-                    include: [{ model: Serviciorequerido, as: 'serviciorequerido' },
-                        { model:Usuario, as: 'usuario' }
-                    ]
-                }
-                
-            ],
-        })
-         if(!paciente || !paciente.publicado){
-            return res.redirect('/404')
-         }
-    
-    
-        res.render('pacientes/mostrardatosmedicos',{
-            paciente,
-            pagina:'Datos Medicos del Paciente: '+paciente.nombre,
+// Mostrar formulario de edición
+const editarDatoMedico = async (req, res) => {
+    const { pacienteId, datomedicoId } = req.params;
+
+    // Buscar el paciente y los datos médicos asociados
+    const paciente = await Paciente.findByPk(pacienteId);
+    if (!paciente) {
+        return res.redirect('/mis-pacientes');
+    }
+
+    const datomedico = await Datomedico.findByPk(datomedicoId);
+    if (!datomedico) {
+        return res.redirect('/mis-pacientes');
+    }
+
+    // Consultar modelo de servicios requeridos
+    const serviciorequeridoid = await Serviciorequerido.findAll();
+
+    res.render('pacientes/editardatomedico', {
+        pagina: `Editar Datos Médicos del paciente: ${paciente.nombre}`,
+        csrfToken: req.csrfToken(),
+        serviciorequeridoid,
+        paciente,
+        datos: datomedico // Asegúrate de que datos contenga los campos necesarios, como enfermedad y ruidosonido
+    });
+};
+
+
+const editarDatoMedicoGuardado = async (req, res) => {
+    const { pacienteId, datomedicoId } = req.params;
+
+    // Validación
+    let resultado = validationResult(req);
+    if (!resultado.isEmpty()) {
+        const serviciorequeridoid = await Serviciorequerido.findAll();
+        return res.render('pacientes/editardatomedico', {
+            pagina: `Editar Datos Médicos`,
             csrfToken: req.csrfToken(),
-            usuario:req.usuario,
-        })
+            serviciorequeridoid,
+            errores: resultado.array(),
+            datos: req.body,
+            paciente: await Paciente.findByPk(pacienteId) 
+        });
+    }
+
+    const { enfermedad, ruidosonido, familiarusausado, ladoescucha, exposicion, tiporuido, diagnostico, serviciorequeridoid } = req.body;
+    const { id: usuariodatomedicoid } = req.usuario;
+
+    try {
+        // Buscar el dato médico para actualizar
+        const datomedico = await Datomedico.findByPk(datomedicoId);
+        if (!datomedico) {
+            return res.redirect('/mis-pacientes');
+        }
+
+        // Actualizar los datos médicos
+        await datomedico.update({
+            enfermedad,
+            ruidosonido,
+            familiarusausado,
+            ladoescucha,
+            exposicion,
+            tiporuido,
+            diagnostico,
+            usuariodatomedicoid,
+            serviciorequeridoid,
+            pacienteid: pacienteId
+        });
+
+        // Redirigir a la página principal de datos medicos del paciente
+        res.redirect(`/pacientes/mostrardatosmedicos/${pacienteId}`);
+    } catch (error) {
+        console.error(error);
+        res.redirect('/404');
+    }
+};
+
+
+
+const mostrarDatosMedicos = async (req, res) => {
+    const { id } = req.params;
+
+    // Comprobar que el paciente exista 
+    const pacienteId = await Paciente.findByPk(id, {
+        include: [
+            { model: Companyseguros, as: 'companyseguro' },
+            { model: Seguridadsocial, as: 'seguridadsocial' },
+            { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
+            { model: Parentesco, as: 'parentesco' },
+            {
+                model: Datomedico, as: 'datomedico',
+                include: [
+                    { model: Serviciorequerido, as: 'serviciorequerido' },
+                    { model: Usuario, as: 'usuario' }
+                ]
+            }
+        ],
+    });
+
+    if (!pacienteId || !pacienteId.publicado) {
+        return res.redirect('/404');
+    }
+
+    // Asegúrate de que exista algún dato médico asociado al pacienteId
+    const datomedicoId = pacienteId.datomedico ? pacienteId.datomedico.id : null;
+
+    res.render('pacientes/mostrardatosmedicos', {
+        pacienteId,
+        pagina: 'Datos Medicos del Paciente: ' + pacienteId.nombre,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        datomedicoId // Pasamos el ID del dato médico para crear el enlace de edición
+    });
 }
+
 
 export{
     completado,
     crearBeneficiario,
     guardarBeneficiario,
+    editarDatoBeneficiario,
+    editarDatoBeneficiarioGuardado,
+    mostrarDatosBeneficiario,
    datosMedicos,
    guardarDatosMedicos,
-   mostrarDatosMedicos
+   mostrarDatosMedicos,
+   editarDatoMedico,
+editarDatoMedicoGuardado
+
  
 }

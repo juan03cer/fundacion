@@ -1,6 +1,6 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
 import Medios from '../models/Medios.js'
@@ -322,7 +322,6 @@ const guardarCambios= async(req,res)=>{
 
         paciente.set({
             nombre,
-            
             sexo,
             seguridadsocialid,
             segdgasmdcs,
@@ -410,6 +409,8 @@ const mostrarPaciente = async (req,res)=>{
             {model:Titularseguridadsocial,as:'titularseguridadsocial'},
             {model:Usuario,as:'usuario'},
             {model:Parentesco,as:'parentesco'},
+            {model:Datomedico,as:'datomedico'},
+            {model:Beneficiario,as:'beneficiario'}
             
             
             
@@ -442,6 +443,8 @@ const mostrarPacienteApp = async (req,res)=>{
             {model: Seguridadsocial, as:'seguridadsocial' },
             {model:Titularseguridadsocial,as:'titularseguridadsocial'},
             {model:Usuario,as:'usuario'},
+            {model:Datomedico,as:'datomedico'},
+            {model:Beneficiario,as:'beneficiario'}
             
             
         ],
