@@ -43,7 +43,7 @@ block contenido
                               div(class="sm:w-1/4 md:w-2/6 lg:w-4/6 flex flex-col lg:flex-row gap-2" ) 
                                  button(type="button" data-pacientes-id=`${pacientes.id}` class=`cambiar-estado w-full px-5 py-5 md:py-2 text-xs leading-5 font-semibold rounded cursor-pointer ${pacientes.publicado ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`)=`${pacientes.publicado ? 'En Atencion' : 'Sin atencion'}`
                                  a(href=`/pacientes/editar/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800") Editar      
-                                 a(href=`/pacientes/completado/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-700 text-white") Completar datos     
+                                 a(href=`/pacientes/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-700 text-white") Completar datos     
 
                                  form(method="POST" action=`/pacientes/eliminar/${pacientes.id}`)
                                      input(type="hidden" name="_csrf" value = csrfToken)

@@ -4,6 +4,7 @@ import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
 import Medios from '../models/Medios.js'
+import Accionesprevias from '../models/Accionesprevias.js'
 
 const admin = async (req, res) => {
 
@@ -311,15 +312,13 @@ const guardarCambios= async(req,res)=>{
         return res.redirect('/mis-pacientes')
     }
 
-    //Revisra que quien visita la url ,es quien creo al paciente
-    if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
-        return res.redirect('/mis-pacientes')
-    }
+  
 
     //Reescribir el objeto y actualizarlo
     try{
         const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng} =req.body
 
+        const{id: usuarioid} =req.usuario
         paciente.set({
             nombre,
             sexo,
@@ -333,7 +332,9 @@ const guardarCambios= async(req,res)=>{
             telrecados,
             calle,
             lat,
-            lng
+            lng,
+            usuarioid
+
 
         })
         await paciente.save()
@@ -444,7 +445,8 @@ const mostrarPacienteApp = async (req,res)=>{
             {model:Titularseguridadsocial,as:'titularseguridadsocial'},
             {model:Usuario,as:'usuario'},
             {model:Datomedico,as:'datomedico'},
-            {model:Beneficiario,as:'beneficiario'}
+            {model:Beneficiario,as:'beneficiario'},
+            {model:Accionesprevias,as:'accionprevia'}
             
             
         ],

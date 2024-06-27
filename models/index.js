@@ -12,7 +12,8 @@ import Medios from "./Medios.js";
 import Escolaridad from "./Escolaridad.js";
 import Ocupacion from "./Ocupacion.js";
 import Parentesco from "./Parentesco.js"
-
+import Accionesprevias from "./Accionesprevias.js";
+import Seguimiento from "./Seguimiento.js";
 
 Paciente.belongsTo(Seguridadsocial,{foreignKey: 'seguridadsocialid'})
 Paciente.belongsTo(Companyseguros,{foreignKey: 'companysegurosid'})
@@ -27,8 +28,12 @@ Paciente.belongsTo(Datomedico,{foreignKey:'datomedicoid'})
 Paciente.belongsTo(Beneficiario,{foreignKey:'beneficiarioid'})
 Paciente.belongsTo(Medios,{foreignKey:'mediosid'})
 Paciente.belongsTo(Parentesco,{foreignKey:'parentescoid'})
-Datomedico.belongsTo(Usuario,{foreignKey:'usuariodatomedicoid'})
+Paciente.belongsTo(Accionesprevias,{foreignKey:'accionespreviasid'})
+Paciente.belongsTo(Seguimiento,{foreignKey:'seguimientoid'})
 
+
+Datomedico.belongsTo(Usuario,{foreignKey:'usuariodatomedicoid'})
+Accionesprevias.belongsTo(Usuario,{foreignKey:'usuarioaccionespreviasid'})
 Beneficiario.belongsTo(Usuario,{foreignKey:'usuariobeneficiarioid'})
 //Beneficiario
 Beneficiario.belongsTo(Escolaridad,{foreignKey:'escolaridadid'})
