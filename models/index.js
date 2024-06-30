@@ -55,5 +55,6 @@ export{
     Escolaridad,
     Serviciorequerido,
     Ocupacion,
-    Parentesco
+    Parentesco,
+    Accionesprevias
 }

@@ -105,12 +105,7 @@ const guardarBeneficiario = async (req, res) => {
         { where: { id: req.params.id } }
       );
 
-    // Redirigue a paguina principal del super
-    res.render('pacientes/beneficiario', {
-        csrfToken: req.csrfToken(),
-          escolaridadid, 
-          ocupacionid,
-    });
+      res.redirect(`/pacientes/mostrardatosbeneficiario/${req.params.id}`);
   } catch(error){
       console.log(error)
   }
@@ -147,7 +142,7 @@ const mostrarDatosBeneficiario = async(req,res)=>{
 
     res.render('pacientes/mostrardatosbeneficiario', {
         pacienteId,
-        pagina: 'Datos Medicos del Paciente: ' + pacienteId.nombre,
+        pagina: 'Datos del beneficiario del paciente: ' + pacienteId.nombre,
         csrfToken: req.csrfToken(),
         usuario: req.usuario,
         beneficiarioId
@@ -307,13 +302,10 @@ const guardarDatosMedicos= async (req,res)=>{
         { where: { id: req.params.id } }
       );
 
-    // Redirigue a paguina principal del super
-    res.render('pacientes/datosmedicos', {
-        csrfToken: req.csrfToken(),
-        serviciorequeridoid
-    });
+      res.redirect(`/pacientes/mostrardatosmedicos/${req.params.id}`);
   } catch(error){
-      res.render('/404')
+    //   res.render('/404')
+    console.log(error)
   }
 }
 
@@ -496,9 +488,7 @@ const accionespreviasguardar =async(req,res)=> {
       );
 
     // Redirigue a paguina principal del super
-    res.render('pacientes/mostraraccionesprevias', {
-        csrfToken: req.csrfToken(),
-    });
+    res.redirect(`/pacientes/mostraraccionesprevias/${req.params.id}`)
   } catch(error){
       console.log(error)
   }

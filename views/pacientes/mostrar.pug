@@ -7,8 +7,8 @@ block styles
 
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
-            span.font-normal  Sin Sordera
+         h1.text-4xl.my-10.font-extrabold.text-center  Fundacion Mexico
+            span.font-normal  Sin Sordera A.C
          
          if errores 
             div(class="max-w-md mx-auto my-10")
@@ -24,16 +24,18 @@ block contenido
             
             - if (paciente.beneficiario && paciente.beneficiario.publicado)
                 a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black")
-                            | Datos Del Beneficiario En Existencia           
+                            | Datos Del Beneficiario en Existencia        
+            - else
+                a(href=`/pacientes/beneficiario/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black") Completar datos del beneficiario                   
+                 
+            
+            - if (paciente.accionesprevia && paciente.accionesprevia.publicado)
+                a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black")
+                            | Datos Del Las Accioones Previas en Existencia          
             - else
                 a(href=`/pacientes/accionesprevias/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black") Completar datos de las Acciones Previas
             
-            - if (paciente.accionprevia && paciente.accionprevia.publicado)
-                a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black")
-                            | Datos Del accionprevia En Existencia           
-            - else
-                a(href=`/pacientes/beneficiario/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black") Completar datos del beneficiario                   
-                    
+                      
          div(class="mt-5 md:flex md:gap-4 md:items-start")
        
                     div(class="md:w-2/3 bg-white shadow rounded-lg") 
@@ -53,12 +55,12 @@ block contenido
                             - else
                                  a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs ml-5 leading-5 font-semibold rounded bg-red-200 cursor-not-allowed text-black")
                                                 | Sin Datos Del Beneficiario           
-                            - if (paciente.accionprevia && paciente.accionprevia.publicado)
-                                 a(href=`/pacientes/mostraraccionesprevias/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black") Accion Previa   
+                            - if (paciente.accionesprevia && paciente.accionesprevia.publicado)
+                                 a(href=`/pacientes/mostraraccionesprevias/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 ml-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black") Acciones Previas   
                             - else
                                  a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs ml-5 leading-5 font-semibold rounded bg-red-200 cursor-not-allowed text-black")
                                                 | Sin Datos De las Acciones Previas        
-                               
+                            a(href=`/pacientes/editar/${paciente.id}` class="text-center w-full md:px-2 md:py-2 py-2 ml-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-purple-200 text-black") Editar Datos del Paciente   
                             h2.text-center.text-2xl.font-extrabold= pagina
                  
 

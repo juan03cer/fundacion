@@ -1,10 +1,9 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
 import Medios from '../models/Medios.js'
-import Accionesprevias from '../models/Accionesprevias.js'
 
 const admin = async (req, res) => {
 
@@ -411,7 +410,8 @@ const mostrarPaciente = async (req,res)=>{
             {model:Usuario,as:'usuario'},
             {model:Parentesco,as:'parentesco'},
             {model:Datomedico,as:'datomedico'},
-            {model:Beneficiario,as:'beneficiario'}
+            {model:Beneficiario,as:'beneficiario'},
+            { model: Accionesprevias, as: 'accionesprevia' } 
             
             
             
@@ -446,8 +446,7 @@ const mostrarPacienteApp = async (req,res)=>{
             {model:Usuario,as:'usuario'},
             {model:Datomedico,as:'datomedico'},
             {model:Beneficiario,as:'beneficiario'},
-            {model:Accionesprevias,as:'accionprevia'}
-            
+            { model: Accionesprevias, as: 'accionesprevia' } 
             
         ],
     })
