@@ -2,7 +2,6 @@ import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
 import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,Seguridadsocial,Titularseguridadsocial,Usuario,Parentesco, Datomedico} from '../models/index.js'
 import {esUsuario} from '../helpers/index.js'
-import Accionesprevias from '../models/Accionesprevias.js'
 
 const completado = async (req,res)=>{
     const {id} = req.params
@@ -105,7 +104,12 @@ const guardarBeneficiario = async (req, res) => {
         { where: { id: req.params.id } }
       );
 
-      res.redirect(`/pacientes/mostrardatosbeneficiario/${req.params.id}`);
+    // Redirigue a paguina principal del super
+    res.render('pacientes/beneficiario', {
+        csrfToken: req.csrfToken(),
+          escolaridadid, 
+          ocupacionid,
+    });
   } catch(error){
       console.log(error)
   }
@@ -142,7 +146,7 @@ const mostrarDatosBeneficiario = async(req,res)=>{
 
     res.render('pacientes/mostrardatosbeneficiario', {
         pacienteId,
-        pagina: 'Datos del beneficiario del paciente: ' + pacienteId.nombre,
+        pagina: 'Datos Medicos del Paciente: ' + pacienteId.nombre,
         csrfToken: req.csrfToken(),
         usuario: req.usuario,
         beneficiarioId
@@ -302,10 +306,13 @@ const guardarDatosMedicos= async (req,res)=>{
         { where: { id: req.params.id } }
       );
 
-      res.redirect(`/pacientes/mostrardatosmedicos/${req.params.id}`);
+    // Redirigue a paguina principal del super
+    res.render('pacientes/datosmedicos', {
+        csrfToken: req.csrfToken(),
+        serviciorequeridoid
+    });
   } catch(error){
-    //   res.render('/404')
-    console.log(error)
+      res.render('/404')
   }
 }
 
@@ -425,107 +432,6 @@ const mostrarDatosMedicos = async (req, res) => {
     });
 }
 
-const accionesprevias= async(req,res)=>{
-    const {id} = req.params
-    
-    //Comprobar que el paciente extista 
-    const pacienteId =await Paciente.findByPk(id)
-    if(!pacienteId){
-        return res.redirect('/mis-pacientes')
-    }
-    //Consultar Modelo 
-    const [serviciorequeridoid] = await Promise.all([
-        Serviciorequerido.findAll(),
-    ])
-
-    res.render('pacientes/accionesprevias',{
-        pagina:`Registrar Datos Medicos del paciente:  ${pacienteId.nombre} `,
-        csrfToken: req.csrfToken(),
-        serviciorequeridoid,
-        pacienteId,
-        datos:{}
-    })
-}
-const accionespreviasguardar =async(req,res)=> {
-  //validacion
-  let resultado = validationResult(req)
-
-  if(!resultado.isEmpty()){
-  
-
-    return  res.render('pacientes/accionesprevias',{
-          pagina:'Registrar Acciones Previas',
-          csrfToken: req.csrfToken(),
-          errores:resultado.array(),
-          datos:req.body
-
-      })
-  }
-
-
-  //Crear un registro
-  const{empresaimplante,marcas,cotizacion,centroimplante,contacto,cualcontacto,apoyo,quien} =req.body
-
-  const{id: usuarioaccionespreviasid} =req.usuario
-  try{
-     const actualizarAccionesPrevias = await Accionesprevias.create({
-        empresaimplante,
-        marcas,
-        cotizacion,
-        centroimplante,
-        contacto,
-        cualcontacto,
-        apoyo,
-        usuarioaccionespreviasid,
-        quien,
-         
-      });
-
-       // Actualizar la tabla Paciente con el beneficiarioid
-    await Paciente.update(
-        { accionespreviasid: actualizarAccionesPrevias.id },
-        { where: { id: req.params.id } }
-      );
-
-    // Redirigue a paguina principal del super
-    res.redirect(`/pacientes/mostraraccionesprevias/${req.params.id}`)
-  } catch(error){
-      console.log(error)
-  }
-}
-
-const mostrarAccionesPrevias = async(req,res) =>{
-    const { id } = req.params;
-
-    // Comprobar que el paciente exista 
-    const pacienteId = await Paciente.findByPk(id, {
-        include: [
-            {
-                model: Accionesprevias, as: 'accionesprevia',
-                include: [
-                    { model: Usuario, as: 'usuario' }
-                ]
-            }
-        ],
-    });
-
-    if (!pacienteId || !pacienteId.publicado) {
-        return res.redirect('/404');
-    }
-
-    // Asegúrate de que exista algún dato médico asociado al pacienteId
-    const accionespreviasId = pacienteId.accionesprevias ? pacienteId.accionesprevias.id : null;
-
-    res.render('pacientes/mostraraccionesprevias', {
-        pacienteId,
-        pagina: 'Acciones previas del paciente: ' + pacienteId.nombre,
-        csrfToken: req.csrfToken(),
-        usuario: req.usuario,
-        accionespreviasId 
-    });
-}
-
-
 
 export{
     completado,
@@ -538,10 +444,7 @@ export{
    guardarDatosMedicos,
    mostrarDatosMedicos,
    editarDatoMedico,
-editarDatoMedicoGuardado,
-accionesprevias,
-accionespreviasguardar,
-mostrarAccionesPrevias
+editarDatoMedicoGuardado
 
  
 }
