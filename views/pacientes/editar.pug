@@ -2,13 +2,28 @@ extends ../layout/admin
 
 block styles
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
-    
+    style.
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #46b8a9, #FFFFFF);
+            background-size: cover;
+            z-index: -1; 
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
+            border-radius: 0.8rem; /* Bordes redondeados */
+        } 
     
 
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  FSFLMX
-            span.font-normal  Sin Sordera
+         h1.text-4xl.my-10.font-extrabold.text-center  Fundación México Sin Sordera A.C
+            span.font-normal  
          h2.text-center.text-2xl.font-extrabold= pagina
 
          if errores 
@@ -17,7 +32,7 @@ block contenido
                    p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
 
 
-         div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
+         div(class="form-container shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
               form.space-y-8(method="POST" )
                 input(type="hidden" name="_csrf" value = csrfToken)
                 div.space-y-5
@@ -25,20 +40,20 @@ block contenido
                     p.text-gray-600 Añade Informacion sobre el paciente
                    
                     div
-                         label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="nombre") Nombre del paciente
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre del paciente
                          input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del paciente" type="text" name="nombre" value= datos ? datos.nombre : '' )        
                     
                     
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="sexo") Sexo
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="sexo") Sexo
                             select#sexo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="sexo")
                                 each optionSex in ['-Selecione el sexo del paciente-','Masculino', 'Femenino','No binario']
                                       option(value=optionSex selected=datos && datos.sexo === optionSex)=optionSex
 
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="seguridadsocialid") ¿Cuenta con Seguridad social?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="seguridadsocialid") ¿Cuenta con Seguridad social?
                             select#seguridadsocialid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="seguridadsocialid")
                                 option(value="") -Selecione con que seguridad social cuenta-     
                                 each seguridadsociales in seguridadsocialid
@@ -46,20 +61,20 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="segdgasmdcs") ¿Cuenta con seguro de Gastos Medicos?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="segdgasmdcs") ¿Cuenta con seguro de Gastos Medicos?
                             select#segdgasmdcs.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="segdgasmdcs")
                                  each optionValue in ['-Selecione-','Si', 'No']
                                       option(value=optionValue selected=datos && datos.segdgasmdcs === optionValue)=optionValue
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="companysegurosid") Compañia de Seguros 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="companysegurosid") Compañia de Seguros 
                             select#companysegurosid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="companysegurosid")
                                 option(value="") -Selecione-
                                 each companyseguro in companysegurosid 
                                     option(value=companyseguro.id selected= datos ? datos.companysegurosid == companyseguro.id ? true:false:null)= companyseguro.nombre  
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="titularseguridadsocialid") Titular Seguridad Social
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="titularseguridadsocialid") Titular Seguridad Social
                             select#titularseguridadsocialid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="titularseguridadsocialid")
                                 option(value="") -Selecione- 
                                 each titularseguritysocial in titularseguridadsocialid
@@ -67,20 +82,20 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="numpaciente") Numero Telefonico del paciente
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="numpaciente") Numero Telefonico del paciente
                             input#numpaciente.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Numero telefonico" type="number" name="numpaciente" value= datos ? datos.numpaciente : '')
                                
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="correo") Correo
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="correo") Correo
                             input#correo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Correo" type="email" name="correo" value= datos ? datos.correo : '' )
                              
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="telrecados") Telefono para recados 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telrecados") Telefono para recados 
                             input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
                                   
                     div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="campaignid") Seleccione la campaña ala que corresponde 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignid") Seleccione la campaña ala que corresponde 
                             select#campaignid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="campaignid")
                                 option(value="") -Selecione- 
                                 each campaign in campaignid
@@ -92,32 +107,32 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="companion") Nombre completo de la persona que llama, responsable o familiar
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="companion") Nombre completo de la persona que llama, responsable o familiar
                             input#companion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Numero telefonico" type="text" name="companion" value= datos ? datos.numpaciente : '')
                                
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="parentescoid") Parentesco
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="parentescoid") Parentesco
                             select#parentescoid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="parentescoid")
                                 option(value="") -Selecione- 
                                 each parentesco in parentescoid
                                     option(value=parentesco.id  selected= datos ? datos.parentescoid == parentesco.id ? true:false:null)= parentesco.nombre  
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="telcompanion") Telefono
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telcompanion") Telefono
                             input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
                   
                     h3.text-lg.leading-6.font-medium.text-gray-900 Informacion requerida para la fundacion
                     p.text-gray-600 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                         div(class="md:w-1/1")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="mediosid") ¿A traves de que medio se entero de la compañia?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="mediosid") ¿A traves de que medio se entero de la compañia?
                             select#mediosid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="mediosid")
                                 option(value="") -Selecione- 
                                 each medio in mediosid
                                     option(value=medio.id  selected= datos ? datos.mediosid == medio.id ? true:false:null)= medio.nombre  
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="canaldereferencia") Canal de Referencia (En caso de ser Referido)
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="canaldereferencia") Canal de Referencia (En caso de ser Referido)
                             input#canaldereferencia.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Canal de referencia" type="text" name="canaldereferencia" value= datos ? datos.canaldereferencia : '')
                  
                     div.border-gray-200.border-t.py-5.space-y-5                   
@@ -133,7 +148,7 @@ block contenido
                         input(type="hidden" name="lat" id="lat" value= datos ? datos.lat: '')    
                         input(type="hidden" name="lng" id="lng" value= datos ? datos.lng: '')    
 
-                    input(class="w-full py-3 bg-indigo-600 hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
 
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
