@@ -125,6 +125,7 @@ const mostrarDatosBeneficiario = async(req,res)=>{
             { model: Seguridadsocial, as: 'seguridadsocial' },
             { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
             { model: Parentesco, as: 'parentesco' },
+            {model:Datomedico,as:'datomedico'},
             {
                 model: Beneficiario, as: 'beneficiario',
                 include: [
@@ -406,6 +407,7 @@ const mostrarDatosMedicos = async (req, res) => {
             { model: Seguridadsocial, as: 'seguridadsocial' },
             { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
             { model: Parentesco, as: 'parentesco' },
+            {model:Beneficiario,as:'beneficiario'},
             {
                 model: Datomedico, as: 'datomedico',
                 include: [
@@ -431,6 +433,109 @@ const mostrarDatosMedicos = async (req, res) => {
         datomedicoId // Pasamos el ID del dato médico para crear el enlace de edición
     });
 }
+
+const accionesprevias= async(req,res)=>{
+    const {id} = req.params
+    
+    //Comprobar que el paciente extista 
+    const pacienteId =await Paciente.findByPk(id)
+    if(!pacienteId){
+        return res.redirect('/mis-pacientes')
+    }
+    //Consultar Modelo 
+    const [serviciorequeridoid] = await Promise.all([
+        Serviciorequerido.findAll(),
+    ])
+
+    res.render('pacientes/accionesprevias',{
+        pagina:`Registrar Datos Medicos del paciente:  ${pacienteId.nombre} `,
+        csrfToken: req.csrfToken(),
+        serviciorequeridoid,
+        pacienteId,
+        datos:{}
+    })
+}
+const accionespreviasguardar =async(req,res)=> {
+  //validacion
+  let resultado = validationResult(req)
+
+  if(!resultado.isEmpty()){
+  
+
+    return  res.render('pacientes/accionesprevias',{
+          pagina:'Registrar Acciones Previas',
+          csrfToken: req.csrfToken(),
+          errores:resultado.array(),
+          datos:req.body
+
+      })
+  }
+
+
+  //Crear un registro
+  const{empresaimplante,marcas,cotizacion,centroimplante,contacto,cualcontacto,apoyo,quien} =req.body
+
+  const{id: usuarioaccionespreviasid} =req.usuario
+  try{
+     const actualizarAccionesPrevias = await Accionesprevias.create({
+        empresaimplante,
+        marcas,
+        cotizacion,
+        centroimplante,
+        contacto,
+        cualcontacto,
+        apoyo,
+        usuarioaccionespreviasid,
+        quien,
+         
+      });
+
+       // Actualizar la tabla Paciente con el beneficiarioid
+    await Paciente.update(
+        { accionespreviasid: actualizarAccionesPrevias.id },
+        { where: { id: req.params.id } }
+      );
+
+    // Redirigue a paguina principal del super
+    res.redirect(`/pacientes/mostraraccionesprevias/${req.params.id}`)
+  } catch(error){
+      console.log(error)
+  }
+}
+
+const mostrarAccionesPrevias = async(req,res) =>{
+    const { id } = req.params;
+
+    // Comprobar que el paciente exista 
+    const pacienteId = await Paciente.findByPk(id, {
+        include: [
+            {model:Beneficiario,as:'beneficiario'},
+            {
+                model: Accionesprevias, as: 'accionesprevia',
+                include: [
+                    { model: Usuario, as: 'usuario' }
+                ]
+              
+            } 
+        ]
+    });
+
+    if (!pacienteId || !pacienteId.publicado) {
+        return res.redirect('/404');
+    }
+
+    // Asegúrate de que exista algún dato médico asociado al pacienteId
+    const accionespreviasId = pacienteId.accionesprevias ? pacienteId.accionesprevias.id : null;
+
+    res.render('pacientes/mostraraccionesprevias', {
+        pacienteId,
+        pagina: 'Acciones previas del paciente: ' + pacienteId.nombre,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        accionespreviasId 
+    });
+}
+
 
 
 export{

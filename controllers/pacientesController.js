@@ -123,7 +123,9 @@ const guardar = async (req,res)=>{
     }
 
     //Crear un registro
-    const{nombre,datomedico,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,companion,parentescoid,mediosid,telcompanion,canaldereferencia} =req.body
+    const{nombre,datomedico,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,
+        titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,
+        companion,parentescoid,mediosid,telcompanion,canaldereferencia} =req.body
 
 
     const{id: usuarioid} =req.usuario
@@ -254,12 +256,13 @@ const editar =async(req,res)=>{
     //     return res.redirect('/mis-pacientes')
     // }
     //Consultar Modelo de Precio y Categorias
-    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid,parentescoid] = await Promise.all([
+    const [companysegurosid,titularseguridadsocialid,seguridadsocialid,campaignid,parentescoid,mediosid] = await Promise.all([
         Companyseguros.findAll(),
         Titularseguridadsocial.findAll(),
         Seguridadsocial.findAll(),
         Campaign.findAll(),
-        Parentesco.findAll()
+        Parentesco.findAll(),
+        Medios.findAll()
         
     ])
 
@@ -271,6 +274,7 @@ const editar =async(req,res)=>{
         seguridadsocialid,
         campaignid,
         parentescoid,
+        mediosid,
         datos:paciente
     })
 }
@@ -318,7 +322,9 @@ const guardarCambios= async(req,res)=>{
 
     //Reescribir el objeto y actualizarlo
     try{
-        const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng} =req.body
+        const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,
+            canaldereferencia,mediosid
+        } =req.body
 
         paciente.set({
             nombre,
@@ -333,7 +339,11 @@ const guardarCambios= async(req,res)=>{
             telrecados,
             calle,
             lat,
-            lng
+            lng,
+            canaldereferencia,
+            usuarioid,
+            mediosid
+
 
         })
         await paciente.save()
