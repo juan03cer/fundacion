@@ -21,13 +21,19 @@ block styles
 
 block contenido
      div.py-10 
+<<<<<<< HEAD
          h1.text-4xl.my-10.font-extrabold.text-center.text-gray-800  Fundación México Sin Sordera A.C
             span.font-normal
+=======
+         h1.text-4xl.my-10.font-extrabold.text-center.text-gray-800  Fundación México Sin Sordera 
+            span.font-normal A.C
+>>>>>>> 3f5545fd6848e709072389dde31a13eea7ea73b2
          h2.text-center.text-2xl.font-extrabold.text-gray-700 Personas Asociadas a la Fundación
          br
          //- pre= JSON.stringify(usuario, undefined, 2)
          if usuario.length
             div.form-container
+<<<<<<< HEAD
                 div.form-container.max-w-7xl.mx-auto.shadow-lg.rounded-lg.overflow-hidden
                     ul.divide-y.divide-gray-300
                         each usuarios in usuario
@@ -35,6 +41,15 @@ block contenido
                                 div(class="form-container p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 gap-4 shadow rounded-lg mb-4")
                                     div(class="flex-grow space-y-2 form-container ")
                                         a(class="form-container block text-2xl font-extrabold text- hover:underline" href=`/usuarios/${usuarios.id}`)= 'Trabajador: ' + usuarios.nombre
+=======
+                div.max-w-7xl.mx-auto.bg-white.shadow-lg.rounded-lg.overflow-hidden
+                    ul.divide-y.divide-gray-300
+                        each usuarios in usuario
+                            li
+                                div(class=" p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 gap-4 bg-white shadow rounded-lg mb-4")
+                                    div(class="flex-grow space-y-2")
+                                        a(class="block text-2xl font-extrabold text- hover:underline" href=`/usuarios/${usuarios.id}`)= 'Trabajador: ' + usuarios.nombre
+>>>>>>> 3f5545fd6848e709072389dde31a13eea7ea73b2
                                         div
                                           h2='Correo Electrónico de la Persona Asociada: '
                                           h2= ''+usuarios.email
@@ -45,4 +60,8 @@ block contenido
                                         form(method="POST" action=`/usuarios/eliminar/${usuarios.id}`)
                                             input(type="hidden" name="_csrf" value=csrfToken)
                                             input(type="submit" class='text-center px-4 py-2 text-xs font-semibold rounded bg-red-100 text-red-800 hover:bg-red-200 cursor-pointer' value="Eliminar")
+<<<<<<< HEAD
                                         a(href=`/admin/editarAsociado/${usuarios.id}` class="text-center px-4 py-2 text-xs font-semibold rounded bg-indigo-100 text-indigo-800 hover:bg-indigo-200") Editar
+=======
+                                        a(href=`/admin/editarAsociado/${usuarios.id}` class="text-center px-4 py-2 text-xs font-semibold rounded bg-indigo-100 text-indigo-800 hover:bg-indigo-200") Editar
+>>>>>>> 3f5545fd6848e709072389dde31a13eea7ea73b2

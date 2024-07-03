@@ -28,7 +28,7 @@ const Beneficiario = db.define('beneficiario',{
    publicado:{
     type:DataTypes.BOOLEAN,
     allowNull:false,
-    defaultValue:true
+    defaultValue:false
 },
 
 

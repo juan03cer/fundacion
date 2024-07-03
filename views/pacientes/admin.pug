@@ -20,7 +20,11 @@ block contenido
          div.py-10 
          h2.text-center.text-2xl.font-extrabold=pagina
          
+<<<<<<< HEAD
          a(href="/pacientes/crear" class="rounded px-10 py-2 bg-verde-pantone  hover:bg-verde-pantone text-sm font-extrabold text-center text-black uppercase my-5 inline-block w-full md:w-auto" ) Registrar Paciente 
+=======
+         a(href="/pacientes/crear" class="rounded px-10 py-2 bg-verde-pantone text-sm font-extrabold text-center text-black uppercase my-5 inline-block w-full md:w-auto hover:text-gray-300" ) Registrar Paciente 
+>>>>>>> 3f5545fd6848e709072389dde31a13eea7ea73b2
         
         
          //- pre= JSON.stringify(paciente,undefine,2)
@@ -56,7 +60,11 @@ block contenido
                               div(class="sm:w-1/4 md:w-2/6 lg:w-4/6 flex flex-col lg:flex-row gap-2" ) 
                                  button(type="button" data-pacientes-id=`${pacientes.id}` class=`cambiar-estado w-full px-5 py-5 md:py-2 text-xs leading-5 font-semibold rounded cursor-pointer ${pacientes.publicado ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`)=`${pacientes.publicado ? 'En Atencion' : 'Sin atencion'}`
                                  a(href=`/pacientes/editar/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800") Editar      
+<<<<<<< HEAD
                                  a(href=`/pacientes/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-verde-pantone text-white") Completar datos     
+=======
+                                 a(href=`/pacientes/completado/${pacientes.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-700 text-white") Completar datos     
+>>>>>>> 3f5545fd6848e709072389dde31a13eea7ea73b2
 
                                  form(method="POST" action=`/pacientes/eliminar/${pacientes.id}`)
                                      input(type="hidden" name="_csrf" value = csrfToken)

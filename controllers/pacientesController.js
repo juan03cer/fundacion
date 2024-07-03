@@ -1,6 +1,6 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
 import Medios from '../models/Medios.js'
@@ -315,7 +315,10 @@ const guardarCambios= async(req,res)=>{
         return res.redirect('/mis-pacientes')
     }
 
-  
+    //Revisra que quien visita la url ,es quien creo al paciente
+    if(paciente.usuarioid.toString() !== req.usuario.id.toString()){
+        return res.redirect('/mis-pacientes')
+    }
 
     //Reescribir el objeto y actualizarlo
     try{
@@ -323,7 +326,6 @@ const guardarCambios= async(req,res)=>{
             canaldereferencia,mediosid
         } =req.body
 
-        const{id: usuarioid} =req.usuario
         paciente.set({
             nombre,
             sexo,
@@ -418,8 +420,7 @@ const mostrarPaciente = async (req,res)=>{
             {model:Usuario,as:'usuario'},
             {model:Parentesco,as:'parentesco'},
             {model:Datomedico,as:'datomedico'},
-            {model:Beneficiario,as:'beneficiario'},
-            { model: Accionesprevias, as: 'accionesprevia' } 
+            {model:Beneficiario,as:'beneficiario'}
             
             
             
@@ -453,8 +454,8 @@ const mostrarPacienteApp = async (req,res)=>{
             {model:Titularseguridadsocial,as:'titularseguridadsocial'},
             {model:Usuario,as:'usuario'},
             {model:Datomedico,as:'datomedico'},
-            {model:Beneficiario,as:'beneficiario'},
-            { model: Accionesprevias, as: 'accionesprevia' } 
+            {model:Beneficiario,as:'beneficiario'}
+            
             
         ],
     })
