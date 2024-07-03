@@ -35,9 +35,16 @@ block styles
             gap: 20px;
             justify-items: center; 
         }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
 block contenido
     div.py-10
-        h1.text-4xl.my-10.font-extrabold.text-center 
+        h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white  Fundación México Sin Sordera A.C
+        h2.text-4xl.my-10.font-extrabold.text-center 
             | CAMPAÑAS
         div.campaigns-grid
             each campaing in campaings

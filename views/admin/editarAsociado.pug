@@ -15,15 +15,21 @@ block styles
             z-index: -1;
         }
         .form-container {
-            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
-            border-radius: 0.8rem; /* Bordes redondeados */
+            background-color: rgba(255, 255, 255, 0.5); 
+            border-radius: 0.8rem; 
+        }
+        .form-title {
+            background-color: rgba(148, 193, 35);
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
         }
     
-
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center Fundación México Sin Sordera
-            span.font-normal  A.C
+         h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white Fundación México Sin Sordera A.C
+            span.font-normal
+         br
          h2.text-center.text-2xl.font-extrabold Edición de Usuario
 
          if errores 
@@ -45,6 +51,5 @@ block contenido
                     div
                          label.block.text-sm.uppercase.text-gray-400.mb-2.fond-bold(for="email") Correo Electrónico Vinculado
                          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="email del paciente" type="email" name="email" value= datos ? datos.email : '' )
-                 
 
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
+                    input(class="w-full py-3 bg-verde-pantone  hover:bg-azul-tur rounded text-white font-extrabold uppercase cursor-pointer" type="submit" value="Guardar Cambios")

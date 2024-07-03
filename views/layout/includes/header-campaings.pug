@@ -9,22 +9,22 @@ header.bg-gradient-to-r.from-green-800.to-purple-700.p-2
     .flex.items-center.gap-4
       
       nav(class="my-5 text-sm md:flex md:items-center md:justify-start gap-3 font-bold text-white")
-        a(href="/mis-pacientes" class="hover:text-gray-300") Mis registros
-        a(href="" class="hover:text-gray-300") Mi perfil 
+        a(href="/mis-pacientes" class="bg-verde-pantone hover:bg-white cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm hover:text-gray-300 shadow-lg0") Mis registros
+        a(href="" class="bg-verde-pantone hover:bg-white cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm hover:text-gray-300 shadow-lg") Mi perfil 
       form(action="/auth/cerrar-sesion" method="POST" class="my-5")
         input(type="hidden" name="_csrf" value=csrfToken)
-        input(type="submit" class="bg-white text-black py-2 px-10 rounded-lg" value="Cerrar Sesion")
+        input(type="submit" class="bg-white text-black py-2 px-10 rounded-lg hover:text-gray-300 font-extrabold shadow-lg uppercase" value="Cerrar Sesion")
 
 hr(class=" bg-red-300 ")
 div(class="bg-gradient-to-r from-green-700 to-purple-700 py-5 md:block")
   div(class="container mx-auto px-8 flex justify-between")
     nav(class="flex gap-4 items-center")
       
-        a(href="/sitio/campaings" class="text-sm font-bold uppercase text-white") Campañas
+        a(href="/" class="bg-verde-pantone hover:bg-white cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm hover:text-gray-300 shadow-lg") MAPA
    
     form(action="/buscadorcampaing" method="POST" class="flex gap-3 items-center")
       input(type="hidden" name="_csrf" value=csrfToken)
       label(for="campaingbusqueda" class="text-sm uppercase font-bold text-white") Busqueda 
       input(type="text" id="campaingbusqueda" name="campaingbusqueda" placeholder="Buscar campaña" class="p-2 rounded-lg shadow text-sm")
 
-      input(type="submit" class="bg-verde-pantone hover:bg-indigo-400 cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm" value="Buscar")
+      input(type="submit" class="bg-verde-pantone hover:bg-indigo-400 cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm shadow-lg" value="Buscar")
