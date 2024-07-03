@@ -16,7 +16,9 @@ router.post('/pacientes/crear',protegerRuta,
     body('nombre').notEmpty().withMessage('El Nombre es obligatorio'),
     body('correo').notEmpty().withMessage('El Correo es obligatorio'),
     body('lat').notEmpty().withMessage('Ubica la direccion del paciente en el mapa'),
-guardar
+    body('mediosid').notEmpty().withMessage('Seleccione a traves de que medio se enetrro de la compañia'),
+   
+    guardar
 )
 
 router.get('/pacientes/agregar-imagen/:id',protegerRuta,agregarImagen)
@@ -31,7 +33,9 @@ router.post('/pacientes/editar/:id',protegerRuta,
     body('nombre').notEmpty().withMessage('El Nombre es obligatorio'),
     body('correo').notEmpty().withMessage('El Correo es obligatorio'),
     body('lat').notEmpty().withMessage('Ubica la direccion del paciente en el mapa'),
-guardarCambios
+    body('mediosid').notEmpty().withMessage('Seleccione a traves de que medio se entero de la compañia'),
+   
+    guardarCambios
 )
 
 router.post('/pacientes/eliminar/:id',

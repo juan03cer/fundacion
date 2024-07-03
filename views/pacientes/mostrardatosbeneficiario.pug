@@ -20,8 +20,13 @@ block contenido
                     h2.text-2xl.leading-6.font-bold.text-gray-900.text-center.mb-6 Información del Beneficiario
                     div.flex.justify-center.gap-4.mb-5
                         a(href=`/pacientes/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-3 text-xs leading-5 font-semibold rounded bg-green-200 text-black hover:bg-green-300") Ver Información General    
-                        a(href=`/pacientes/mostrardatosmedicos/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-3 text-xs leading-5 font-semibold rounded bg-yellow-200 text-black hover:bg-yellow-300") Ver Datos Medicos  
+                        - if (pacienteId.datomedico && pacienteId.datomedico.publicado)
+                            a(href=`/pacientes/mostrardatosmedicos/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-3 text-xs leading-5 font-semibold rounded bg-yellow-200 text-black hover:bg-yellow-300") Ver Datos Medicos  
                     
+                        - else
+                             a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs ml-5 leading-5 font-semibold rounded bg-red-200 cursor-not-allowed text-black")
+                                    | Sin Datos Medicos       
+
                     h2.text-center.text-2xl.font-extrabold.mb-6= pagina
                     if beneficiarioId
                         a(href=`/pacientes/${pacienteId.id}/editardatobeneficiario/${beneficiarioId}` class="text-center w-full md:px-5 md:py-2  py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black") Editar Datos del beneficiario

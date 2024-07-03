@@ -121,6 +121,7 @@ const mostrarDatosBeneficiario = async(req,res)=>{
             { model: Seguridadsocial, as: 'seguridadsocial' },
             { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
             { model: Parentesco, as: 'parentesco' },
+            {model:Datomedico,as:'datomedico'},
             {
                 model: Beneficiario, as: 'beneficiario',
                 include: [
@@ -399,6 +400,7 @@ const mostrarDatosMedicos = async (req, res) => {
             { model: Seguridadsocial, as: 'seguridadsocial' },
             { model: Titularseguridadsocial, as: 'titularseguridadsocial' },
             { model: Parentesco, as: 'parentesco' },
+            {model:Beneficiario,as:'beneficiario'},
             {
                 model: Datomedico, as: 'datomedico',
                 include: [
@@ -500,13 +502,15 @@ const mostrarAccionesPrevias = async(req,res) =>{
     // Comprobar que el paciente exista 
     const pacienteId = await Paciente.findByPk(id, {
         include: [
+            {model:Beneficiario,as:'beneficiario'},
             {
                 model: Accionesprevias, as: 'accionesprevia',
                 include: [
                     { model: Usuario, as: 'usuario' }
                 ]
-            }
-        ],
+              
+            } 
+        ]
     });
 
     if (!pacienteId || !pacienteId.publicado) {
