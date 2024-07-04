@@ -28,23 +28,22 @@ block styles
 block contenido
      div.py-10 
          h1.text-4xl.my-10.font-extrabold.text-white.form-title.form-title.text-center  Fundación México Sin Sordera A.C
-            span.font-normal
          br
-         h2.text-center.text-2xl.font-extrabold.text-black Personas Asociadas a la Fundación
+         h2.text-center.text-2xl.font-extrabold.text-black.form-container Personas Asociadas a la Fundación
          br
          //- pre= JSON.stringify(usuario, undefined, 2)
          if usuario.length
             div
-                div.max-w-7xl.mx-auto.shadow-lg.rounded-lg.overflow-hidden
-                    ul.divide-y.divide-gray-300
+                div.max-w-7xl.mx-auto.shadow-lg.rounded-lg
+                    ul
                         each usuarios in usuario
                             li
                                 div(class="form-container p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 shadow-lg gap-4 rounded-lg mb-4 ")
                                     div(class="flex-grow space-y-2")
                                         a(class="block text-2xl font-extrabold text- hover:underline" href=`/usuarios/${usuarios.id}`)= 'Trabajador: ' + usuarios.nombre
                                         div
-                                          h2='Correo Electrónico de la Persona Asociada: '
-                                          h2= ''+usuarios.email
+                                          h2='Correo Electrónico del Asociado: '
+                                          h2='' +  usuarios.email
                                     div(class="flex space-x-2")
                                         form(method="POST" action=`/usuarios/eliminar/${usuarios.id}`)
                                             input(type="hidden" name="_csrf" value=csrfToken)
