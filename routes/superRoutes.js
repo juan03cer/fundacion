@@ -1,6 +1,6 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {superUsuario,crearCampaing,guardar,campaings, asociados,eliminarUsuario,editarAsociado} from '../controllers/campaingController.js'
+import {superUsuario,crearCampaing,guardar,campaings, asociados,eliminarUsuario,editarAsociado,editarcampaing, editarcampainguardar} from '../controllers/campaingController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador,
@@ -39,14 +39,13 @@ router.post('/admin/mensajes/crear', protegerRuta,
 );
 
 router.get('/admin/mostrarcampaings',protegerRuta, campaings)
-
-
 router.get('/admin/campaing',protegerRuta, crearCampaing)
 router.post('/admin/campaing',protegerRuta,
     body('nombre').notEmpty().withMessage('El Nombre de la campaña es obligatoria'),
-
     guardar
 )
+router.get('/admin/editarcampaing/:id',protegerRuta,editarcampaing)
+router.post('/admin/editarcampaing/:id',protegerRuta,editarcampainguardar)
 ////////Asociados///////////
 router.get('/admin/asociados',protegerRuta, asociados)
 

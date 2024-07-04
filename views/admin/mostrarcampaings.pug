@@ -66,10 +66,8 @@ block contenido
                 div.campaign-section
                     p(class="campaign-title text-gray-600 font-bold text-1xl") Nombre de la Campaña:
                         span(class="campaign-name block text-lg")= campaing.nombre
+                    p(class="campaign-title text-gray-600 font-bold text-1xl") Descripcion:
+                        span(class="campaign-name block text-lg")= campaing.descripcion
                     div(class="w-full flex flex-col lg:flex-row gap-2 justify-center")
-                        a(href=`/pacientes/editar/${campaing.id}` class="btn-mostrar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
-                            | Mostrar
-                        a(href=`/pacientes/completado/${campaing.id}` class="btn-eliminar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
-                            | Eliminar
-                    // Salto de línea entre las campañas
-                    br
+                        a(href=`/admin/editarcampaing/${campaing.id}` class="btn-mostrar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
+                                | Editar

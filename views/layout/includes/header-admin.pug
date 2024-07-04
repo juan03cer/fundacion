@@ -24,7 +24,6 @@ div(class="bg-gradient-to-r from-green-700 to-purple-700 py-5 md:block")
    
     form(action="/buscadorcampaing" method="POST" class="flex gap-3 items-center")
       input(type="hidden" name="_csrf" value=csrfToken)
-      label(for="campaingbusqueda" class="text-sm uppercase font-bold text-white") Busqueda 
-      input(type="text" id="campaingbusqueda" name="campaingbusqueda" placeholder="Buscar campaña" class="p-2 rounded-lg shadow text-sm")
-
-      input(type="submit" class="bg-verde-pantone hover:bg-indigo-400 cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm shadow-lg" value="Buscar")
+      label(for="termino" class="text-sm uppercase font-bold text-white") Busqueda 
+      input(type="text" id="termino" name="termino" placeholder="Buscar Paciente" class="p-2 rounded-lg shadow text-sm")
+      input(type="submit" class="bg-verde-pantone hover:bg-gray cursor-pointer rounded-lg text-white uppercase font-bold p-2 text-sm" value="Buscar")
