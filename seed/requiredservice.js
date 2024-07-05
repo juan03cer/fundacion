@@ -57,7 +57,7 @@
         ,abreviatura:'CRA' 
     },
     {
-        nombre:'ACESORIOS IC'
+        nombre:'ACCESORIOS IC'
         ,abreviatura:'ACI' 
     },
     {

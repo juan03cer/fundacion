@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= pagina
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+  body
+    .container
+      h1= pagina
+
+      // Formulario para seleccionar la campaña por su nombre
+      form(method='GET', action='/pacientes/filtrado')
+        .form-group
+          label(for='nombreCampaing') Nombre de la Campaña
+          input.form-control(type='text', id='nombreCampaing', name='nombreCampaing', required)
+        input(type='hidden', name='_csrf', value=csrfToken)
+        button.btn.btn-primary(type='submit') Filtrar
+
+      // Mostrar resultados de la búsqueda
+      if pacientes && pacientes.length
+        table.table.table-striped
+          thead
+            tr
+              th Nombre
+              th Email
+              th Campaña
+          tbody
+            each paciente in pacientes
+              tr
+                td= paciente.nombre
+                td= paciente.email
+                td= paciente.campaing.nombre
+      else
+        p No se encontraron pacientes para la campaña especificada.

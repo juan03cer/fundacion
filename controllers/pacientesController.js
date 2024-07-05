@@ -1,9 +1,8 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias,Medios} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
-import Medios from '../models/Medios.js'
 
 const admin = async (req, res) => {
 
@@ -125,7 +124,7 @@ const guardar = async (req,res)=>{
     //Crear un registro
     const{nombre,datomedico,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,
         titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,
-        companion,parentescoid,mediosid,telcompanion,canaldereferencia} =req.body
+        companion,parentescoid,mediosid,telcompanion,canaldereferencia,numexpediente,fechanacimiento,edad,meses} =req.body
 
 
     const{id: usuarioid} =req.usuario
@@ -151,7 +150,11 @@ const guardar = async (req,res)=>{
             parentescoid,
             mediosid,
             telcompanion,
-            canaldereferencia
+            canaldereferencia,
+            numexpediente,
+            fechanacimiento,
+            edad,
+            meses
 
             
         })
@@ -320,7 +323,7 @@ const guardarCambios= async(req,res)=>{
     //Reescribir el objeto y actualizarlo
     try{
         const{nombre,sexo,seguridadsocialid,segdgasmdcs,companysegurosid,titularseguridadsocialid,campaignid,correo,numpaciente,telrecados,calle,lat,lng,
-            canaldereferencia,mediosid
+            canaldereferencia,mediosid,numexpediente,fechanacimiento,edad,meses
         } =req.body
 
         const{id: usuarioid} =req.usuario
@@ -340,7 +343,11 @@ const guardarCambios= async(req,res)=>{
             lng,
             canaldereferencia,
             usuarioid,
-            mediosid
+            mediosid,
+            numexpediente,
+            fechanacimiento,
+            edad,
+            meses
 
 
         })
@@ -419,7 +426,8 @@ const mostrarPaciente = async (req,res)=>{
             {model:Parentesco,as:'parentesco'},
             {model:Datomedico,as:'datomedico'},
             {model:Beneficiario,as:'beneficiario'},
-            { model: Accionesprevias, as: 'accionesprevia' } 
+            { model: Accionesprevias, as: 'accionesprevia' } ,
+            {model:Medios,as:'medio'}
             
             
             
@@ -454,7 +462,8 @@ const mostrarPacienteApp = async (req,res)=>{
             {model:Usuario,as:'usuario'},
             {model:Datomedico,as:'datomedico'},
             {model:Beneficiario,as:'beneficiario'},
-            { model: Accionesprevias, as: 'accionesprevia' } 
+            { model: Accionesprevias, as: 'accionesprevia' } ,
+            {model:Medios,as:'medios'}
             
         ],
     })

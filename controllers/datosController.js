@@ -279,7 +279,7 @@ const guardarDatosMedicos= async (req,res)=>{
 
 
   //Crear un registro
-  const{enfermedad,ruidosonido,familiarusausado,ladoescucha,exposicion,tiporuido,diagnostico,serviciorequeridoid} =req.body
+  const{enfermedad,ruidosonido,familiarusausado,ladoescucha,exposicion,tiporuido,diagnostico,serviciorequeridoid,otorrino,audiologo,terapeuta,ingresaraudiometria} =req.body
 
   const{id: usuariodatomedicoid} =req.usuario
   try{
@@ -293,7 +293,11 @@ const guardarDatosMedicos= async (req,res)=>{
         diagnostico,
         usuariodatomedicoid,
         serviciorequeridoid,
-        pacienteid: req.params.id
+        pacienteid: req.params.id,
+        otorrino,
+        audiologo,
+        terapeuta,
+        ingresaraudiometria
          
       });
 
@@ -356,7 +360,7 @@ const editarDatoMedicoGuardado = async (req, res) => {
         });
     }
 
-    const { enfermedad, ruidosonido, familiarusausado, ladoescucha, exposicion, tiporuido, diagnostico, serviciorequeridoid } = req.body;
+    const { enfermedad, ruidosonido, familiarusausado, ladoescucha, exposicion, tiporuido, diagnostico, serviciorequeridoid ,otorrino,audiologo,terapeuta,ingresaraudiometria} = req.body;
     const { id: usuariodatomedicoid } = req.usuario;
 
     try {
@@ -377,7 +381,11 @@ const editarDatoMedicoGuardado = async (req, res) => {
             diagnostico,
             usuariodatomedicoid,
             serviciorequeridoid,
-            pacienteid: pacienteId
+            pacienteid: pacienteId,
+            otorrino,
+            audiologo,
+            terapeuta,
+            ingresaraudiometria
         });
 
         // Redirigir a la página principal de datos medicos del paciente
@@ -466,7 +474,7 @@ const accionespreviasguardar =async(req,res)=> {
 
 
   //Crear un registro
-  const{empresaimplante,marcas,cotizacion,centroimplante,contacto,cualcontacto,apoyo,quien} =req.body
+  const{empresaimplante,marcas,cotizacion,centroimplante,contacto,cualcontacto,apoyo,quien,prevencioneconomica,campaignrecaudacion} =req.body
 
   const{id: usuarioaccionespreviasid} =req.usuario
   try{
@@ -480,6 +488,8 @@ const accionespreviasguardar =async(req,res)=> {
         apoyo,
         usuarioaccionespreviasid,
         quien,
+        prevencioneconomica,
+        campaignrecaudacion
          
       });
 

@@ -65,8 +65,19 @@ const Paciente = db.define('pacientes',{
     canaldereferencia:{
         type:DataTypes.STRING,
         allowNull:false
+    },
+    fechanacimiento:{
+        type:DataTypes.STRING(50),
+        allowNull:false
+    }, 
+    edad:{
+        type:DataTypes.STRING(50),
+        allowNull:false
+    }, 
+    meses:{
+        type:DataTypes.STRING(50),
+        allowNull:false
     }
-    
 
 })
 

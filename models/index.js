@@ -56,5 +56,6 @@ export{
     Serviciorequerido,
     Ocupacion,
     Parentesco,
-    Accionesprevias
+    Accionesprevias,
+    Medios
 }

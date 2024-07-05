@@ -41,7 +41,14 @@ block contenido
                             - else
                                  a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs ml-5 leading-5 font-semibold rounded bg-red-200 cursor-not-allowed text-black")
                                                 | Sin Datos Del beneficiario       
-                         
+                        div  
+                            a(href=`/pacientes/editar/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
+                                                 | Completar Audiometria del Oido Izquierdo  
+                            a(href=`/pacientes/editar/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
+                                                 | Completar Audiometria del Oido Derecho 
+                        div(class="flex justify-center gap-4 mb-5") 
+                            a(href=`/pacientes/${pacienteId.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-green-200 text-black") Completar Historial Auditivo 
+                      
 
                         h2.text-center.text-2xl.font-extrabold= pagina
                         a(href=`/pacientes/${pacienteId.id}/editardatomedico/${pacienteId.datomedico.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black") Editar Datos Médicos
@@ -61,6 +68,14 @@ block contenido
                                 span(class="text-gray-800 block text-lg")= pacienteId.datomedico.tiporuido
                             p(class="text-gray-600 font-bold text-1xl") SERVICIO REQUERIDO
                                 span(class="text-gray-800 block text-lg")= pacienteId.datomedico.serviciorequerido.nombre
+                            p(class="text-gray-600 font-bold text-1xl") OTORRINO
+                                span(class="text-gray-800 block text-lg")= pacienteId.datomedico.otorrino
+                            p(class="text-gray-600 font-bold text-1xl") AUDIOLOGO
+                                span(class="text-gray-800 block text-lg")= pacienteId.datomedico.audiologo
+                            p(class="text-gray-600 font-bold text-1xl") TERAPEUTA
+                                span(class="text-gray-800 block text-lg")= pacienteId.datomedico.terapeuta
+                            p(class="text-gray-600 font-bold text-1xl") AUDIOMETRIA
+                                span(class="text-gray-800 block text-lg")= pacienteId.datomedico.ingresaraudiometria 
                             p(class="text-gray-600 font-bold text-1xl") Correo:
                                 span(class="text-gray-800 block text-lg")= pacienteId.correo
                             p(class="text-gray-600 font-bold text-1xl") Última Persona que actualizó el dato Médico:

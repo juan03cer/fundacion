@@ -51,7 +51,7 @@ block contenido
                             input#cotizacion.w-full.px-3.py-2.mt-5.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote la cotizacion" type="nutextmber" name="cotizacion" value= datos ? datos.cotizacion : '')
                         div(class="md:w-1/2")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="centroimplante") EN EL CENTRO DE IMPLANTE DONDE ESTA ¿LE DAN OPCION DE ELEGIR MARCA DE IMPLANTE COCLEAR? 
-                            select#centroimplante.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="centroimplante")
+                            select#centroimplante.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400.mt-5(name="centroimplante")
                                 each optionCentroImplante in ['-Selecione-', 'SI','NO','NO SÉ','TAL VEZ', 'NO E TENIDO CONTACTO CON NINGUNA']
                                       option(value=optionCentroImplante selected=datos && datos.centroimplante === optionCentroImplante)=optionCentroImplante
 
@@ -78,6 +78,14 @@ block contenido
                     div
                          label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="quien") ¿A QUIEN SOLICITADO APOYO?
                          input#quien.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote a que instituciones a solicitado apoyo" type="text" name="quien" value= datos ? datos.quien : '' )        
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Estrategias
+                    div
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="prevencioneconomica") ¿CUENTA CON PREVISIÓN ECONÓMICA?
+                         input#prevencioneconomica.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si tiene prevision economica" type="text" name="prevencioneconomica" value= datos ? datos.prevencioneconomica : '')
+                           
+                    div
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignrecaudacion") CAMPAÑA DE RECAUDACION
+                         input#campaignrecaudacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="campaña de recaudacion" type="text" name="campaignrecaudacion" value= datos ? datos.campaignrecaudacion : '' )        
                     
                     
                     input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar")

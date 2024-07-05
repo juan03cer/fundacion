@@ -243,6 +243,9 @@ const editarcampainguardar = async (req,res) =>{
     }
 }
 
+
+
+
 export{
     superUsuario,
     crearCampaing,
@@ -252,7 +255,8 @@ export{
    eliminarUsuario,
    editarAsociado,
    editarcampaing,
-   editarcampainguardar
+   editarcampainguardar,
+   
 
     
 }

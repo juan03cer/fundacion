@@ -1,53 +1,43 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
-import Campaign from "./Campaign.js";
 
-const Accionesprevias = db.define('accionesprevias',{
-    empresaimplante:{
+const Izquierdo = db.define('izquierdo',{
+    fecha:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    marcas:{
+    tipo:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    cotizacion:{
+    oido:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    centroimplante:{
+    umbral:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    contacto:{
+    gradoperdida:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    cualcontacto:{
+    configuracion:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    apoyo:{
+    tipoygrado :{
         type:DataTypes.STRING,
         allowNull:false
     },
-    quien:{
+    patrónperdida:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    prevencioneconomica:{
+    observaciones:{
         type:DataTypes.STRING,
         allowNull:false
     },
-    campaignrecaudacion:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    publicado:{
-        type:DataTypes.BOOLEAN,
-        allowNull:false,
-        defaultValue:true
-    }
 })
 
-export default Accionesprevias
+export default Izquierdo

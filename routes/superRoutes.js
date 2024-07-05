@@ -1,12 +1,13 @@
 import express from 'express'
 import {body} from 'express-validator'
-import {superUsuario,crearCampaing,guardar,campaings, asociados,eliminarUsuario,editarAsociado,editarcampaing, editarcampainguardar} from '../controllers/campaingController.js'
+import {superUsuario,crearCampaing,guardar,campaings, asociados,eliminarUsuario,editarAsociado,editarcampaing, editarcampainguardar,} from '../controllers/campaingController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 import { sendEmails, crearCorreo, crearDonador, guardarDonador, mostrarDonadores, editarDonador,
    actualizarDonador, eliminarDonador, verMensajesPredefinidos, crearMensajePredefinido, guardarMensajePredefinido } from '../controllers/emailController.js';
 
 const router = express.Router();
+
 
 router.get('/mi-sitio',protegerRuta, superUsuario)
 
