@@ -38,10 +38,10 @@ router.get('/pacientes/:pacienteId/audiometria/oidoderechoeditar/:derechoId',pro
 router.post('/pacientes/:pacienteId/audiometria/oidoderechoeditar/:derechoId',protegerRuta, oidoDerechoEditarGuardar);
 
 router.get('/pacientes/historial/:id',protegerRuta,historialMedico)
-// router.post('/pacientes/oidoderecho/:id',protegerRuta,oidoDerechoGuardar)
-// router.get('/pacientes/oidoderechomostrar/:id',protegerRuta,oidoDerechoMostrar)
-// router.get('/pacientes/oidoderechoeditar/:derechoId',protegerRuta, oidoDerechoEditar);
-// router.post('/pacientes/oidoderechoeditar/:derechoId',protegerRuta, oidoDerechoEditarGuardar);
+router.post('/pacientes/historial/:id',protegerRuta,historialMedicoGuardar)
+router.get('/pacientes/historialmostrar/:id',protegerRuta,historialMedicoMostrar)
+router.get('/pacientes/:pacienteId/historialeditar/:historialId',protegerRuta, historialMedicoEditar);
+router.post('/pacientes/:pacienteId/historialeditar/:historialId',protegerRuta, historialMedicoEditarGuardar);
 
 
 router.get('/pacientes/accionesprevias/:id',protegerRuta,accionesprevias)

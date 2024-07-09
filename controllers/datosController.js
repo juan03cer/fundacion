@@ -1,7 +1,8 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
 import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,
-    Seguridadsocial,Titularseguridadsocial,Usuario,Parentesco, Datomedico,Izquierdo,Derecho} from '../models/index.js'
+    Seguridadsocial,Titularseguridadsocial,Usuario,Parentesco, Datomedico,Izquierdo,Derecho,
+    Historialauditivo} from '../models/index.js'
 import {esUsuario} from '../helpers/index.js'
 import Accionesprevias from '../models/Accionesprevias.js'
 
@@ -901,17 +902,17 @@ const historialMedicoGuardar= async(req,res) =>{
 
 
   //Crear un registro
-  const{antecedentes,factores,problemas,familiares,expuesto,protección,infecciones,cirugia,medicamentos,covid,
+  const{antecedentes,factores,problemas,familiares,expuesto,proteccion,infecciones,cirugia,medicamentos,covid,
     dificultades,volumen,zumbidos,sonidos,sufrido,episodios,musica,habitos,sustancias,tabaco,conversaciones,murmurar,
-    situaciones,audición,pruebaauditiva,resultadoh,consultado,diagnóstico
+    situaciones,audicion,pruebaauditiva,resultadoh,consultado,diagnostico
   } =req.body
 
   const{id: usuariohistorialid} =req.usuario
   try{
-     const actualizarOidoDerecho = await Derecho.create({
-        antecedentes,factores,problemas,familiares,expuesto,protección,infecciones,cirugia,medicamentos,covid,
+     const actualizarHistorial = await Historialauditivo.create({
+        antecedentes,factores,problemas,familiares,expuesto,proteccion,infecciones,cirugia,medicamentos,covid,
         dificultades,volumen,zumbidos,sonidos,sufrido,episodios,musica,habitos,sustancias,tabaco,conversaciones,murmurar,
-        situaciones,audición,pruebaauditiva,resultadoh,consultado,diagnóstico,
+        situaciones,audicion,pruebaauditiva,resultadoh,consultado,diagnostico,
         usuariohistorialid,
         pacienteid: req.params.id,
          
@@ -919,23 +920,112 @@ const historialMedicoGuardar= async(req,res) =>{
 
        // Actualizar la tabla Paciente con el beneficiarioid
     await Paciente.update(
-        { derechoid: actualizarOidoDerecho.id },
+        { historialauditivoid: actualizarHistorial.id },
         { where: { id: req.params.id } }
       );
 
-      res.redirect(`/pacientes/audiometria/oidoderechomostrar/${req.params.id}`);
+      res.redirect(`/pacientes/historialmostrar/${req.params.id}`);
   } catch(error){
-     res.render('/404')
+    //  res.render('/404')
+    console.log(error)
   }
 }
 const historialMedicoMostrar= async(req,res) =>{
-    
+    const { id } = req.params;
+
+    // Comprobar que el paciente exista 
+    const pacienteId = await Paciente.findByPk(id, {
+        include: [  
+            {model:Izquierdo,as:'izquierdo'},
+            {
+                model: Historialauditivo, as: 'historialauditivo',
+                include: [
+                    { model: Usuario, as: 'usuario' }
+                ]
+            }
+        
+        ],
+    });
+
+    if (!pacienteId || !pacienteId.publicado) {
+        return res.redirect('/404');
+    }
+
+    // Asegúrate de que exista algún dato médico asociado al pacienteId
+    const historialauditivo = pacienteId.historialauditivo;
+
+    res.render('pacientes/historialmostrar', {
+        pacienteId,
+        pagina: 'Datos del Historial del Paciente: ' + pacienteId.nombre,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        historialauditivo
+    });
 }
 const historialMedicoEditar= async(req,res) =>{
-    
+    const { pacienteId, historialId } = req.params;
+
+    // Buscar el paciente y los datos médicos asociados
+    const paciente = await Paciente.findByPk(pacienteId);
+    if (!paciente) {
+        return res.redirect('/mis-pacientes');
+    }
+
+    const historial = await Historialauditivo.findByPk(historialId);
+    if (!historial) {
+        return res.redirect('/mis-pacientes');
+    }
+
+
+    res.render('pacientes/historialeditar', {
+        pagina: `Editar Historial de Datos del Paciente: ${paciente.nombre}`,
+        csrfToken: req.csrfToken(),
+        paciente,
+        datos: historial 
+    });
 }
 const historialMedicoEditarGuardar= async(req,res) =>{
-    
+    const { pacienteId, historialId } = req.params;
+
+    // Validación
+    let resultado = validationResult(req);
+    if (!resultado.isEmpty()) {
+        return res.render('pacientes/historialeditar', {
+            pagina: `Editar Historial de Datos del Paciente: `,
+            csrfToken: req.csrfToken(),
+            errores: resultado.array(),
+            datos: req.body,
+            paciente: await Paciente.findByPk(pacienteId) 
+        });
+    }
+    const{antecedentes,factores,problemas,familiares,expuesto,proteccion,infecciones,cirugia,medicamentos,covid,
+        dificultades,volumen,zumbidos,sonidos,sufrido,episodios,musica,habitos,sustancias,tabaco,conversaciones,murmurar,
+        situaciones,audicion,pruebaauditiva,resultadoh,consultado,diagnostico
+      } =req.body
+
+      const{id: usuariohistorialid} =req.usuario
+    try {
+        // Buscar el dato médico para actualizar
+        const historial = await Historialauditivo.findByPk(historialId);
+        if (!historial) {
+            return res.redirect('/mis-pacientes');
+        }
+
+        // Actualizar los datos médicos
+        await historial.update({
+            antecedentes,factores,problemas,familiares,expuesto,proteccion,infecciones,cirugia,medicamentos,covid,
+            dificultades,volumen,zumbidos,sonidos,sufrido,episodios,musica,habitos,sustancias,tabaco,conversaciones,murmurar,
+            situaciones,audicion,pruebaauditiva,resultadoh,consultado,diagnostico,
+            usuariohistorialid,
+            pacienteid: req.params.id,
+        });
+
+        // Redirigir a la página principal de datos medicos del paciente
+        res.redirect(`/pacientes/historialmostrar/${pacienteId}`);
+    } catch (error) {
+        console.error(error);
+        res.redirect('/404');
+    }
 }
 
 export{

@@ -23,7 +23,7 @@ const Historialauditivo = db.define('historialauditivo',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    protección:{
+    proteccion:{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -95,7 +95,7 @@ const Historialauditivo = db.define('historialauditivo',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    audición:{
+    audicion:{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -111,7 +111,7 @@ const Historialauditivo = db.define('historialauditivo',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    diagnóstico:{
+    diagnostico:{
         type:DataTypes.STRING,
         allowNull:false
     },
