@@ -27,7 +27,7 @@ block styles
 
 block contenido
   div.py-10
-    h1(class="form-title text-4xl my-10 font-extrabold text-center text-white") Fundación Mexico Sin Sordera A.C
+    h1(class="form-title text-4xl my-10 font-extrabold text-center text-white") Fundación México Sin Sordera A.C
     br
     if errores
       div(class=" form-container max-w-md mx-auto my-10")
@@ -81,10 +81,10 @@ block contenido
         a(href=`/pacientes/historial/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 cursor-pointer bg-white text-black rounded-lg hover:text-gray-300 font-extrabold shadow-lg uppercase")
           | click para Completar Historial Auditivo    
     
-    div(class=" form-container mt-5 md:flex md:gap-4 md:items-start")
+    div(class="mt-5 md:flex md:gap-4 md:items-start")
       div(class=" form-container md:w-2/3 bg-white shadow rounded-lg")
         div(class="px-5 py-10 space-y-5")
-          h2(class="text-2xl leading-6 font-bold text-gray-900") Información del Paciente
+          h2(class="text-2xl leading-6 font-bold text-gray-900") Información del Paciente:
           div(class="flex justify-center gap-4 mb-5 mt-5")
             if (paciente.datomedico && paciente.datomedico.publicado)
               a(href=`/pacientes/mostrardatosmedicos/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
@@ -128,20 +128,16 @@ block contenido
                 | Datos del Historial Auditivo sin completar     
    
           h2(class="text-center text-2xl font-extrabold")= pagina
-
-          a(href=`/pacientes/editar/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
-                | Editar Datos del Paciente
-
           div(class="grid grid-cols-1 md:grid-cols-2 space-y-2")
             p(class="text-gray-600 font-bold text-1xl") Sexo del Paciente:
               span(class="text-gray-800 block text-lg")=paciente.sexo
-            p(class="text-gray-600 font-bold text-1xl") Telefono del paciente:
+            p(class="text-gray-600 font-bold text-1xl") Teléfono del paciente:
               span(class="text-gray-800 block text-lg")=paciente.numpaciente
-            p(class="text-gray-600 font-bold text-1xl") Telefono para recados:
+            p(class="text-gray-600 font-bold text-1xl") Teléfono para recados:
               span(class="text-gray-800 block text-lg")=paciente.telrecados
             p(class="text-gray-600 font-bold text-1xl") Titular de Seguridad Social:
               span(class="text-gray-800 block text-lg")=paciente.titularseguridadsocial.nombre
-            p(class="text-gray-600 font-bold text-1xl") Direccion:
+            p(class="text-gray-600 font-bold text-1xl") Dirección:
               span(class="text-gray-800 block text-lg")=paciente.calle
             p(class="text-gray-600 font-bold text-1xl") Compañia de seguros:
               span(class="text-gray-800 block text-lg")=paciente.companyseguro.nombre
@@ -155,20 +151,25 @@ block contenido
               span(class="text-gray-800 block text-lg")=paciente.meses
             p(class="text-gray-600 font-bold text-1xl") Correo:
               span(class="text-gray-800 block text-lg")=paciente.correo
-            p(class="text-gray-600 font-bold text-1xl") Ultima modificacion hecha por:
+            p(class="text-gray-600 font-bold text-1xl") Ultima modificación hecha por:
               span(class="text-gray-800 block text-lg")=paciente.usuario.nombre
+              br
+            a(href=`/pacientes/editar/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
+                | Editar Datos del Paciente
+          br
+          br
 
           div(class="grid grid-cols-1 md:grid-cols-2 space-y-2 space-x-3")
-            h3(class="text-lg leading-6 font-medium text-gray-900") Acompañante
+            h2(class="text-2xl leading-6 font-bold text-gray-900") Información del Acompañante:
             p.text-gray-600.py-1
             p(class="text-gray-600 font-bold text-1xl") Nombre del Acompañante:
               span(class="text-gray-800 block text-lg")=paciente.companion
-            p(class="text-gray-600 font-bold text-1xl") Telefono del Acompañante:
+            p(class="text-gray-600 font-bold text-1xl") Teléfono del Acompañante:
               span(class="text-gray-800 block text-lg")=paciente.telcompanion
             p(class="text-gray-600 font-bold text-1xl") Parentesco:
               span(class="text-gray-800 block text-lg")=paciente.parentesco.nombre
           div(class="grid grid-cols-1 md:grid-cols-2 space-y-2 space-x-3")
-            h3(class="text-lg leading-6 font-medium text-gray-900") Informacion requerida para la fundacion
+            h3(class="text-lg leading-6 font-medium text-gray-900") Información requerida para la fundacion
             p.text-gray-600.py-1
             p(class="text-gray-600 font-bold text-1xl") ¿A TRAVÉS DE QUE MEDIO SE ENTERO DE LA CAMPAÑA?
               span(class="text-gray-800 block text-lg")=paciente.medio.nombre
@@ -176,17 +177,17 @@ block contenido
               span(class="text-gray-800 block text-lg")=paciente.canaldereferencia
 
       aside(class="form-container md:w-1/3 bg-white shadow rounded-lg")
-        h3(class="text-center py-10 leading-6 font text-gray-900") Ubicacion
+        h3(class="text-center py-10 leading-6 font-extrabold text-black uppercase ") Ubicación
         div(class="h-96" id="mapa")
           p(id="lat" class="hidden")=paciente.lat
           p(id="lng" class="hidden")=paciente.lng
         div(class="p-5")
-          p(class="text-gray-600 font-bold text-xs") Direccion:
+          p(class="text-gray-600 font-bold text-xs") Dirección:
             span(id="calle" class="text-gray-800 block text-lg")=paciente.calle
           form(method="POST" action=`/pacientes/eliminar/${paciente.id}`)
             input(type="hidden" name="_csrf" value = csrfToken)
-            
-            input(type="submit" class="w-full px-5 py-5 md:py-2 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800" value="Eliminar paciente")
+            br
+            input(type="submit" class="w-full px-5 py-5 md:py-2 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-600 hover:bg-red-200 text-white" value="Eliminar paciente")
               
 
 block scripts

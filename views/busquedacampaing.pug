@@ -1,5 +1,30 @@
 extends ./layout/campaings
 
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+    style.
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #46b8a9, #FFFFFF);
+            background-size: cover;
+            z-index: -1; 
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
+            border-radius: 0.8rem; /* Bordes redondeados */
+        }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
+
 block contenido 
     section(class="py-5")
         h2(class="text-4xl my-10 font-extrabold text-center")= pagina
