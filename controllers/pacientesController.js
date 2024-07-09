@@ -1,6 +1,6 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
-import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias,Medios} from '../models/index.js'
+import { Companyseguros,Titularseguridadsocial,Seguridadsocial,Paciente, Usuario ,Campaign, Parentesco, Datomedico, Beneficiario, Accionesprevias,Medios,Izquierdo,Derecho} from '../models/index.js'
 import { promises } from 'node:dns'
 import {esUsuario} from '../helpers/index.js'
 
@@ -427,7 +427,9 @@ const mostrarPaciente = async (req,res)=>{
             {model:Datomedico,as:'datomedico'},
             {model:Beneficiario,as:'beneficiario'},
             { model: Accionesprevias, as: 'accionesprevia' } ,
-            {model:Medios,as:'medio'}
+            {model:Medios,as:'medio'},
+            {model:Izquierdo,as:'izquierdo'},
+            {model:Derecho,as:'derecho'}
             
             
             
@@ -463,7 +465,10 @@ const mostrarPacienteApp = async (req,res)=>{
             {model:Datomedico,as:'datomedico'},
             {model:Beneficiario,as:'beneficiario'},
             { model: Accionesprevias, as: 'accionesprevia' } ,
-            {model:Medios,as:'medios'}
+            {model:Medios,as:'medios'},
+            {model:Izquierdo,as:'izquierdo'},
+            {model:Derecho,as:'derecho'}
+            
             
         ],
     })

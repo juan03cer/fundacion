@@ -26,11 +26,7 @@ const Izquierdo = db.define('izquierdo',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    tipoygrado :{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    patrónperdida:{
+    patronperdida:{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -38,6 +34,11 @@ const Izquierdo = db.define('izquierdo',{
         type:DataTypes.STRING,
         allowNull:false
     },
+    publicado:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
+    }
 })
 
 export default Izquierdo

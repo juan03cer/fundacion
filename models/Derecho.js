@@ -2,12 +2,6 @@ import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
 const Derecho = db.define('derecho',{
- 
-    responsable:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-
     fecha:{
         type:DataTypes.STRING,
         allowNull:false
@@ -32,11 +26,7 @@ const Derecho = db.define('derecho',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    tipoygrado :{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    patrónperdida:{
+    patronperdida:{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -44,14 +34,11 @@ const Derecho = db.define('derecho',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    Diagnóstico :{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
-    Recomendaciones:{
-        type:DataTypes.STRING,
-        allowNull:false
-    },
+    publicado:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
+    }
 })
 
 export default Derecho

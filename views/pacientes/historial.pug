@@ -37,12 +37,18 @@ block contenido
                         h3.text-lg.leading-6.font-medium.text-gray-900 Añade Informacion sobre el beneficiario
     
                         div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="enfermedad") ¿Padece alguna enfermedad?
-                            input#enfermedad.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciente padece alguna enfermedad" type="text" name="enfermedad" value= datos ? datos.enfermedad : '' )        
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="antecedentes")  Antecedentes médicos relevantes
+                            input#antecedentes.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ejemplo: infecciones de oído, cirugías previas,etc" type="text" name="antecedentes" value= datos ? datos.antecedentes : '' )        
+                        
                         
                         div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ruidosonido") ¿Siente algun Ruido o Sonido dentro de sus Oidos?
-                            input#ruidosonido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciende siente algun ruido o sonido" type="text" name="ruidosonido" value= datos ? datos.ruidosonido : '' )        
+                        label.block.text-sm.uppercase.text-black.mb-2.font-bold Factores de Riesgo Auditivo (Marque la Casilla segun sea el caso)
+                        div.grid.grid-cols-1.gap-4
+                            each optionValue in ['Exposición al Ruido','Envejecimiento (Presbiacusia)', 'Genética', 'Enfermedades e Infecciones', 'Uso de Medicamentos Ototóxicos', 'Trauma Físico', 'Factores de Estilo de Vida y Salud', 'Exposición a Sustancias Químicas', 'Problemas de Nacimiento y Desórdenes Congénitos']
+                                div
+                                    input(type="checkbox" name="factores" value=optionValue id=optionValue checked=datos && datos.factores && datos.factores.includes(optionValue))
+                                    label(for=optionValue) #{optionValue}
+
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
@@ -60,13 +66,8 @@ block contenido
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="tiporuido") ¿Que tipo de ruido?
                             input#tiporuido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote el tipo de ruido" type="text" name="tiporuido" value= datos ? datos.tiporuido : '' )        
                         
-                        div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="serviciorequeridoid") Servicio requerido 
-                            select#serviciorequeridoid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="serviciorequeridoid")
-                                option(value="") -Selecione-
-                                each serviciorequerido in serviciorequeridoid 
-                                    option(value=serviciorequerido.id selected= datos ? datos.serviciorequeridoid == serviciorequerido.id ? true:false:null)= serviciorequerido.nombre  
-                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        
+                        div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="otorrino") OTORRINO

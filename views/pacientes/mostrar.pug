@@ -56,6 +56,23 @@ block contenido
         a(href=`/pacientes/accionesprevias/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 cursor-pointer bg-white text-black rounded-lg hover:text-gray-300 font-extrabold shadow-lg uppercase")
           | click para Completar Datos de las Acciones Previas
 
+    div(class="flex justify-center gap-4 mb-5 mt-5") 
+      if (paciente.izquierdo && paciente.izquierdo.publicado)
+         a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 cursor-pointer bg-white text-black rounded-lg font-extrabold shadow-lg uppercase")
+          | Datos Del La Audiometria del oido Izquierdo Completados ✓
+      else
+        a(href=`/pacientes/audiometria/oidoizquierdo/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 ml-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black")
+          | Completar datos de la audiometria del oido izquierdo      
+
+
+      if (paciente.derecho && paciente.derecho.publicado)
+         a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 cursor-pointer bg-white text-black rounded-lg font-extrabold shadow-lg uppercase")
+          | Datos Del La Audiometria del oido Derecho Completados ✓  
+      else
+        a(href=`/pacientes/audiometria/oidoizquierdo/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 ml-5 text-xs leading-5 font-semibold rounded cursor-pointer bg-yellow-200 text-black")
+          | Completar datos de la audiometria del oido izquierdo     
+    
+
     div(class=" form-container mt-5 md:flex md:gap-4 md:items-start")
       div(class=" form-container md:w-2/3 bg-white shadow rounded-lg")
         div(class="px-5 py-10 space-y-5")
@@ -81,6 +98,22 @@ block contenido
             else
               a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-red-600 cursor-not-allowed text-white")
                 | Datos De las Acciones Previas Sin Completar
+          div(class="flex justify-center gap-4 mb-5 mt-5") 
+            if (paciente.izquierdo && paciente.izquierdo.publicado)
+              a(href=`/pacientes/audiometria/oidoizquierdomostrar/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
+                | Ver Datos de la Audiometria en Oido Izquierdo
+            else
+              a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-red-600 cursor-not-allowed text-white")
+                | Datos de la audiometria del oido izquierdo sin completar     
+
+
+            if (paciente.derecho && paciente.derecho.publicado)
+              a(href=`/pacientes/audiometria/oidoderechomostrar/${paciente.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-azul-tur cursor-pointer text-white hover:text-gray-300")
+                | Ver Datos de la Audiometria en Oido Derecho
+            else
+              a(class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 font-extrabold rounded bg-red-600 cursor-not-allowed text-white")
+                | Datos de la audiometria del oido izquierdo sin completar     
+   
 
           h2(class="text-center text-2xl font-extrabold")= pagina
 

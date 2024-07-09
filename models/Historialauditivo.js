@@ -103,7 +103,7 @@ const Historialauditivo = db.define('historialauditivo',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    resultado :{
+    resultadoh :{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -115,6 +115,11 @@ const Historialauditivo = db.define('historialauditivo',{
         type:DataTypes.STRING,
         allowNull:false
     },
+    publicado:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:true
+    }
 })
 
 export default Historialauditivo
