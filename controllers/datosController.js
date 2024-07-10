@@ -573,7 +573,7 @@ const oidoIzquierdoGuardar = async (req,res) =>{
 
 
   //Crear un registro
-  const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones} =req.body
+  const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones,recomendacion,nombre} =req.body
 
   const{id: usuarioizquierdoid} =req.usuario
   try{
@@ -586,6 +586,7 @@ const oidoIzquierdoGuardar = async (req,res) =>{
         configuracion,
         patronperdida,
         observaciones,
+        recomendacion,nombre,
         usuarioizquierdoid,
         pacienteid: req.params.id,
          
@@ -674,7 +675,7 @@ const oidoIzquierdoEditarGuardar = async (req,res) =>{
             paciente: await Paciente.findByPk(pacienteId) 
         });
     }
-    const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones} =req.body
+    const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones,recomendacion,nombre} =req.body
 
     const{id: usuarioizquierdoid} =req.usuario
     try {
@@ -694,6 +695,7 @@ const oidoIzquierdoEditarGuardar = async (req,res) =>{
             configuracion,
             patronperdida,
             observaciones,
+            recomendacion,nombre,
             usuarioizquierdoid,
             pacienteid: req.params.id,
         });
@@ -738,7 +740,7 @@ const oidoDerechoGuardar= async (req,res) =>{
 
 
   //Crear un registro
-  const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones} =req.body
+  const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones,recomendacion,nombre} =req.body
 
   const{id: usuarioderechoid} =req.usuario
   try{
@@ -751,6 +753,7 @@ const oidoDerechoGuardar= async (req,res) =>{
         configuracion,
         patronperdida,
         observaciones,
+        recomendacion,nombre,
         usuarioderechoid,
         pacienteid: req.params.id,
          
@@ -837,7 +840,7 @@ const oidoDerechoEditarGuardar = async (req,res) =>{
             paciente: await Paciente.findByPk(pacienteId) 
         });
     }
-    const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones} =req.body
+    const{fecha,tipo,oido,umbral,gradoperdida,configuracion,patronperdida,observaciones,recomendacion,nombre} =req.body
 
     const{id: usuarioderechoid} =req.usuario
     try {
@@ -857,6 +860,7 @@ const oidoDerechoEditarGuardar = async (req,res) =>{
             configuracion,
             patronperdida,
             observaciones,
+            recomendacion,nombre,
             usuarioderechoid,
             pacienteid: req.params.id,
         });

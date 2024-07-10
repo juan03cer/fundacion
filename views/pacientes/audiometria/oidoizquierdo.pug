@@ -29,7 +29,7 @@ block contenido
      div.py-10 
          h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white  Fundación México Sin Sordera A.C
          br
-         h2.text-center.text-2xl.font-extrabold.form-container Audiometría Oído Derecho
+         h2.text-center.text-2xl.font-extrabold.form-container Audiometría Oído Izquierdo
 
          if errores 
             div(class="max-w-md mx-auto my-10")
@@ -38,6 +38,10 @@ block contenido
          div(class="form-container shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
+                    div
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre de quien realiza la audiometria
+                            input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el nombre" type="" name="nombre" value= datos ? datos.nombre : '' )        
+                        
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
@@ -70,11 +74,17 @@ block contenido
                             select#patronperdida.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="patronperdida")
                                 each optionPatronperdida in [' Seleccione el Grado de Pérdida Auditiva','Ascendente', 'Descendente','Plano']
                                       option(value=optionPatronperdida selected=datos && datos.patronperdida === optionPatronperdida)=optionPatronperdida
-                    div(class="md:w-1/2 ")
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        div(class="md:w-1/2 ")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="configuracion") Configuración de la pérdida auditiva 
                             select#configuracion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="configuracion")
                                 each optionConfiguracion in ['Seleccione Configuración de la Perdida Auditiva ','Conduciva', 'Sensorineural','Mixta']
                                  option(value=optionConfiguracion selected=datos && datos.configuracion === optionConfiguracion)= optionConfiguracion
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="recomendacion") Recomendaciones para tratamiento  audiologico (uso de audifonos,derivacion a especialistas,seguimiento) 
+                            select#recomendacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="recomendacion")
+                                each optionConfiguracion in ['Seleccione Recomendaciones  ','Auxiliarres Auditivos', 'Derivacion a Especialistas','Seguimiento','Lavado de oidos']
+                                 option(value=optionConfiguracion selected=datos && datos.recomendacion === optionConfiguracion)= optionConfiguracion
                     div
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="observaciones") Observaciones:
                             textarea#observaciones.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba las observaciones" type="" name="observaciones" value= datos ? datos.observaciones : '' )        

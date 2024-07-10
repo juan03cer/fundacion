@@ -194,9 +194,8 @@ block contenido
                                       option(value=optionValue selected=datos && datos.audicion === optionValue)=optionValue
                         div(class="md:w-1/2")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="pruebaauditiva") ¿Se ha realizado alguna prueba auditiva antes? si o no ¿Cuándo fue la última vez?
-                            select#pruebaauditiva.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="pruebaauditiva")
-                                 each optionValue in ['Seleccione','Si', 'No']
-                                      option(value=optionValue selected=datos && datos.pruebaauditiva === optionValue)=optionValue
+                            input#pruebaauditiva.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba la respuesta" name="pruebaauditiva")
+    
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")

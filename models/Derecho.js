@@ -2,6 +2,10 @@ import { DataTypes } from "sequelize";
 import db from "../config/db.js";
 
 const Derecho = db.define('derecho',{
+    nombre:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     fecha:{
         type:DataTypes.STRING,
         allowNull:false
@@ -31,6 +35,10 @@ const Derecho = db.define('derecho',{
         allowNull:false
     },
     observaciones:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    recomendacion:{
         type:DataTypes.STRING,
         allowNull:false
     },
