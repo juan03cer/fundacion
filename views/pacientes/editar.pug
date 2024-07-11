@@ -18,13 +18,19 @@ block styles
             background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
             border-radius: 0.8rem; /* Bordes redondeados */
         } 
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
     
 
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  Fundación México Sin Sordera A.C
-            span.font-normal  
-         h2.text-center.text-2xl.font-extrabold= pagina
+         h1.text-4xl.my-10.font-extrabold.text-center.text-white.form-title  Fundación México Sin Sordera A.C
+         br
+         h2.text-center.text-2xl.font-extrabold.form-container= pagina
 
          if errores 
             div(class="max-w-md mx-auto my-10")
@@ -36,8 +42,8 @@ block contenido
               form.space-y-8(method="POST" )
                 input(type="hidden" name="_csrf" value = csrfToken)
                 div.space-y-5
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion General
-                    p.text-gray-600 Añade Informacion sobre el paciente
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Información General
+                    p.text-gray-600 Añade Información sobre el paciente
                    
                     div
                          label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre del paciente
@@ -61,13 +67,13 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="segdgasmdcs") ¿Cuenta con seguro de Gastos Medicos?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="segdgasmdcs") ¿Cuenta con seguro de Gastos Médicos?
                             select#segdgasmdcs.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="segdgasmdcs")
                                  each optionValue in ['-Selecione-','Si', 'No']
                                       option(value=optionValue selected=datos && datos.segdgasmdcs === optionValue)=optionValue
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="companysegurosid") Compañia de Seguros 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="companysegurosid") Compañía de Seguros 
                             select#companysegurosid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="companysegurosid")
                                 option(value="") -Selecione-
                                 each companyseguro in companysegurosid 
@@ -82,33 +88,33 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="numpaciente") Numero Telefonico del paciente
-                            input#numpaciente.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Numero telefonico" type="number" name="numpaciente" value= datos ? datos.numpaciente : '')
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="numpaciente") Número Telefónico del paciente
+                            input#numpaciente.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Número telefónico" type="number" name="numpaciente" value= datos ? datos.numpaciente : '')
                                
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="correo") Correo
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="correo") Correo electrónico
                             input#correo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Correo" type="email" name="correo" value= datos ? datos.correo : '' )
                              
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telrecados") Telefono para recados 
-                            input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telrecados") Teléfono para recados 
+                            input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Teléfono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
                                   
                     div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignid") Seleccione la campaña ala que corresponde 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignid") Seleccione la campaña donde se conoció al paciente 
                             select#campaignid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="campaignid")
                                 option(value="") -Selecione- 
                                 each campaign in campaignid
                                     option(value=campaign.id  selected= datos ? datos.campaignid == campaign.id ? true:false:null)= campaign.nombre   
                    
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion del acompañante
-                    p.text-gray-600 Añade Informacion sobre el acompañante, si no es el caso poner N/A
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Información del acompañante
+                    p.text-gray-600 Añade Información sobre el acompañante, si no es el caso poner N/A
 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/3")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="companion") Nombre completo de la persona que llama, responsable o familiar
-                            input#companion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Numero telefonico" type="text" name="companion" value= datos ? datos.numpaciente : '')
+                            input#companion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre completo" type="text" name="companion" value= datos ? datos.numpaciente : '')
                                
 
                         div(class="md:w-1/3")
@@ -119,14 +125,14 @@ block contenido
                                     option(value=parentesco.id  selected= datos ? datos.parentescoid == parentesco.id ? true:false:null)= parentesco.nombre  
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telcompanion") Telefono
-                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telcompanion") Teléfono
+                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Teléfono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
                   
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion requerida para la fundacion
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Información requerida para la fundación
                     p.text-gray-600 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                         div(class="md:w-1/1")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="mediosid") ¿A traves de que medio se entero de la compañia?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="mediosid") ¿A traves de que medio se entero de la compañía?
                             select#mediosid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="mediosid")
                                 option(value="") -Selecione- 
                                 each medio in mediosid
@@ -148,7 +154,7 @@ block contenido
                         input(type="hidden" name="lat" id="lat" value= datos ? datos.lat: '')    
                         input(type="hidden" name="lng" id="lng" value= datos ? datos.lng: '')    
 
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Cambios")
 
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")

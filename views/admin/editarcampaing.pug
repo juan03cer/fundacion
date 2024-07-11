@@ -18,19 +18,13 @@ block styles
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 0.8rem; 
         }
-        .form-title {
-            background-color: rgba(148, 193, 35); 
-            border-radius: 0.8rem; 
-            padding: 0.5rem 1rem; 
-            margin: 0.5rem 0; 
-        }
     
 
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white  Fundación México Sin Sordera A.C
-         br
-         h2.text-center.text-2xl.font-extrabold.form-container Registro de Nueva Campaña
+         h1.text-4xl.my-10.font-extrabold.text-center  Fundación México Sin Sordera
+            span.font-normal  A.C
+         h2.text-center.text-2xl.font-extrabold Editar Campaña
 
          if errores 
             div(class="max-w-md mx-auto my-10")
@@ -39,11 +33,11 @@ block contenido
 
 
          div(class="py-8 px-4 mx-auto max-w-4xl my-10 md:px-10 flex.flex-col.md.flex-row.items-center.justify-center")
-              form.form-container.py-8.px-4.shadow-lg(method="POST" action="/admin/campaing")
+              form.form-container.py-8.px-4.shadow-lg(method="POST")
                 input(type="hidden" name="_csrf" value = csrfToken)
                 div.space-y-5
-                    h3.text-lg.text-black.text-center.font-bold NUEVA CAMPAÑA
-                    p.text-black.font-bold AÑADE INFORMACIÓN SOBRE LA NUEVA CAMPAÑA
+                    h3.text-lg.text-black.text-center.font-bold EDITAR CAMPAÑA
+                    p.text-black.font-bold EDITA LA INFORMACIÓN SOBRE LA CAMPAÑA
                    
                     div
                          label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre de la campaña

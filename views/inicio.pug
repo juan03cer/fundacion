@@ -14,6 +14,12 @@ block styles
             background-size: cover;
             z-index: -1; 
         }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
    
 block contenido 
 
@@ -28,13 +34,14 @@ block contenido
                     option(value="") Seleccione la campaña 
                     each campaigns in campaign 
                         option(value=campaigns.id)=campaigns.nombre 
-        h3(class="text-center text-3xl font-extrabold") UBICACIÓN DE LOS PACIENTES EN EL MAPA
+        h3(class="text-center text-3xl font-extrabold form-title text-white") UBICACIÓN DE LOS PACIENTES EN EL MAPA
             
 
         div(id="mapa-inicio" class="h-[600px] mt-10")
 
         section(class="px-10")
-            h2(class="text-center text-3xl font-extrabold pt-10") PACIENTES
+            br
+            h2(class="text-center text-3xl font-extrabold pt-10 form-title text-white") PACIENTES
             
             div(class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14")
                 each pacientes in paciente 

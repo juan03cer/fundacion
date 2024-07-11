@@ -1,5 +1,7 @@
 import express from 'express'
-import {completado,crearBeneficiario, datosMedicos, guardarBeneficiario,guardarDatosMedicos, mostrarDatosMedicos,editarDatoMedico,editarDatoMedicoGuardado,editarDatoBeneficiario,editarDatoBeneficiarioGuardado,mostrarDatosBeneficiario,accionesprevias,accionespreviasguardar,mostrarAccionesPrevias} from '../controllers/datosController.js'
+import {completado,crearBeneficiario, datosMedicos, guardarBeneficiario,guardarDatosMedicos, mostrarDatosMedicos,editarDatoMedico,editarDatoMedicoGuardado,editarDatoBeneficiario,editarDatoBeneficiarioGuardado,mostrarDatosBeneficiario,
+    accionesprevias,accionespreviasguardar,mostrarAccionesPrevias,oidoIzquierdo,oidoIzquierdoGuardar,oidoIzquierdoMostrar,oidoIzquierdoEditar,oidoIzquierdoEditarGuardar,oidoDerecho,
+    oidoDerechoGuardar,oidoDerechoMostrar,oidoDerechoEditar,oidoDerechoEditarGuardar,historialMedico,historialMedicoGuardar,historialMedicoMostrar,historialMedicoEditar,historialMedicoEditarGuardar} from '../controllers/datosController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 
 const router =express.Router()
@@ -20,6 +22,26 @@ router.post('/pacientes/datosmedicos/:id',protegerRuta,guardarDatosMedicos)
 router.get('/pacientes/mostrardatosmedicos/:id',protegerRuta,mostrarDatosMedicos)
 router.get('/pacientes/:pacienteId/editardatomedico/:datomedicoId',protegerRuta, editarDatoMedico);
 router.post('/pacientes/:pacienteId/editardatomedico/:datomedicoId',protegerRuta, editarDatoMedicoGuardado);
+
+
+router.get('/pacientes/audiometria/oidoizquierdo/:id',protegerRuta,oidoIzquierdo)
+router.post('/pacientes/audiometria/oidoizquierdo/:id',protegerRuta,oidoIzquierdoGuardar)
+router.get('/pacientes/audiometria/oidoizquierdomostrar/:id',protegerRuta,oidoIzquierdoMostrar)
+router.get('/pacientes/:pacienteId/audiometria/oidoizquierdoeditar/:izquierdoId',protegerRuta, oidoIzquierdoEditar);
+router.post('/pacientes/:pacienteId/audiometria/oidoizquierdoeditar/:izquierdoId',protegerRuta, oidoIzquierdoEditarGuardar);
+
+
+router.get('/pacientes/audiometria/oidoderecho/:id',protegerRuta,oidoDerecho)
+router.post('/pacientes/audiometria/oidoderecho/:id',protegerRuta,oidoDerechoGuardar)
+router.get('/pacientes/audiometria/oidoderechomostrar/:id',protegerRuta,oidoDerechoMostrar)
+router.get('/pacientes/:pacienteId/audiometria/oidoderechoeditar/:derechoId',protegerRuta, oidoDerechoEditar);
+router.post('/pacientes/:pacienteId/audiometria/oidoderechoeditar/:derechoId',protegerRuta, oidoDerechoEditarGuardar);
+
+router.get('/pacientes/historial/:id',protegerRuta,historialMedico)
+router.post('/pacientes/historial/:id',protegerRuta,historialMedicoGuardar)
+router.get('/pacientes/historialmostrar/:id',protegerRuta,historialMedicoMostrar)
+router.get('/pacientes/:pacienteId/historialeditar/:historialId',protegerRuta, historialMedicoEditar);
+router.post('/pacientes/:pacienteId/historialeditar/:historialId',protegerRuta, historialMedicoEditarGuardar);
 
 
 router.get('/pacientes/accionesprevias/:id',protegerRuta,accionesprevias)

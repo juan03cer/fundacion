@@ -182,6 +182,70 @@ const editarAsociado = async (req,res)=>{
 }
 
 
+const editarcampaing = async (req,res) =>{
+
+    const{id}=req.params
+    //Validar que el paciente exista
+    const campaings = await Campaign.findByPk(id)
+
+    if(!campaings){
+        return res.redirect('/mi-sitio')
+    }
+
+
+    res.render('admin/editarcampaing',{
+        pagina:`Editar campaing: ${campaings.nombre}`,
+        csrfToken: req.csrfToken(),
+        datos:campaings
+    })
+}
+
+const editarcampainguardar = async (req,res) =>{
+    
+    //verificar la validacion
+    let resultado = validationResult(req)
+
+    if(!resultado.isEmpty()){
+
+       
+        res.render('admin/editarcampaing',{
+            pagina:'Editar Campaña',
+            csrfToken: req.csrfToken(),
+            errores:resultado.array(),
+            datos:req.body
+        })
+    }
+
+    const{id}=req.params
+    //Validar que el paciente exista
+    const campaings = await Campaign.findByPk(id)
+
+    if(!campaings){
+        return res.redirect('/mi-sitio')
+    }
+
+  
+
+    //Reescribir el objeto y actualizarlo
+    try{
+        const{nombre,descripcion} =req.body
+
+        campaings.set({
+            nombre,
+            descripcion
+
+
+        })
+        await campaings.save()
+        res.redirect('/admin/mostrarcampaings')
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+
+
 export{
     superUsuario,
     crearCampaing,
@@ -189,7 +253,10 @@ export{
     campaings,
    asociados,
    eliminarUsuario,
-   editarAsociado
+   editarAsociado,
+   editarcampaing,
+   editarcampainguardar,
+   
 
     
 }

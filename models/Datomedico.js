@@ -30,6 +30,22 @@ const Datomedico = db.define('datomedico',{
         type:DataTypes.STRING,
         allowNull:false
     },  
+    otorrino:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    audiologo:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    terapeuta:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    ingresaraudiometria:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     publicado:{
         type:DataTypes.BOOLEAN,
         allowNull:false,
