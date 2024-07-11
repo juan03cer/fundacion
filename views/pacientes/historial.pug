@@ -40,7 +40,7 @@ block contenido
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div.space-y-5
-                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Informacion sobre el beneficiario
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Información sobre el beneficiario
     
                         div
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="antecedentes")  Antecedentes médicos relevantes
@@ -48,14 +48,14 @@ block contenido
                         
                         
                         div
-                        label.block.text-sm.uppercase.text-black.mb-2.font-bold(for="factores")  Factores de Riesgo Auditivo (Marque la Casilla segun sea el caso)
+                        label.block.text-sm.uppercase.text-black.mb-2.font-bold(for="factores")  Factores de Riesgo Auditivo (Marque la Casilla según sea el caso)
                         select#factores.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="factores")
                             each optionValue in ['Exposición al Ruido','Envejecimiento (Presbiacusia)', 'Genética', 'Enfermedades e Infecciones', 'Uso de Medicamentos Ototóxicos', 'Trauma Físico', 'Factores de Estilo de Vida y Salud', 'Exposición a Sustancias Químicas', 'Problemas de Nacimiento y Desórdenes Congénitos']
                                 option(value=optionValue selected=datos && datos.factores === optionValue)=optionValue
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.mt-10.text-black.mb-2.fond-bold(for="problemas")  ¿Ha tenido problemas auditivos anteriormente? 
+                            label.block.text-sm.uppercase.mt-10.text-black.mb-2.fond-bold(for="problemas")  ¿Ha tenido problemas auditívos anteriormente? 
                             select#problemas.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="problemas")
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.problemas === optionValue)=optionValue
@@ -75,14 +75,14 @@ block contenido
                                       option(value=optionValue selected=datos && datos.expuesto === optionValue)=optionValue
 
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="proteccion")  ¿Utiliza proteccion auditiva en entornos ruidosos?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="proteccion")  ¿Utiliza protección auditiva en entornos ruidosos?
                             select#proteccion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="proteccion")
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.proteccion === optionValue)=optionValue
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cirugia") ¿Ha tenido alguna cirugia de oido?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cirugia") ¿Ha tenido alguna cirugía de oído?
                             select#cirugia.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="cirugia")
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.cirugia === optionValue)=optionValue
@@ -99,7 +99,7 @@ block contenido
                             input#medicamentos.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="ej. (antibióticos, quimioterapia, etc.)" type="text" name="medicamentos" value= datos ? datos.medicamentos : '' )        
                         
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="covid")  ¿A presentado covid anteriormente?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="covid")  ¿Ha presentado covid 19 anteriormente?
                             select#covid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="covid")
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.covid === optionValue)=optionValue
@@ -111,7 +111,7 @@ block contenido
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.dificultades === optionValue)=optionValue
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="volumen")   ¿Ha notado que necesita subir el volumen de la televisión o la musica?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="volumen")   ¿Ha notado que necesita subir el volúmen de la televisión o la música?
                             select#volumen.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="volumen")
                                  each optionValue in ['Seleccione','Si', 'No']
                                       option(value=optionValue selected=datos && datos.volumen === optionValue)=optionValue
@@ -130,7 +130,7 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="sufrido") ¿a sufrido o a presentado alguno de estos problemas? 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="sufrido") ¿Ha sufrido o a presentado alguno de estos problemas? 
                             select#sufrido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="sufrido")
                                  each optionValue in ['Seleccione','Mareos', 'Vértigo','problemas  de equilibrio ','No Aplica','Otro']
                                       option(value=optionValue selected=datos && datos.sufrido === optionValue)=optionValue
@@ -142,8 +142,8 @@ block contenido
                 
 
                     div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="musica") ¿que utiliza para escuchar música? ¿Con qué frecuencia y a qué volumen? 
-                            input#musica.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="ej. (audífonos o cascos) volumen:alto, medio, bajo Frecuencia:todos los días ,fines de semana etc" type="text" name="musica" value= datos ? datos.musica : '' )        
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="musica") ¿qué utiliza para escuchar música? ¿Con qué frecuencia y a qué volumen? 
+                            input#musica.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="ej. (audífonos) volumen:alto, medio, bajo Frecuencia:todos los días ,fines de semana etc" type="text" name="musica" value= datos ? datos.musica : '' )        
                         
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0") 
                        div(class="md:w-1/2")
@@ -213,7 +213,7 @@ block contenido
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") ¿Ha recibido algún diagnóstico específico o tratamiento para problemas de audición? ¿cual?
                             textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el Diagnostico Medico" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
                         
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Médicos")
 
 block scripts
      script(src="/js/calcularedad.js")                                                             

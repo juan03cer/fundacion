@@ -1,4 +1,7 @@
-div(class="form-container shadow rounded-lg")
-    div(class="p-5 space-y-3")
+div(class="form-container shadow rounded-lg flex items-center ")
+    div(class="p-5 space-y-3 campaigns-grid")
         p(class="text-sm text-black font-bold flex items-center") Nombre de la campaña: 
-        h3= campaign.nombre
+            h3= campaign.nombre
+        p(class="text-sm text-black font-bold flex items-center") Descripcion:
+            h3= campaign.descripcion
+        

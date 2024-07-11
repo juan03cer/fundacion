@@ -43,8 +43,8 @@ block contenido
               form.space-y-8(method="POST")
                 input(type="hidden" name="_csrf" value = csrfToken)
                 div.space-y-5
-                    h3.text-lg.leading-6.font-medium.text-gray-900 Informacion de las acciones previas del paciente
-                    p.text-gray-600 Añade Informacion sobre acciones previas
+                    h3.text-lg.leading-6.font-medium.text-gray-900 Información de las acciones previas del paciente
+                    p.text-gray-600 Añade Información sobre acciones previas
                    
                     div
                          label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="empresaimplante") ¿QUE EMPRESAS DE IMPLANTE COCLEAR CONOCE?
@@ -55,12 +55,12 @@ block contenido
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cotizacion") ¿LE PROPORCIONARON COTIZACION? ANOTE EL MONTO COTIZADO 
-                            input#cotizacion.w-full.px-3.py-2.mt-5.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote la cotizacion" type="nutextmber" name="cotizacion" value= datos ? datos.cotizacion : '')
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cotizacion") ¿LE PROPORCIONARON COTIZACIÓN? ANOTE EL MONTO COTIZADO 
+                            input#cotizacion.w-full.px-3.py-2.mt-5.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote la cotización" type="nutextmber" name="cotizacion" value= datos ? datos.cotizacion : '')
                         div(class="md:w-1/2")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="centroimplante") EN EL CENTRO DE IMPLANTE DONDE ESTA ¿LE DAN OPCION DE ELEGIR MARCA DE IMPLANTE COCLEAR? 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="centroimplante") EN EL CENTRO DE IMPLANTE DONDE ESTA ¿LE DAN OPCIÓN DE ELEGIR MARCA DE IMPLANTE COCLEAR? 
                             select#centroimplante.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400.mt-5(name="centroimplante")
-                                each optionCentroImplante in ['-Selecione-', 'SI','NO','NO SÉ','TAL VEZ', 'NO E TENIDO CONTACTO CON NINGUNA']
+                                each optionCentroImplante in ['-Selecione-', 'SI','NO','NO SÉ','TAL VEZ', 'NO HE TENIDO CONTACTO CON NINGUNA']
                                       option(value=optionCentroImplante selected=datos && datos.centroimplante === optionCentroImplante)=optionCentroImplante
 
 
@@ -69,7 +69,7 @@ block contenido
 
                              div(class="md:w-1/2")
                                 label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="marcas")  ¿CON QUE MARCAS A TENIDO CONTACTO?
-                                input#marcas.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote con que marcas a tenido contacto" type="text" name="marcas" value= datos ? datos.marcas : '')
+                                input#marcas.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote con que marcas ha tenido contacto" type="text" name="marcas" value= datos ? datos.marcas : '')
                              div(class="md:w-1/2")
                                 label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="contacto") ¿HA TENIDO CONTACTO CON OTRA FUNDACION?
                                 select#contacto.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="contacto")
@@ -77,23 +77,23 @@ block contenido
                                         option(value=optionCoontacto selected=datos && datos.contacto === optionCoontacto)=optionCoontacto
 
                     div
-                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cualcontacto") ¿CON CUAL FUNDACION A TENIDO CONTACTO?
-                         input#cualcontacto.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote con que fundacion a tenido contacto" type="text" name="cualcontacto" value= datos ? datos.cualcontacto : '' )         
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="cualcontacto") ¿CON CUAL FUNDACIÓN A TENIDO CONTACTO?
+                         input#cualcontacto.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote con que fundacion ha tenido contacto" type="text" name="cualcontacto" value= datos ? datos.cualcontacto : '' )         
                     div
-                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="apoyo") ¿HA SOLICITADO APOYO A ALGUNA INSTITUCION PUBLICA, SERVIDOR PUBLICO?
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="apoyo") ¿HA SOLICITADO APOYO A ALGUNA INSTITUCIÓN PÚBLICA, SERVIDOR PÚBLICO?
                          input#apoyo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si a solicitado apoyo a algunas instituciones" type="text" name="apoyo" value= datos ? datos.apoyo : '')
                            
                     div
-                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="quien") ¿A QUIEN SOLICITADO APOYO?
-                         input#quien.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote a que instituciones a solicitado apoyo" type="text" name="quien" value= datos ? datos.quien : '' )        
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="quien") ¿A QUÍEN SOLICITADO APOYO?
+                         input#quien.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote a que instituciones ha solicitado apoyo" type="text" name="quien" value= datos ? datos.quien : '' )        
                     h3.text-lg.leading-6.font-medium.text-gray-900 Estrategias
                     div
                          label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="prevencioneconomica") ¿CUENTA CON PREVISIÓN ECONÓMICA?
-                         input#prevencioneconomica.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si tiene prevision economica" type="text" name="prevencioneconomica" value= datos ? datos.prevencioneconomica : '')
+                         input#prevencioneconomica.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si tiene previsión económica" type="text" name="prevencioneconomica" value= datos ? datos.prevencioneconomica : '')
                            
                     div
-                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignrecaudacion") CAMPAÑA DE RECAUDACION
-                         input#campaignrecaudacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="campaña de recaudacion" type="text" name="campaignrecaudacion" value= datos ? datos.campaignrecaudacion : '' )        
+                         label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignrecaudacion") CAMPAÑA DE RECAUDACIÓN
+                         input#campaignrecaudacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Campaña de recaudación" type="text" name="campaignrecaudacion" value= datos ? datos.campaignrecaudacion : '' )        
                     
                     
                     input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar")

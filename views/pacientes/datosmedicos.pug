@@ -40,19 +40,19 @@ block contenido
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div.space-y-5
-                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Informacion sobre el beneficiario
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Información sobre el beneficiario
     
                         div
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="enfermedad") ¿Padece alguna enfermedad?
                             input#enfermedad.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciente padece alguna enfermedad" type="text" name="enfermedad" value= datos ? datos.enfermedad : '' )        
                         
                         div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ruidosonido") ¿Siente algun Ruido o Sonido dentro de sus Oidos?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ruidosonido") ¿Siente algún Ruido o Sonido dentro de sus Oídos?
                             input#ruidosonido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciende siente algun ruido o sonido" type="text" name="ruidosonido" value= datos ? datos.ruidosonido : '' )        
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="familiarusausado") ¿Algun familiar usa o ha usado AA?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="familiarusausado") ¿Algún familiar usa o ha usado AA?
                             input#familiarusausado.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si algun familiar usa o ha usado AA" type="text" name="familiarusausado" value= datos ? datos.familiarusausado : '' )        
                        
                         div(class="md:w-1/2")
@@ -92,10 +92,10 @@ block contenido
                             textarea#ingresaraudiometria.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Audiometria " type="" name="ingresaraudiometria" value= datos ? datos.ingresaraudiometria : '' )         
                    
                     div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") Diagnostico medico:
-                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el Diagnostico Medico" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") Diagnóstico médico:
+                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el Diagnostico Médico" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
                         
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Médicos")
 
 block scripts
      script(src="/js/calcularedad.js")                                                             

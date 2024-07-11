@@ -39,18 +39,18 @@ block contenido
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre de quien realiza la audiometria
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre de quien realiza la audiometría
                             input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el nombre" type="" name="nombre" value= datos ? datos.nombre : '' )        
                         
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fecha") Fecha de la audiometría del oido Derecho
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fecha") Fecha de la audiometría del oído Derecho
                             input#fecha.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Terapeuta" type="date" name="fecha" value= datos ? datos.fecha : '' )        
                        
                         div(class="md:w-1/2")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="tipo") Tipo de audiometría
-                            input#tipo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote el tipo de audiometria " type="" name="tipo" value= datos ? datos.tipo : '' )         
+                            input#tipo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote el tipo de audiometría " type="" name="tipo" value= datos ? datos.tipo : '' )         
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
@@ -81,7 +81,7 @@ block contenido
                                 each optionConfiguracion in ['Seleccione Configuración de la Perdida Auditiva ','Conduciva', 'Sensorineural','Mixta']
                                  option(value=optionConfiguracion selected=datos && datos.configuracion === optionConfiguracion)= optionConfiguracion
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="recomendacion") Recomendaciones para tratamiento  audiologico (uso de audifonos,derivacion a especialistas,seguimiento) 
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="recomendacion") Recomendaciones para tratamiento  audiologico (uso de audífonos,derivación a especialistas,seguimiento) 
                             select#recomendacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="recomendacion")
                                 each optionConfiguracion in ['Seleccione Recomendaciones  ','Auxiliarres Auditivos', 'Derivacion a Especialistas','Seguimiento','Lavado de oidos']
                                  option(value=optionConfiguracion selected=datos && datos.recomendacion === optionConfiguracion)= optionConfiguracion
@@ -89,7 +89,7 @@ block contenido
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="observaciones") Observaciones:
                             textarea#observaciones.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba las observaciones" type="" name="observaciones" value= datos ? datos.observaciones : '' )        
                         
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Médicos")
 
 block scripts
      script(src="/js/calcularedad.js")                                                             
