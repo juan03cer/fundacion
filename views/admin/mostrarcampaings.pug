@@ -28,7 +28,6 @@ block styles
         }
         .campaign-name {
             color: #706f6f; 
-            padding: 20px;
         }
         
         .btn-mostrar {
@@ -37,39 +36,40 @@ block styles
             padding: 10px; 
         }
         .btn-mostrar:hover {
-            background-color: #45a049; 
+            background-color: #46b8a9; 
         }
-        .btn-eliminar {
-            background-color: #f44336; 
-            color: white;
-            padding: 10px; 
-        }
-        .btn-eliminar:hover {
-            background-color: #e53935; 
-        }
-        
         .campaigns-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            justify-items: center; 
+            justify-items: center;
+            margin: 0 auto; 
+        }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.5); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0;  
         }
 block contenido
     div.py-10
-        h1.text-4xl.my-10.font-extrabold.text-center 
-            | Fundación México Sin Sordera 
-            span.font-normal A.C
-        h2.text-center.text-2xl.font-extrabold CAMPAÑAS REGISTRADAS
+        h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white Fundación México Sin Sordera A.C
+        br
+        h2.text-center.text-2xl.font-extrabold.form-container CAMPAÑAS REGISTRADAS
         br
         div.campaigns-grid
             each campaing in campaings
                 div.campaign-section
-                    p(class="campaign-title text-gray-600 font-bold text-1xl") Nombre de la Campaña:
+                    p(class="campaign-title text-black font-bold text-xl") Nombre de la Campaña:
                         span(class="campaign-name block text-lg")= campaing.nombre
+                    p(class="campaign-title text-black font-bold text-xl") Descripcion:
+                        span(class="campaign-name block text-lg")= campaing.descripcion
                     div(class="w-full flex flex-col lg:flex-row gap-2 justify-center")
-                        a(href=`/pacientes/editar/${campaing.id}` class="btn-mostrar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
-                            | Mostrar
-                        a(href=`/pacientes/completado/${campaing.id}` class="btn-eliminar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
-                            | Eliminar
-                    // Salto de línea entre las campañas
-                    br
+                        a(href=`/admin/editarcampaing/${campaing.id}` class="btn-mostrar text-center w-full text-xs leading-5 font-semibold rounded cursor-pointer")
+                                | Editar

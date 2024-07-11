@@ -18,12 +18,18 @@ block styles
             background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
             border-radius: 0.8rem; /* Bordes redondeados */
         }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
 block contenido
     
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center REGISTRO DE PACIENTE
+         h1.text-4xl.my-10.font-extrabold.text-center.form-title.text-white  Fundación México Sin Sordera A.C
+         h1.text-4xl.my-10.font-extrabold.text-center.form-container REGISTRO DE PACIENTE
             
-
          if errores 
             div(class="max-w-md mx-auto my-10")
                 each error in errores 
@@ -93,14 +99,27 @@ block contenido
                              
                         div(class="md:w-1/3")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telrecados") Teléfono para recados 
-                            input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
+                            input#telrecados.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Teléfono para recados" type="number" name="telrecados" value= datos ? datos.telrecados : '')
                     div(class="md:w-1/2")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="campaignid") Seleccione la campaña en que se conoce al Paciente 
                             select#campaignid.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="campaignid")
                                 option(value="") Seleccione 
                                 each campaign in campaignid
                                     option(value=campaign.id  selected= datos ? datos.campaignid == campaign.id ? true:false:null)= campaign.nombre   
-                                    
+                               
+                    
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fechanacimiento") Fecha de nacimiento 
+                            input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" value= datos ? datos.nombre : '' )     
+    
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="edad") Años del paciente
+                            input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad" value= datos ? datos.nombre : '' readonly )     
+                        
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="meses") Meses del paciente
+                            input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" value= datos ? datos.nombre : '' readonly)           
+                     
+   
+
                     h3.text-lg.leading-6.font-medium.text-gray-900 INFORMACIÓN DEL ACOMPAÑANTE
                     p.text-gray-600 Añade Información Sobre El Acompañante   (si no es el caso poner N/A)
 
@@ -119,8 +138,8 @@ block contenido
                                     option(value=parentesco.id  selected= datos ? datos.parentescoid == parentesco.id ? true:false:null)= parentesco.nombre  
 
                         div(class="md:w-1/3")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telcompanion") Telefono
-                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Telefono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="telcompanion") Teléfono
+                            input#telcompanion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Teléfono" type="text" name="telcompanion" value= datos ? datos.telcompanion : '')
                     h3.text-lg.leading-6.font-medium.text-gray-900 INFORMACIÓN REQUERIDA PARA LA FUNDACIÓN
                     p.text-gray-600 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
@@ -149,11 +168,12 @@ block contenido
                         input(type="hidden" name="lng" id="lng" value= datos ? datos.lng: '') 
                             
 
-                    input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar")
 
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
     script(src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js")
     script(src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js")
-    script(src="/js/mapa.js")                                                             
+    script(src="/js/mapa.js")         
+    script(src="/js/calcularedad.js")                                                          

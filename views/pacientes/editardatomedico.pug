@@ -66,10 +66,28 @@ block contenido
                                 option(value="") -Selecione-
                                 each serviciorequerido in serviciorequeridoid 
                                     option(value=serviciorequerido.id selected= datos ? datos.serviciorequeridoid == serviciorequerido.id ? true:false:null)= serviciorequerido.nombre  
-                        div
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="otorrino") OTORRINO
+                            textarea#otorrino.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Otorrino" type="text" name="otorrino")= datos ? datos.otorrino : ''         
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="audiologo") Audiologo
+                            textarea#audiologo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Audiologo " type="text" name="audiologo" )= datos ? datos.audiologo : ''         
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="terapeuta") TERAPEUTA
+                            textarea#terapeuta.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Terapeuta" type="text" name="terapeuta" )= datos ? datos.terapeuta : ''        
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ingresaraudiometria") INGRESAR AUDIOMETRIA
+                            textarea#ingresaraudiometria.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Audiometria " type="text" name="ingresaraudiometria" )= datos ? datos.ingresaraudiometria : ''         
+                      
+                       
+                    div
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") Diagnostico medico:
                             textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Beneficiario" type="" name="diagnostico" )= datos ? datos.diagnostico : ''        
-                        
-
-                        input(class="w-full py-3 bg-verde-pantone hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
                                                      

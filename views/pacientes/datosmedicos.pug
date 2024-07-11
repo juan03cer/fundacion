@@ -19,12 +19,18 @@ block styles
             background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
             border-radius: 0.8rem; /* Bordes redondeados */
         }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        } 
     
 block contenido
      div.py-10 
-         h1.text-4xl.my-10.font-extrabold.text-center  Fundación México Sin Sordera A.C
-            span.font-normal  
-         h2.text-center.text-2xl.font-extrabold= pagina
+         h1.text-4xl.my-10.font-extrabold.text-center.text-white.form-title  Fundación México Sin Sordera A.C
+         br
+         h2.text-center.text-2xl.font-extrabold.form-container= pagina
 
          if errores 
             div(class="max-w-md mx-auto my-10")
@@ -34,19 +40,19 @@ block contenido
                 form.space-y-8(method="POST")
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div.space-y-5
-                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Informacion sobre el beneficiario
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Información sobre el beneficiario
     
                         div
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="enfermedad") ¿Padece alguna enfermedad?
                             input#enfermedad.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciente padece alguna enfermedad" type="text" name="enfermedad" value= datos ? datos.enfermedad : '' )        
                         
                         div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ruidosonido") ¿Siente algun Ruido o Sonido dentro de sus Oidos?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ruidosonido") ¿Siente algún Ruido o Sonido dentro de sus Oídos?
                             input#ruidosonido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si el paciende siente algun ruido o sonido" type="text" name="ruidosonido" value= datos ? datos.ruidosonido : '' )        
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
                         div(class="md:w-1/2 ")
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="familiarusausado") ¿Algun familiar usa o ha usado AA?
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="familiarusausado") ¿Algún familiar usa o ha usado AA?
                             input#familiarusausado.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote si algun familiar usa o ha usado AA" type="text" name="familiarusausado" value= datos ? datos.familiarusausado : '' )        
                        
                         div(class="md:w-1/2")
@@ -66,12 +72,30 @@ block contenido
                                 option(value="") -Selecione-
                                 each serviciorequerido in serviciorequeridoid 
                                     option(value=serviciorequerido.id selected= datos ? datos.serviciorequeridoid == serviciorequerido.id ? true:false:null)= serviciorequerido.nombre  
-                        div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") Diagnostico medico:
-                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Beneficiario" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
-                        
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
 
-                        input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="otorrino") OTORRINO
+                            textarea#otorrino.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Otorrino" type="text" name="otorrino" value= datos ? datos.otorrino : '' )        
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="audiologo") Audiologo
+                            textarea#audiologo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Audiologo " type="text" name="audiologo" value= datos ? datos.audiologo : '' )         
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="terapeuta") TERAPEUTA
+                            textarea#terapeuta.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Terapeuta" type="text" name="terapeuta" value= datos ? datos.terapeuta : '' )        
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="ingresaraudiometria") INGRESAR AUDIOMETRIA
+                            textarea#ingresaraudiometria.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Audiometria " type="" name="ingresaraudiometria" value= datos ? datos.ingresaraudiometria : '' )         
+                   
+                    div
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="diagnostico") Diagnóstico médico:
+                            textarea#diagnostico.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba el Diagnostico Médico" type="" name="diagnostico" value= datos ? datos.diagnostico : '' )        
+                        
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Médicos")
 
 block scripts
      script(src="/js/calcularedad.js")                                                             

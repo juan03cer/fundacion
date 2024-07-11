@@ -1,0 +1,93 @@
+extends ../../layout/admin
+
+block styles
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+    style.
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #46b8a9, #FFFFFF);
+            background-size: cover;
+            z-index: -1; 
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con opacidad */
+            border-radius: 0.8rem; /* Bordes redondeados */
+        }
+        .form-title {
+            background-color: rgba(148, 193, 35); 
+            border-radius: 0.8rem; 
+            padding: 0.5rem 1rem; 
+            margin: 0.5rem 0; 
+        }
+    
+block contenido
+     div.py-10 
+         h1.text-4xl.my-10.font-extrabold.text-center.text-white.form-title  Fundación México Sin Sordera A.C
+         br
+         h2.text-center.text-2xl.font-extrabold= pagina
+
+         if errores 
+            div(class="max-w-md mx-auto my-10")
+                each error in errores 
+                   p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
+         div(class="form-container shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
+                form.space-y-8(method="POST")
+                    input(type="hidden" name="_csrf" value = csrfToken)
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fecha") Fecha de la audiometría del oido Izquierdo
+                            input#fecha.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Terapeuta" type="date" name="fecha" value= datos ? datos.fecha : '' )        
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="tipo") Tipo de audiometría
+                            input#tipo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote el tipo de audiometria " type="" name="tipo" value= datos ? datos.tipo : '' )         
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.mt-5.uppercase.text-black.mb-2.font-bold(for="oido") Oído evaluado
+                            input#oido.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="oido" value="Oído Izquierdo" readonly="readonly")
+
+
+                       
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="umbral") Umbral auditivo por cada frecuencia (en decibelios dB) captura de decibel
+                            input#umbral.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Anote la frecuencia del umbral en decibelios " type="text" name="umbral" value= datos ? datos.umbral : '' )         
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="gradoperdida") Grado de Pérdida Auditiva: Se clasifica la pérdida auditiva según su severidad:
+                            select#gradoperdida.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="gradoperdida")
+                                each optionGrado in [' Seleccione el Grado de Pérdida Auditiva','Leve (26-40 dB)', 'Moderada (41-55 dB)','Moderadamente severa (56-70 dB)','Severa (71-90 dB)','Profunda (más de 90 dB)']
+                                      option(value=optionGrado selected=datos && datos.gradoperdida === optionGrado)=optionGrado
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-black.mb-2.mt-5.fond-bold(for="patronperdida") Patrón de la pérdida auditiva:
+                            select#patronperdida.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="patronperdida")
+                                each optionPatronperdida in [' Seleccione el Grado de Pérdida Auditiva','Ascendente', 'Descendente','Plano']
+                                      option(value=optionPatronperdida selected=datos && datos.patronperdida === optionPatronperdida)=optionPatronperdida
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="configuracion") Configuración de la pérdida auditiva 
+                            select#configuracion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="configuracion")
+                                each optionConfiguracion in ['Seleccione Configuración de la Perdida Auditiva ','Conduciva', 'Sensorineural','Mixta']
+                                 option(value=optionConfiguracion selected=datos && datos.configuracion === optionConfiguracion)= optionConfiguracion
+                        div(class="md:w-1/2 ")
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="recomendacion") Recomendaciones para tratamiento  audiologico (uso de audifonos,derivacion a especialistas,seguimiento) 
+                            select#recomendacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="recomendacion")
+                                each optionConfiguracion in ['Seleccione Recomendaciones  ','Auxiliarres Auditivos', 'Derivacion a Especialistas','Seguimiento','Lavado de oidos']
+                                 option(value=optionConfiguracion selected=datos && datos.recomendacion === optionConfiguracion)= optionConfiguracion
+                 
+                    div
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="observaciones") Observaciones:
+                            textarea#observaciones.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escriba las observaciones" type="" name="observaciones" )= datos ? datos.observaciones : '' 
+                        
+                    input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Medicos")
+
+block scripts
+     script(src="/js/calcularedad.js")                                                             
+     script(src="/js/otro.js")           

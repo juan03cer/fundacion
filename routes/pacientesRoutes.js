@@ -38,10 +38,7 @@ router.post('/pacientes/editar/:id',protegerRuta,
     guardarCambios
 )
 
-router.post('/pacientes/eliminar/:id',
-    protegerRuta,
-    eliminar
-)
+router.post('/pacientes/eliminar/:id',protegerRuta,eliminar)
 
 router.put('/pacientes/:id',protegerRuta,cambiarEstado)
 

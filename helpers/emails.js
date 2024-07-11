@@ -18,14 +18,14 @@ const emailRegistro = async(datos)=>{
     await transport.sendMail({
         from: 'ju1an34xd@gmail.com',
         to:adminEmail,
-        subject:'Confirma tu cuenta en FSFLMXsinfronteras.com',
-        text:'Confirma tu cuenta en  FSFLMXsinfronteras.com',
+        subject:'Confirma la Cuenta de Fundacionmexicosinsordera.com',
+        text:'Confirma tu cuenta en  Fundacionmexicosinsordera.com',
         html:`
-        <p>hola el usuario ${nombre},quiere que compruebes su cuenta en FSFLMXsinfronteras.com</p>
+        <p>hola el usuario ${nombre},con el corrreo ${email} quiere que compruebes su cuenta en Fundacionnmexicosinsordera.com</p>
         <p>La cuenta ya esta lista,solo debes de confirmarla en el siguiente enlace </p>
         <a href="${process.env.BACKEND_URL}/auth/confirmar/${token}">Confirmar cuenta</a>
 
-        <p>si no reconoce los datos ignorelos  </p>
+        <p>si no reconoce los datos ignore este correo </p>
 
         `
     })

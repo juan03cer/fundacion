@@ -1,6 +1,7 @@
 extends ../layout/super
 
 block styles
+    meta(name="csrf-token" content=csrfToken)
     link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
     style.
         body::before {
