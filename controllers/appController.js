@@ -7,7 +7,7 @@ const inicio = async (req, res )=>{
         Campaign.findAll(),
         Companyseguros.findAll(),
         Paciente.findAll({
-            limit:10,
+            limit:500,
             
             include:[
                 {
