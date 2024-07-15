@@ -53,7 +53,7 @@ const crearBeneficiario = async(req,res) =>{
 
    
     res.render('pacientes/beneficiario',{
-        pagina:`Registrar Beneficiario del paciente:  ${paciente.nombre}`,
+        pagina:`Registrar de Datos Extras del Paciente:  ${paciente.nombre}`,
         csrfToken: req.csrfToken(),
         escolaridadid,
         ocupacionid,

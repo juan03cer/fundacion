@@ -40,11 +40,11 @@ block contenido
                 form.space-y-8(method="POST" )
                     input(type="hidden" name="_csrf" value = csrfToken)
                     div.space-y-5
-                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Información sobre el beneficiario
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Añade Información sobre extra del Paciente
     
                         div
-                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre del Beneficiario
-                            input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Beneficiario" type="text" name="nombre" value= datos ? datos.nombre : '' )        
+                            label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="nombre") Nombre del Paciente
+                            input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Nombre del Paciente" type="text" name="nombre" value= datos ? datos.nombre : '' )        
                         
                         
                     
@@ -74,12 +74,12 @@ block contenido
                                     input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" value= datos ? datos.nombre : '' )     
                         div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                             div(class="md:w-1/2")
-                                    label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="edad") Años del beneficiario
+                                    label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="edad") Años del Paciente
                                     input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad" value= datos ? datos.nombre : '' readonly )     
                             div(class="md:w-1/2")
-                                    label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="meses") Meses del beneficiario
+                                    label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="meses") Meses del Paciente
                                     input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" value= datos ? datos.nombre : '' readonly)           
-                        input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Beneficiario")
+                        input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Extras del Paciente")
 
 block scripts
      script(src="/js/calcularedad.js")                                                             
