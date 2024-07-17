@@ -52,63 +52,61 @@ block contenido
                         a(href=`/pacientes/${pacienteId.id}/historialeditar/${pacienteId.historialauditivo.id}` class="text-center w-full md:px-5 md:py-2 py-5 text-xs leading-5 cursor-pointer bg-white text-black rounded-lg hover:text-gray-300 font-extrabold shadow-lg uppercase") Editar Datos del Historial del Paciente
                         div(class="grid grid-cols-1 md:grid-cols-2 gap-4") 
 
-                            p(class="text-gray-600 font-bold text-1xl") FECHA DE LA AUDIOMETRÍA DEL OIDO IZQUIERDO
+                            p(class="text-gray-600 font-bold text-1xl") Antecedentes médicos relevantes
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.antecedentes
-                            p(class="text-gray-600 font-bold text-1xl") TIPO DE AUDIOMETRÍA
+                            p(class="text-gray-600 font-bold text-1xl") Factores de Riesgo Auditivo
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.factores
-                            p(class="text-gray-600 font-bold text-1xl") OÍDO EVALUADO
+                            p(class="text-gray-600 font-bold text-1xl") ¿Ha tenido problemas auditívos anteriormente? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.problemas
-                            p(class="text-gray-600 font-bold text-1xl") UMBRAL AUDITIVO POR CADA FRECUENCIA (EN DECIBELIOS DB) CAPTURA DE DECIBEL
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Tiene antecedentes familiares de pérdida auditiva o problemas de audición? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.familiares
-                            p(class="text-gray-600 font-bold text-1xl") GRADO DE PÉRDIDA AUDITIVA: SE CLASIFICA LA PÉRDIDA AUDITIVA SEGÚN SU SEVERIDAD:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Está expuesto a ruidos fuertes en su entorno laboral o recreativo?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.expuesto
-                            p(class="text-gray-600 font-bold text-1xl") PATRÓN DE LA PÉRDIDA AUDITIVA:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Utiliza protección auditiva en entornos ruidosos?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.proteccion
-                            p(class="text-gray-600 font-bold text-1xl") CONFIGURACIÓN DE LA PÉRDIDA AUDITIVA
-                                span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.configuracion
-                            p(class="text-gray-600 font-bold text-1xl") OBSERVACIONES:
-                                span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.infecciones
-                            p(class="text-gray-600 font-bold text-1xl") FECHA DE LA AUDIOMETRÍA DEL OIDO IZQUIERDO
+                            p(class="text-gray-600 font-bold text-1xl") ¿Ha tenido alguna cirugía de oído?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.cirugia
-                            p(class="text-gray-600 font-bold text-1xl") TIPO DE AUDIOMETRÍA
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Ha tenido infecciones de oído frecuentes? 
+                                span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.infecciones
+                            p(class="text-gray-600 font-bold text-1xl") ¿Está tomando medicamentos que pueden afectar su audición?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.medicamentos
-                            p(class="text-gray-600 font-bold text-1xl") OÍDO EVALUADO
-                                span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.covid
-                            p(class="text-gray-600 font-bold text-1xl") UMBRAL AUDITIVO POR CADA FRECUENCIA (EN DECIBELIOS DB) CAPTURA DE DECIBEL
+                            p(class="text-gray-600 font-bold text-1xl") ¿Ha presentado covid 19 anteriormente?
+                                span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.covid 
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Tiene dificultades para escuchar conversaciones, especialmente en ambientes ruidosos? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.dificultades
-                            p(class="text-gray-600 font-bold text-1xl") GRADO DE PÉRDIDA AUDITIVA: SE CLASIFICA LA PÉRDIDA AUDITIVA SEGÚN SU SEVERIDAD:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Ha notado que necesita subir el volúmen de la televisión o la música?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.volumen
-                            p(class="text-gray-600 font-bold text-1xl") PATRÓN DE LA PÉRDIDA AUDITIVA:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Experimenta zumbidos, pitidos u otros sonidos en los oídos?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.zumbidos
-                            p(class="text-gray-600 font-bold text-1xl") CONFIGURACIÓN DE LA PÉRDIDA AUDITIVA
+                            p(class="text-gray-600 font-bold text-1xl") ¿Estos sonidos son? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.sonidos
-                            p(class="text-gray-600 font-bold text-1xl") OBSERVACIONES:
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Ha sufrido o a presentado alguno de estos problemas? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.sufrido
-                            p(class="text-gray-600 font-bold text-1xl") GRADO DE PÉRDIDA AUDITIVA: SE CLASIFICA LA PÉRDIDA AUDITIVA SEGÚN SU SEVERIDAD:
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Ha tenido episodios recientes de vértigo o mareos intensos?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.episodios
-                            p(class="text-gray-600 font-bold text-1xl") PATRÓN DE LA PÉRDIDA AUDITIVA:
+                            p(class="text-gray-600 font-bold text-1xl") ¿qué utiliza para escuchar música? ¿Con qué frecuencia y a qué volumen? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.musica
-                            p(class="text-gray-600 font-bold text-1xl") CONFIGURACIÓN DE LA PÉRDIDA AUDITIVA
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Tiene hábitos recreativos que puedan impactar su audición? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.habitos
-                            p(class="text-gray-600 font-bold text-1xl") OBSERVACIONES:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Está expuesto a sustancias químicas o toxinas en su entorno laboral?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.sustancias
-                            p(class="text-gray-600 font-bold text-1xl") FECHA DE LA AUDIOMETRÍA DEL OIDO IZQUIERDO
+                            p(class="text-gray-600 font-bold text-1xl") ¿Fuma o está expuesto al humo de tabaco con regularidad? 
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.tabaco
-                            p(class="text-gray-600 font-bold text-1xl") TIPO DE AUDIOMETRÍA
+                            p(class="text-gray-600 font-bold text-1xl") ¿Le resulta difícil seguir conversaciones en un grupo?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.conversaciones
-                            p(class="text-gray-600 font-bold text-1xl") OÍDO EVALUADO
+                            p(class="text-gray-600 font-bold text-1xl") ¿Siente que los demás parecen murmurar o hablar más bajo de lo habitual?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.murmurar
-                            p(class="text-gray-600 font-bold text-1xl") UMBRAL AUDITIVO POR CADA FRECUENCIA (EN DECIBELIOS DB) CAPTURA DE DECIBEL
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Evita situaciones sociales debido a dificultades auditivas?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.situaciones
-                            p(class="text-gray-600 font-bold text-1xl") GRADO DE PÉRDIDA AUDITIVA: SE CLASIFICA LA PÉRDIDA AUDITIVA SEGÚN SU SEVERIDAD:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Siente que sus problemas de audición afectan su calidad de vida?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.audicion
-                            p(class="text-gray-600 font-bold text-1xl") PATRÓN DE LA PÉRDIDA AUDITIVA:
+                            p(class="text-gray-600 font-bold text-1xl") ¿Se ha realizado alguna prueba auditiva antes? si o no ¿Cuándo fue la última vez?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.pruebaauditiva
-                            p(class="text-gray-600 font-bold text-1xl") CONFIGURACIÓN DE LA PÉRDIDA AUDITIVA
+                            p(class="text-gray-600 font-bold text-1xl") ¿Cuál fue el resultado de esa prueba?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.resultadoh
-                            p(class="text-gray-600 font-bold text-1xl") OBSERVACIONES:
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Ha consultado a un médico o especialista en oído, nariz y garganta ?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.consultado
-                            p(class="text-gray-600 font-bold text-1xl") OBSERVACIONES:
+                            p(class="text-gray-600 font-bold text-1xl")  ¿Ha recibido algún diagnóstico específico o tratamiento para problemas de audición? ¿cual?
                                 span(class="text-gray-800 block text-lg")= pacienteId.historialauditivo.diagnostico
 
                             p(class="text-gray-600 font-bold text-1xl") ULTIMA PERSONA EN REALIZAR MODIFICACIONES:
