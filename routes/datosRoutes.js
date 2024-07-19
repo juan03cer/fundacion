@@ -1,13 +1,16 @@
 import express from 'express'
 import {completado,crearBeneficiario, datosMedicos, guardarBeneficiario,guardarDatosMedicos, mostrarDatosMedicos,editarDatoMedico,editarDatoMedicoGuardado,editarDatoBeneficiario,editarDatoBeneficiarioGuardado,mostrarDatosBeneficiario,
     accionesprevias,accionespreviasguardar,mostrarAccionesPrevias,oidoIzquierdo,oidoIzquierdoGuardar,oidoIzquierdoMostrar,oidoIzquierdoEditar,oidoIzquierdoEditarGuardar,oidoDerecho,
-    oidoDerechoGuardar,oidoDerechoMostrar,oidoDerechoEditar,oidoDerechoEditarGuardar,historialMedico,historialMedicoGuardar,historialMedicoMostrar,historialMedicoEditar,historialMedicoEditarGuardar} from '../controllers/datosController.js'
+    oidoDerechoGuardar,oidoDerechoMostrar,oidoDerechoEditar,oidoDerechoEditarGuardar,historialMedico,historialMedicoGuardar,historialMedicoMostrar,historialMedicoEditar,historialMedicoEditarGuardar,pacienteExcel,
+    } from '../controllers/datosController.js'
 import protegerRuta from '../middleware/protegerRuta.js';
 
 const router =express.Router()
 
 
 router.get('/pacientes/completado/:id',protegerRuta, completado)
+
+router.get('/paciente/excel/:id', pacienteExcel);
 
 //
 router.get('/pacientes/beneficiario/:id',protegerRuta,crearBeneficiario)

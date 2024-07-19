@@ -12,7 +12,7 @@ const db = new Sequelize(process.env.BD_NOMBRE,
         timestamps: true
     },
     pool: {
-        max: 5,
+        max: 50,
         min: 0,
         acquire: 3000,
         idle: 10000

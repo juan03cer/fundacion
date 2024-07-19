@@ -50,7 +50,7 @@ block contenido
                         div
                         label.block.text-sm.uppercase.text-black.mb-2.font-bold(for="factores")  Factores de Riesgo Auditivo (Marque la Casilla según sea el caso)
                         select#factores.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="factores")
-                            each optionValue in ['Exposición al Ruido','Envejecimiento (Presbiacusia)', 'Genética', 'Enfermedades e Infecciones', 'Uso de Medicamentos Ototóxicos', 'Trauma Físico', 'Factores de Estilo de Vida y Salud', 'Exposición a Sustancias Químicas', 'Problemas de Nacimiento y Desórdenes Congénitos']
+                            each optionValue in ['Exposición al Ruido','Envejecimiento (Presbiacusia)', 'Genética', 'Enfermedades e Infecciones', 'Uso de Medicamentos Ototóxicos', 'Trauma Físico', 'Factores de Estilo de Vida y Salud', 'Exposición a Sustancias Químicas', 'Problemas de Nacimiento y Desórdenes Congénitos','Otro']
                                 option(value=optionValue selected=datos && datos.factores === optionValue)=optionValue
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-5")
 

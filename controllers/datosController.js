@@ -1,8 +1,12 @@
 import {unlink} from 'node:fs/promises'
 import { validationResult } from "express-validator"
+import xlsx from "xlsx"
+
 import {Ocupacion,Escolaridad,Serviciorequerido,Paciente, Beneficiario,Companyseguros,
     Seguridadsocial,Titularseguridadsocial,Usuario,Parentesco, Datomedico,Izquierdo,Derecho,
-    Historialauditivo} from '../models/index.js'
+    Historialauditivo,
+    Campaign,
+    Medios} from '../models/index.js'
 import {esUsuario} from '../helpers/index.js'
 import Accionesprevias from '../models/Accionesprevias.js'
 
@@ -1031,6 +1035,121 @@ const historialMedicoEditarGuardar= async(req,res) =>{
         res.redirect('/404');
     }
 }
+const pacienteExcel = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Consultar Modelo
+        const pacienteId = await Paciente.findByPk(id, {
+            include: [
+                { model: Seguridadsocial, as: 'seguridadsocial' },
+                { model: Companyseguros, as: 'companyseguro' },
+                { model: Usuario, as: 'usuario' },
+                { model: Campaign, as: 'campaign' },
+                { model: Datomedico, as: 'datomedico' },
+                { model: Izquierdo, as: 'izquierdo' },
+                { model: Derecho, as: 'derecho' },
+                { model: Beneficiario, as: 'beneficiario' },
+                { model: Medios, as: 'medio' },
+                { model: Parentesco, as: 'parentesco' },
+                { model: Accionesprevias, as: 'accionesprevia' },
+                { model: Historialauditivo, as: 'historialauditivo' }
+            ],
+        });
+
+        if (!pacienteId) {
+            return res.status(404).send('Paciente no encontrado');
+        }
+
+        // Crear datos para Excel
+        const data = [{
+            'ID': pacienteId.id,
+            'Nombre': pacienteId.nombre,
+            'Sexo': pacienteId.sexo,
+            'Correo': pacienteId.correo,
+            'Fecha de Nacimiento':pacienteId.fechanacimiento,
+            'Numero del Paciente': pacienteId.numpaciente,
+            'Telefono para Recados': pacienteId.telrecados,
+            'Seguridad Social': pacienteId.seguridadsocial?.nombre,
+            'Compañia de seguros': pacienteId.companyseguro?.nombre,
+            'Nombre del acompañante': pacienteId.companion,
+            'Telefono del acompañante': pacienteId.telcompanion,
+            'Parentesco del Acompañante':pacienteId.parentesco?.nombre,
+            'Campaña en la que se conocio al paciente':pacienteId.campaign?.nombre
+        }];
+
+        // Crear un nuevo libro de trabajo
+        const workbook = xlsx.utils.book_new();
+        
+        // Convertir los datos en una hoja de trabajo
+        const worksheet = xlsx.utils.json_to_sheet(data);
+
+        // Agregar la hoja al libro
+        xlsx.utils.book_append_sheet(workbook, worksheet, 'Paciente');
+
+        // Escribir el libro a un archivo
+        const filePath = `./public/paciente_${pacienteId.id}.xlsx`;
+        xlsx.writeFile(workbook, filePath);
+
+        // Descargar el archivo
+        res.download(filePath, `paciente_${pacienteId.nombre}.xlsx`);
+
+    } catch (error) {
+        console.error('Error al generar el archivo Excel:', error);
+        res.status(500).send('Error del servidor');
+    }
+};
+
+const exportarPacientesExcel = async (req, res) => {
+    const { campaignId } = req.params;
+
+    try {
+        // Obtener pacientes de la campaña seleccionada
+        const pacientes = await Paciente.findAll({
+            include: [
+                { model: Campaign, as: 'campaign', where: { id: campaignId } },
+                { model: Seguridadsocial, as: 'seguridadsocial' },
+                { model: Companyseguros, as: 'companyseguro' },
+                { model: Usuario, as: 'usuario' },
+                { model: Datomedico, as: 'datomedico' },
+                { model: Izquierdo, as: 'izquierdo' },
+                { model: Derecho, as: 'derecho' },
+                { model: Beneficiario, as: 'beneficiario' },
+                { model: Medios, as: 'medio' },
+                { model: Parentesco, as: 'parentesco' },
+                { model: Accionesprevias, as: 'accionesprevias' },
+                { model: Historialauditivo, as: 'historialauditivo' }
+            ],
+        });
+
+        // Formatear los datos para Excel
+        const data = pacientes.map(paciente => ({
+            'ID': paciente.id,
+            'Nombre': paciente.nombre,
+            'Sexo': paciente.sexo,
+            'Correo': paciente.correo,
+            'Fecha de Nacimiento':paciente.fechanacimiento,
+            'Numero del Paciente': paciente.numpaciente,
+            'Telefono para Recados': paciente.telrecados,
+            'Seguridad Social': paciente.seguridadsocial?.nombre,
+        }));
+
+        const workbook = xlsx.utils.book_new();
+
+        const worksheet = xlsx.utils.json_to_sheet(data);
+
+        xlsx.utils.book_append_sheet(workbook, worksheet, 'Pacientes');
+
+        const filePath = `./public/pacientes_campania_${campaignId}.xlsx`;
+        xlsx.writeFile(workbook, filePath);
+
+        res.download(filePath, `pacientes_campania_${campaignId}.xlsx`);
+
+    } catch (error) {
+        res.redirect(404)
+    }
+};
+
 
 export{
     completado,
@@ -1061,7 +1180,9 @@ historialMedico,
 historialMedicoGuardar,
 historialMedicoMostrar,
 historialMedicoEditar,
-historialMedicoEditarGuardar
+historialMedicoEditarGuardar,
+pacienteExcel,
+exportarPacientesExcel
 
  
 }
