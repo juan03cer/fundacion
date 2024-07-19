@@ -81,5 +81,26 @@ block contenido
                                     input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" value= datos ? datos.nombre : '' readonly)           
                         input(class="w-full py-3 bg-verde-pantone hover:bg-azul-tur rounded text-white font-bold uppercase cursor-pointer" type="submit" value="Guardar Datos Extras del Paciente")
 
-block scripts
-     script(src="/js/calcularedad.js")                                                             
+block scripts  
+     script.
+            document.addEventListener('DOMContentLoaded', function() {
+            const fechaNacimientoInput = document.getElementById('fechanacimiento');
+            const edadInput = document.getElementById('edad');
+            const mesesInput = document.getElementById('meses');
+            
+            fechaNacimientoInput.addEventListener('change', function() {
+                const fechaNacimiento = new Date(fechaNacimientoInput.value);
+                const hoy = new Date();
+                
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                let mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            
+                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+                mes = (mes + 12) % 12;
+                }
+            
+                edadInput.value = edad;
+                mesesInput.value = mes;
+            });
+            });                                                  
