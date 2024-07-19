@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const fechaNacimientoInput = document.getElementById('fechanacimiento');
+  (function() {
+ const fechaNacimientoInput = document.getElementById('fechanacimiento');
     const edadInput = document.getElementById('edad');
     const mesesInput = document.getElementById('meses');
   
@@ -18,5 +18,4 @@ document.addEventListener('DOMContentLoaded', function() {
         edadInput.value = edad;
         mesesInput.value = mes;
     });
-  });
-  
+})()
