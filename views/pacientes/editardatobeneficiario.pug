@@ -65,14 +65,14 @@ block contenido
 
                             div(class="md:w-1/2")
                                     label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fechanacimiento") Fecha de nacimiento 
-                                    input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" )=datos ? datos.fechanacimiento : ''      
+                                    input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" value= datos ? datos.fechanacimiento : '' )     
                         div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                             div(class="md:w-1/2")
                                     label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="edad") Años del paciente
-                                    input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad" )= datos ? datos.edad : '' readonly      
+                                    input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad" readonly value= datos ? datos.edad : ''  )     
                             div(class="md:w-1/2")
                                     label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="meses") Meses del paciente
-                                    input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" )= datos ? datos.meses : '' readonly           
+                                    input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" readonly value= datos ? datos.meses : '' )           
                         input(class="w-full py-3 bg-verde-pantone hover:bg-indigos-700 rounded text-white font-extrabold uppercase cursor-pointer" type="submit" value="Actualizar Beneficiario")
 
 block scripts

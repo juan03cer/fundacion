@@ -110,13 +110,13 @@ block contenido
                     
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="fechanacimiento") Fecha de nacimiento 
-                            input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" )= datos ? datos.nombre : ''     
+                            input#fechanacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="date" name="fechanacimiento" value = datos ? datos.fechanacimiento : '' )     
     
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="edad") Años del paciente
-                            input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad")= datos ? datos.nombre : '' readonly      
+                            input#edad.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="edad" readonly  value= datos ? datos.edad : '' )     
                         
                             label.block.text-sm.uppercase.text-black.mb-2.fond-bold(for="meses") Meses del paciente
-                            input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses"  )= datos ? datos.nombre : '' readonly           
+                            input#meses.readonly.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400( type="text" name="meses" readonly value= datos ? datos.meses : '' )           
                      
    
 
